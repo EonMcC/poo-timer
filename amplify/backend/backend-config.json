@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "ionicapp2b8066ef": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "dynamoPoo": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

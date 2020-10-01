@@ -1,0 +1,91 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+
+  <svg width="224" height="250" viewBox="0 0 224 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3.32173 -2.5H226.225L248.839 237.41C248.049 237.73 246.987 238.147 245.679 238.628C242.565 239.772 238.07 241.275 232.576 242.697C221.57 245.546 206.644 248.046 190.821 246.743C175.022 245.442 158.388 240.357 143.813 228.088C129.24 215.821 116.52 196.199 108.848 165.46C102.944 141.802 92.2838 123.743 79.3969 106.732C73.0699 98.3801 66.1887 90.2587 59.086 81.876L58.7411 81.469C51.5033 72.9266 44.0279 64.0894 36.5738 54.3503C21.6778 34.8882 13.125 19.8197 8.30721 9.67014C5.89822 4.59514 4.42245 0.748669 3.55422 -1.80391C3.47127 -2.04776 3.39387 -2.27981 3.32173 -2.5Z" fill="#895E3B" stroke="black" stroke-width="5"/>
+    <g filter="url(#filter0_d)">
+    <ellipse cx="136.891" cy="38.8908" rx="21.5" ry="33.5" transform="rotate(45 136.891 38.8908)" fill="white"/>
+    </g>
+    <circle cx="128.213" cy="48.2131" r="15" transform="rotate(45 128.213 48.2131)" fill="black"/>
+    <circle cx="128" cy="41" r="4.5" fill="white" stroke="black"/>
+    <g filter="url(#filter1_d)">
+    <ellipse cx="184.974" cy="86.9741" rx="21.5" ry="33.5" transform="rotate(45 184.974 86.9741)" fill="white"/>
+    </g>
+    <circle cx="175.237" cy="97.9757" r="15" transform="rotate(45 175.237 97.9757)" fill="black"/>
+    <circle cx="174" cy="92" r="5" fill="white"/>
+    <path d="M131 121.5C126.932 124.806 105.53 123.834 100.304 117.405C95.0789 110.977 96.9325 91.3063 101 88C105.068 84.6938 109.809 99.0038 115.034 105.432C120.259 111.861 135.068 118.194 131 121.5Z" fill="black"/>
+    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="86" y="85" width="47" height="50">
+    <path d="M131 121.5C126.932 124.806 105.53 123.834 100.304 117.405C95.0789 110.977 96.9325 91.3063 101 88C105.068 84.6938 109.809 99.0038 115.034 105.432C120.259 111.861 135.068 118.194 131 121.5Z" fill="black"/>
+    </mask>
+    <g mask="url(#mask0)">
+    <rect x="113.984" y="101.131" width="8" height="7.59286" rx="2" transform="rotate(50.8943 113.984 101.131)" fill="white"/>
+    <rect x="121.48" y="106.636" width="8" height="9.93782" rx="3" transform="rotate(50.8943 121.48 106.636)" fill="white"/>
+    <rect x="109.151" y="93.4616" width="8" height="8.67977" rx="3" transform="rotate(50.8943 109.151 93.4616)" fill="white"/>
+    </g>
+    <defs>
+    <filter id="filter0_d" x="94" y="-3.05176e-05" width="85.7817" height="85.7817" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+    <feOffset dy="4"/>
+    <feGaussianBlur stdDeviation="2"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="filter1_d" x="142.083" y="48.0833" width="85.7817" height="85.7817" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+    <feOffset dy="4"/>
+    <feGaussianBlur stdDeviation="2"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    </defs>
+    </svg>
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Poo Timer</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <div id="container">
+    <h1 id="title">How much are you paid to poo?</h1>
+    <!-- <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p> -->
+  </div>
+
+  <p id="timer">00:00</p>
+
+  <div id="btn-wrapper">
+    <ion-button id="menu-btn" (click)="openFirst()">MENU</ion-button>
+    <ion-button id="start-btn" (click)="open()">START</ion-button>
+  </div>
+
+</ion-content>
+
+<ion-menu class="menu" side="start" menuId="first" content-id="main">
+  <!-- <ion-header>
+    <ion-toolbar >
+      <ion-title id="menu-title">Poo Timer</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+    <p id="menu-title">Poo Timer</p>
+  <ion-content id="main">
+    <ion-list id="menu-list" lines="none">
+      <ion-item class="menu-item"><ion-icon name="person-outline" slot="start" size="large"></ion-icon>Profile</ion-item>
+      <ion-item class="menu-item">Settings</ion-item>
+      <ion-item class="menu-item">Statistics</ion-item>
+      <ion-item class="menu-item logout">Logout</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+

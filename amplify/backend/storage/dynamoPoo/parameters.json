@@ -1,0 +1,5 @@
+{
+    "tableName": "dynamoPoo",
+    "partitionKeyName": "firstColumn",
+    "partitionKeyType": "S"
+}
