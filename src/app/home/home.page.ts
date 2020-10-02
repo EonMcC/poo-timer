@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +7,14 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage {
 
-  constructor(private menu: MenuController) {}
+  menuClick = false;
 
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+  constructor() {}
+
+  openMenu(){
+    this.menuClick = true;
+    setTimeout(() => {
+      this.menuClick = false;
+    }, 500)
   }
-
 }

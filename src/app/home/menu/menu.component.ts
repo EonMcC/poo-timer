@@ -1,0 +1,30 @@
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MenuController } from '@ionic/angular';
+
+@Component({
+  selector: 'app-menu',
+  templateUrl: 'menu.component.html',
+  styleUrls: ['menu.component.scss'],
+})
+export class Menu implements OnChanges {
+
+    @Input() menuClick: boolean;
+
+  constructor(private menu: MenuController) {}
+
+  ngOnInit(){
+    this.openFirst();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.menuClick && this.menuClick === true) {
+        this.openFirst();
+    }
+  }
+
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
+
+}

@@ -2,13 +2,13 @@ svg {
   position: absolute;
   width: 251.5px;
   height: 254.6px;
-  right: -15px;
+  right: -30px;
   top: -5px;
   z-index: 9;
 }
 
 #title {
-  color: #6B401D;
+  color: var(--ion-color-secondary);
   font-size: 48px;
   line-height: 48px;
   position: absolute;
@@ -26,7 +26,7 @@ svg {
   right: 0;
   // top: 50%;
   // transform: translateY(-50%);
-  background: #FFE34F;
+  background: var(--ion-color-background);
   height: 100%;
   width: 100%;
 }
@@ -58,14 +58,14 @@ font-family: Annie Use Your Telescope;
 font-size: 180px;
 line-height: 258px;
 text-align: center;
-color: #895E3B;
+color: var(--ion-color-secondary);
 margin: 0 auto;
 }
 
 #menu-btn {
-  --background: #895E3B;
-  --color: black;
-  --border-color: black;
+  // --background: var(--ion-color-secondary-tint);
+  // --color: var(--ion-color-secondary-contrast);
+  --border-color: var(--ion-color-secondary-contrast);
   --border-radius: 0px;
   --border-width: 5px;
   --border-style: solid;
@@ -75,9 +75,9 @@ margin: 0 auto;
 line-height: 36px;
 }
 #start-btn {
-  --background: #FFD914;
-  --color: black;
-  --border-color: black;
+  // --background: var(--ion-color-primary);
+  // --color: var(--ion-color-primary-contrast);
+  --border-color: var(--ion-color-primary-contrast);
   --border-radius: 0px;
   --border-width: 5px;
   --border-style: solid;
@@ -94,32 +94,5 @@ line-height: 36px;
   justify-content: center;
   align-items: center;
   bottom: 32px;
-}
-
-#menu-title{
-  background:  #FFE34F;
-  font-size: 48px;
-  color:#6B401D;
-  padding: 32px 0px 32px 24px;
-  margin: 0px;
-}
-
-#main {
-  --background: #FFE34F;
-}
-
-#menu-list {
-  
-}
-
-.menu-item {
-  --background: #FFE34F;
-  font-size: 30px;
-  color: #202020;
-  border: none;
-}
-
-.logout {
-  color: #EB5757;
 }
 
