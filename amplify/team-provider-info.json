@@ -1,23 +1,26 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-pootimer-dev-132916-authRole",
-            "UnauthRoleArn": "arn:aws:iam::725945935684:role/amplify-pootimer-dev-132916-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::725945935684:role/amplify-pootimer-dev-132916-authRole",
-            "Region": "eu-west-1",
-            "DeploymentBucketName": "amplify-pootimer-dev-132916-deployment",
-            "UnauthRoleName": "amplify-pootimer-dev-132916-unauthRole",
-            "StackName": "amplify-pootimer-dev-132916",
-            "StackId": "arn:aws:cloudformation:eu-west-1:725945935684:stack/amplify-pootimer-dev-132916/19123160-0574-11eb-8ad0-02f0c9b42810",
-            "AmplifyAppId": "drfgf3sj404oy"
-        },
-        "categories": {
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "drfgf3sj404oy",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pootimer-dev-132916-authRole",
+      "UnauthRoleArn": "arn:aws:iam::725945935684:role/amplify-pootimer-dev-132916-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::725945935684:role/amplify-pootimer-dev-132916-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-pootimer-dev-132916-deployment",
+      "UnauthRoleName": "amplify-pootimer-dev-132916-unauthRole",
+      "StackName": "amplify-pootimer-dev-132916",
+      "StackId": "arn:aws:cloudformation:eu-west-1:725945935684:stack/amplify-pootimer-dev-132916/19123160-0574-11eb-8ad0-02f0c9b42810",
+      "AmplifyAppId": "drfgf3sj404oy"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "drfgf3sj404oy",
+          "type": "manual"
         }
+      },
+      "auth": {
+        "pootimer9ba47e7d": {}
+      }
     }
+  }
 }
