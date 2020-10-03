@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -10,7 +11,10 @@ export class Menu implements OnChanges {
 
     @Input() menuClick: boolean;
 
-  constructor(private menu: MenuController) {}
+  constructor(
+      private menu: MenuController,
+      private router: Router
+    ) {}
 
   ngOnInit(){
     this.openFirst();
@@ -25,6 +29,10 @@ export class Menu implements OnChanges {
   openFirst() {
     this.menu.enable(true, 'first');
     this.menu.open('first');
+  }
+
+  clickFn(){
+    console.log('click')
   }
 
 }

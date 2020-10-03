@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,16 @@ export class HomePage {
 
   menuClick = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   openMenu(){
     this.menuClick = true;
     setTimeout(() => {
       this.menuClick = false;
     }, 500)
+  }
+
+  go(){
+    this.router.navigate(['profile'])
   }
 }
