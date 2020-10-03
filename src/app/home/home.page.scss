@@ -1,27 +1,42 @@
-#container {
-  text-align: center;
-
+svg {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 251.5px;
+  height: 254.6px;
+  right: -30px;
+  top: -5px;
+  z-index: 9;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#title {
+  color: var(--ion-color-secondary);
+  font-size: 48px;
+  line-height: 48px;
+  position: absolute;
+  width: 211px;
+  left: 24px;
+  top: 58px;
+  text-align: left;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+#timer {
+position: absolute;
+width: 320px;
+height: 258px;
+top: 329px;
+font-family: Annie Use Your Telescope;
+font-size: 180px;
+line-height: 258px;
+text-align: center;
+color: var(--ion-color-secondary);
+margin: 0 auto;
 }
 
-#container a {
-  text-decoration: none;
+#btn-wrapper {
+  position: absolute;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 32px;
 }
+

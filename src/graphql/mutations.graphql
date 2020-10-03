@@ -1,0 +1,19 @@
+# this is an auto generated file. This will be overwritten
+mutation CreatePooTimer($input: CreatePooTimerInput!) {
+  createPooTimer(input: $input) {
+    id
+    title
+  }
+}
+mutation UpdatePooTimer($input: UpdatePooTimerInput!) {
+  updatePooTimer(input: $input) {
+    id
+    title
+  }
+}
+mutation DeletePooTimer($input: DeletePooTimerInput!) {
+  deletePooTimer(input: $input) {
+    id
+    title
+  }
+}

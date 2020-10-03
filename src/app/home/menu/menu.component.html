@@ -1,0 +1,36 @@
+<ion-menu class="menu" side="start" menuId="first" content-id="main-menu">
+  <p id="menu-title">Poo Timer</p>
+<ion-content id="main-menu">
+  <ion-list id="menu-list" lines="none">
+
+    <ion-item class="menu-item" href="home/profile">
+      <ion-icon name="person" slot="start" size="large"></ion-icon>
+      Profile
+      <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
+    </ion-item>
+
+
+    <ion-item class="menu-item">
+      <ion-icon (click)="clickFn()" name="settings" slot="start" size="large"></ion-icon>
+      Settings
+      <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
+    </ion-item>
+
+    <ion-item class="menu-item">
+      <ion-icon name="bar-chart" slot="start" size="large"></ion-icon>
+      Statistics
+      <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+
+  <p id="watermark">Have<br> you <span>Poo Timed</span> it yet?</p>
+
+  <ion-list id="menu-list-bottom" lines="none">
+    <ion-item class="menu-item">
+      <ion-icon name="log-out" slot="start" size="large"></ion-icon>
+      Logout
+    </ion-item>
+  </ion-list>
+</ion-content>
+</ion-menu>

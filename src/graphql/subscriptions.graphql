@@ -1,0 +1,19 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreatePooTimer($id: ID, $title: String) {
+  onCreatePooTimer(id: $id, title: $title) {
+    id
+    title
+  }
+}
+subscription OnUpdatePooTimer($id: ID, $title: String) {
+  onUpdatePooTimer(id: $id, title: $title) {
+    id
+    title
+  }
+}
+subscription OnDeletePooTimer($id: ID, $title: String) {
+  onDeletePooTimer(id: $id, title: $title) {
+    id
+    title
+  }
+}

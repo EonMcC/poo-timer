@@ -1,0 +1,20 @@
+# this is an auto generated file. This will be overwritten
+query GetPooTimer($id: ID!) {
+  getPooTimer(id: $id) {
+    id
+    title
+  }
+}
+query ListPooTimers(
+  $filter: TablePooTimerFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPooTimers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+    }
+    nextToken
+  }
+}
