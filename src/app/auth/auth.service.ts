@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as AWSCognito from "amazon-cognito-identity-js";
 import { Subject } from 'rxjs';
 import { User } from './user.model';
+import { Auth } from 'aws-amplify'
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,14 @@ export class AuthService {
 
   user = new Subject<User>();
 
-  constructor() { }
+  constructor(
+    private router: Router,
+
+  ) {
+    Auth.currentAuthenticatedUser({bypassCache: false}).then(user => {
+      this.router.navigate(['/home'])
+    })
+   }
 
   _POOL_DATA = {
     UserPoolId: "us-east-1_wZP5yzO91",
@@ -56,46 +65,49 @@ confirmUser(verificationCode, userName) {
 }
 
 authenticate(email, password) {
-  return new Promise((resolved, reject) => {
-    const userPool = new AWSCognito.CognitoUserPool(this._POOL_DATA);
+  Auth.signIn(email, password).then(user => {
+    this.router.navigate(['/home'])
+  })
+  // return new Promise((resolved, reject) => {
+  //   const userPool = new AWSCognito.CognitoUserPool(this._POOL_DATA);
 
-    const authDetails = new AWSCognito.AuthenticationDetails({
-      Username: email,
-      Password: password
-    });
+  //   const authDetails = new AWSCognito.AuthenticationDetails({
+  //     Username: email,
+  //     Password: password
+  //   });
 
-    const cognitoUser = new AWSCognito.CognitoUser({
-      Username: email,
-      Pool: userPool
-    });
+  //   const cognitoUser = new AWSCognito.CognitoUser({
+  //     Username: email,
+  //     Pool: userPool
+  //   });
 
-    cognitoUser.authenticateUser(authDetails, {
-      onSuccess: result => {
-        resolved(result);
-        const user = result;
-        // this.user.next(user);
-      },
-      onFailure: err => {
-        reject(err);
-      },
-      newPasswordRequired: userAttributes => {
-        // User was signed up by an admin and must provide new
-        // password and required attributes, if any, to complete
-        // authentication.
+  //   cognitoUser.authenticateUser(authDetails, {
+  //     onSuccess: result => {
+  //       resolved(result);
+  //       const user = result;
+  //       // this.user.next(user);
+  //     },
+  //     onFailure: err => {
+  //       reject(err);
+  //     },
+  //     newPasswordRequired: userAttributes => {
+  //       // User was signed up by an admin and must provide new
+  //       // password and required attributes, if any, to complete
+  //       // authentication.
 
-        // the api doesn't accept this field back
-        userAttributes.email = email;
-        delete userAttributes.email_verified;
+  //       // the api doesn't accept this field back
+  //       userAttributes.email = email;
+  //       delete userAttributes.email_verified;
 
-        cognitoUser.completeNewPasswordChallenge(password, userAttributes, {
-          onSuccess: function(result) {},
-          onFailure: function(error) {
-            reject(error);
-          }
-        });
-      }
-    });
-  });
+  //       cognitoUser.completeNewPasswordChallenge(password, userAttributes, {
+  //         onSuccess: function(result) {},
+  //         onFailure: function(error) {
+  //           reject(error);
+  //         }
+  //       });
+  //     }
+  //   });
+  // });
 }
 
 

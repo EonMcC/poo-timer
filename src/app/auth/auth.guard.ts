@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Auth } from 'aws-amplify';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService) {
+
+  signedIn = false;
+
+
+  constructor() {
 
   }
-  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): boolean | Promise<boolean> | Observable<boolean> {
-    console.log('this.authService.user', this.authService.user)
-    console.log('!!this.authService.user', !!this.authService.user)
-    return !!this.authService.user
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return Auth.currentAuthenticatedUser({
+      bypassCache: false
+    }).then(user => {
+      return true;
+    })
   }
 }

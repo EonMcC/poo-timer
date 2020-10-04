@@ -33,11 +33,11 @@ export class AuthComponent {
     if (this.isLoginMode) {
       console.log('Login with:', email, password)
       this.cognitoService.authenticate(email, password)
-      .then(res =>{
-        console.log(res);
-      }, err =>{
-        console.log(err);
-      });
+      // .then(res =>{
+      //   console.log(res);
+      // }, err =>{
+      //   console.log(err);
+      // });
     } else {
       console.log('Signup with:', email, password)
       this.cognitoService.signUp(email, password).then(
