@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as AWSCognito from "amazon-cognito-identity-js";
+import { Subject } from 'rxjs';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  user = new Subject<User>();
 
   constructor() { }
 
@@ -68,6 +72,8 @@ authenticate(email, password) {
     cognitoUser.authenticateUser(authDetails, {
       onSuccess: result => {
         resolved(result);
+        const user = result;
+        // this.user.next(user);
       },
       onFailure: err => {
         reject(err);
