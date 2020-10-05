@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NavController, NavParams, AlertController } from "@ionic/angular";
+import { Auth } from 'aws-amplify';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -14,47 +16,46 @@ export class AuthComponent {
     public navCtrl: NavController,
     // public navParams: NavParams,
     public alertController: AlertController,
-    public cognitoService: AuthService
-    ) { }
-
+    public cognitoService: AuthService,
+    private router: Router,
+    ) {
+      Auth.currentAuthenticatedUser({bypassCache: false}).then(user => {
+        this.router.navigate(['/home'])
+      })
+     }
 
   isLoginMode = true;
-  email: string;
+  password: string;;
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
-    this.email = form.value.email;
-    const email = form.value.email;
-    const password = form.value.password;
+    const email = form.value.email.slice();
+    this.password = form.value.password;
 
     if (this.isLoginMode) {
-      console.log('Login with:', email, password)
-      this.cognitoService.authenticate(email, password)
-      // .then(res =>{
-      //   console.log(res);
-      // }, err =>{
-      //   console.log(err);
-      // });
+      Auth.signIn(email, this.password).then(user => {
+        this.router.navigate(['/home'])
+      })
     } else {
-      console.log('Signup with:', email, password)
-      this.cognitoService.signUp(email, password).then(
+      console.log('signup with:', email, this.password)
+      Auth.signUp(email, this.password, email).then(
         res => {
-          this.promptVerificationCode();
+          console.log(res)
+          this.promptVerificationCode(email);
         },
         err => {
-          console.log(err);
+          console.log('signup err:', err)
         }
-      );
+      )
     }
-
     form.reset();
   }
 
-  async promptVerificationCode() {
+  async promptVerificationCode(email) {
+    console.log('in ver code')
     let alert = await this.alertController.create({
       header: "Enter Verfication Code",
       inputs: [
@@ -74,7 +75,8 @@ export class AuthComponent {
         {
           text: "Verify",
           handler: data => {
-            this.verifyUser(data.VerificationCode);
+            console.log('1', email)
+            this.verifyUser(email, data.VerificationCode);
           }
         }
       ]
@@ -82,15 +84,17 @@ export class AuthComponent {
      await alert.present();
   }
 
-  verifyUser(verificationCode) {
-    this.cognitoService.confirmUser(verificationCode, this.email).then(
+  verifyUser(email, verificationCode) {
+    console.log('email', email, 'verCode', verificationCode)
+    Auth.confirmSignUp(email, verificationCode).then(
       res => {
-        console.log(res);
+        console.log(res)
+        this.isLoginMode = true;
       },
       err => {
-        alert(err.message);
+        console.log(err);
       }
-    );
+    )
   }
 
 
