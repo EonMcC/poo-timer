@@ -11,24 +11,30 @@ svg {
   color: var(--ion-color-secondary);
   font-size: 48px;
   line-height: 48px;
-  position: absolute;
   width: 211px;
-  left: 24px;
-  top: 58px;
+  margin: 58px 0px 0px 24px;
   text-align: left;
 }
 
+#number-wrapper {
+  font-family: Annie Use Your Telescope;
+  width: 320px;
+  color: var(--ion-color-secondary);
+  margin: 40px auto 0px auto;
+}
 #timer {
-position: absolute;
-width: 320px;
-height: 258px;
-top: 329px;
-font-family: Annie Use Your Telescope;
+height: 180px;
 font-size: 180px;
-line-height: 258px;
 text-align: center;
-color: var(--ion-color-secondary);
-margin: 0 auto;
+margin: 0px auto 0px auto;
+}
+
+#money-counter {
+  font-size: 64px;
+  height: 64px;
+  line-height: 64px;
+  text-align: right;
+  margin: 0px;
 }
 
 #btn-wrapper {
