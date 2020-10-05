@@ -3,7 +3,7 @@
 <ion-content id="main-menu">
   <ion-list id="menu-list" lines="none">
 
-    <ion-item class="menu-item" href="home/profile">
+    <ion-item class="menu-item" (click)="goToProfile()">
       <ion-icon name="person" slot="start" size="large"></ion-icon>
       Profile
       <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
