@@ -50,3 +50,14 @@ ion-content {
   font-size: 36px;
   line-height: 36px;
 }
+
+#danger-btn {
+  --border-color: var(--ion-color-danger-contrast);
+  --border-radius: 0px;
+  --border-width: 5px;
+  --border-style: solid;
+  width: 159px;
+  height: 65px;
+  font-size: 36px;
+  line-height: 36px;
+}
