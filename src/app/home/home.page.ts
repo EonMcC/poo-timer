@@ -16,12 +16,11 @@ export class HomePage {
   todos: Array<any>;
   numbers = timer(0, 1000)
   timer: any;
-  formatedTime: string;
+  formatedTime = '00:00';
   timerRunning = false;
 
   constructor(
-      private router: Router,
-      private apiService: APIService
+      private router: Router
     ) {}
 
   openMenu(){
@@ -53,6 +52,8 @@ export class HomePage {
       console.log('Stopping Timer');
       this.timerRunning = false;
       this.timer.unsubscribe();
+      this.router.navigate(['/home/stop'])
+      this.formatedTime = '00:00'
     }
   }
 }

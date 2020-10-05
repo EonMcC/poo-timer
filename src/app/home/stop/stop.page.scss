@@ -1,0 +1,33 @@
+p {
+  color: var(--ion-color-secondary);
+  width: 262px;
+  font-size: 48px;
+  line-height: 48px;
+
+  & span {
+    color: var(--ion-color-dark);
+  }
+}
+
+
+#para-one {
+  margin: 24px;
+}
+
+#para-two {
+  margin-left: 102px;
+}
+
+#para-three {
+  margin-left: 57px;
+}
+
+
+#btn-wrapper {
+  position: absolute;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 32px;
+}
