@@ -1,5 +1,5 @@
 <ion-content>
-  <p id="para-one">That was a <span>45 minute</span> and <span>13 second</span> poo,</p>
+  <p id="para-one">That was a <span *ngIf="showMinutes"><span>{{minutes}} minute</span> and </span> <span>{{seconds}} second</span> poo,</p>
   <p id="para-two">meaning you were paid <span>£9.53</span> to poo</p>
   <p id="para-three">Way to go!</p>
 

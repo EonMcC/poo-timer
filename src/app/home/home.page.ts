@@ -2,12 +2,19 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { APIService } from '../API.service';
 import { timer } from 'rxjs';
+import { DataServiceService } from './data-service.service';
+
+
+export interface stopData {
+  stopTime: string;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
 
   @ViewChild('timer') timerElement: ElementRef;
@@ -20,8 +27,13 @@ export class HomePage {
   timerRunning = false;
 
   constructor(
-      private router: Router
+      private router: Router,
+      private dataService: DataServiceService
     ) {}
+
+  set data(value: string) {
+    this.dataService.stopTime = value;
+  }
 
   openMenu(){
     this.menuClick = true;
@@ -52,6 +64,7 @@ export class HomePage {
       console.log('Stopping Timer');
       this.timerRunning = false;
       this.timer.unsubscribe();
+      this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
     }
