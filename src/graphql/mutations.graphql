@@ -1,19 +1,64 @@
 # this is an auto generated file. This will be overwritten
-mutation CreatePooTimer($input: CreatePooTimerInput!) {
-  createPooTimer(input: $input) {
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
   }
 }
-mutation UpdatePooTimer($input: UpdatePooTimerInput!) {
-  updatePooTimer(input: $input) {
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
   }
 }
-mutation DeletePooTimer($input: DeletePooTimerInput!) {
-  deletePooTimer(input: $input) {
+mutation DeleteUser($input: DeleteUserInput!) {
+  deleteUser(input: $input) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
+  }
+}
+mutation CreatePoo($input: CreatePooInput!) {
+  createPoo(input: $input) {
+    pooId
+    userId
+    duration
+    createdAt
+  }
+}
+mutation UpdatePoo($input: UpdatePooInput!) {
+  updatePoo(input: $input) {
+    pooId
+    userId
+    duration
+    createdAt
+  }
+}
+mutation DeletePoo($input: DeletePooInput!) {
+  deletePoo(input: $input) {
+    pooId
+    userId
+    duration
+    createdAt
   }
 }

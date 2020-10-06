@@ -1,19 +1,94 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreatePooTimer($id: ID, $title: String) {
-  onCreatePooTimer(id: $id, title: $title) {
+subscription OnCreateUser($id: String, $email: String, $name: String) {
+  onCreateUser(id: $id, email: $email, name: $name) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
   }
 }
-subscription OnUpdatePooTimer($id: ID, $title: String) {
-  onUpdatePooTimer(id: $id, title: $title) {
+subscription OnUpdateUser($id: String, $email: String, $name: String) {
+  onUpdateUser(id: $id, email: $email, name: $name) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
   }
 }
-subscription OnDeletePooTimer($id: ID, $title: String) {
-  onDeletePooTimer(id: $id, title: $title) {
+subscription OnDeleteUser($id: String, $email: String, $name: String) {
+  onDeleteUser(id: $id, email: $email, name: $name) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
+  }
+}
+subscription OnCreatePoo(
+  $pooId: String
+  $userId: String
+  $duration: Float
+  $createdAt: Float
+) {
+  onCreatePoo(
+    pooId: $pooId
+    userId: $userId
+    duration: $duration
+    createdAt: $createdAt
+  ) {
+    pooId
+    userId
+    duration
+    createdAt
+  }
+}
+subscription OnUpdatePoo(
+  $pooId: String
+  $userId: String
+  $duration: Float
+  $createdAt: Float
+) {
+  onUpdatePoo(
+    pooId: $pooId
+    userId: $userId
+    duration: $duration
+    createdAt: $createdAt
+  ) {
+    pooId
+    userId
+    duration
+    createdAt
+  }
+}
+subscription OnDeletePoo(
+  $pooId: String
+  $userId: String
+  $duration: Float
+  $createdAt: Float
+) {
+  onDeletePoo(
+    pooId: $pooId
+    userId: $userId
+    duration: $duration
+    createdAt: $createdAt
+  ) {
+    pooId
+    userId
+    duration
+    createdAt
   }
 }

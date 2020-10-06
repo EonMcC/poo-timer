@@ -1,19 +1,46 @@
 # this is an auto generated file. This will be overwritten
-query GetPooTimer($id: ID!) {
-  getPooTimer(id: $id) {
+query GetUser($id: String!) {
+  getUser(id: $id) {
     id
-    title
+    email
+    name
+    poos {
+      pooId
+      userId
+      duration
+      createdAt
+    }
   }
 }
-query ListPooTimers(
-  $filter: TablePooTimerFilterInput
+query ListUsers(
+  $filter: TableUserFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listPooTimers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      title
+      email
+      name
+    }
+    nextToken
+  }
+}
+query GetPoo($userId: String!, $pooId: String!) {
+  getPoo(userId: $userId, pooId: $pooId) {
+    pooId
+    userId
+    duration
+    createdAt
+  }
+}
+query ListPoos($filter: TablePooFilterInput, $limit: Int, $nextToken: String) {
+  listPoos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      pooId
+      userId
+      duration
+      createdAt
     }
     nextToken
   }

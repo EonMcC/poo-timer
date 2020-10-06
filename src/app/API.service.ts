@@ -52,8 +52,7 @@ export type TableStringFilterInput = {
 export type CreatePooTimerMutation = {
   __typename: "PooTimer";
   id: string;
-  title: string;
-  reason: string | null;
+  title: string | null;
 };
 
 export type UpdatePooTimerMutation = {

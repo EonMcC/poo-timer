@@ -1,9 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { APIService } from '../API.service';
+import { APIService } from '../API.service.service';
 import { timer } from 'rxjs';
 import { DataServiceService } from './data-service.service';
 import { Auth } from 'aws-amplify';
+import * as moment from 'moment';
 
 
 export interface stopData {
@@ -71,6 +72,8 @@ export class HomePage {
   }
 
   saveToDb(){
-    this.apiService.CreatePooTimer({title: 'fromHome'})
+    const createdAt = moment.now();
+    this.apiService.CreatePoo({createdAt: createdAt})
+    console.log(moment.now())
   }
 }
