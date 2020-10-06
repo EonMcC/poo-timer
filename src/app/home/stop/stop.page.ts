@@ -11,9 +11,11 @@ import { DataServiceService } from '../data-service.service';
 
 export class StopPage implements OnInit {
 
+  hours: string;
   minutes: string;
-  showMinutes: boolean;
   seconds: string;
+  showHours: boolean;
+  showMinutes: boolean;
 
 
   constructor(
@@ -28,27 +30,39 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
-    this.breakDownTime(this.dataService.stopTime);
+    // this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
+    this.breakDownTimeInclHours('05:01:01')
   }
 
   breakDownTime(wholeTime) {
     const minutes = wholeTime.slice(0, 2);
     const seconds = wholeTime.slice(3, 5);
     
-
     this.arrangeText(minutes);
     
-    
-
     this.minutes = minutes.slice(0,1) === '0' ? minutes.slice(1,2) : minutes.slice(0,2);
     this.seconds = seconds.slice(0,1) === '0' ? seconds.slice(1,2) : seconds.slice(0,2);
-    
   }
 
-  arrangeText(minutes){
-    //rember to change to handle hours. Minutes can't be 00 etc. Below function isn't right but along those lines.
-    // this.minutes === '00' && this.hours === '00' ? this.showMinutes = false : this.showMinutes = true;
-    minutes === '00' ? this.showMinutes = false : this.showMinutes = true;
+  breakDownTimeInclHours(wholeTime) {
+    const hours = wholeTime.slice(0, 2);
+    const minutes = wholeTime.slice(3, 5);
+    const seconds = wholeTime.slice(6, 8);
+
+    this.arrangeText(minutes, hours)
+
+    this.hours = hours.slice(0,1) === '0' ? hours.slice(1,2) : hours.slice(0,2);
+    this.minutes = minutes.slice(0,1) === '0' ? minutes.slice(1,2) : minutes.slice(0,2);
+    this.seconds = seconds.slice(0,1) === '0' ? seconds.slice(1,2) : seconds.slice(0,2);
+  }
+
+  arrangeText(minutes, hours?){
+    if (!hours) {
+      minutes === '00' ? this.showMinutes = false : this.showMinutes = true;
+    } else {
+      this.showMinutes = true;
+      this.showHours = true;
+    }
   }
 
   discardTime(){

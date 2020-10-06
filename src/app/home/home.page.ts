@@ -49,12 +49,8 @@ export class HomePage {
       this.timer = this.numbers.subscribe(t => {
         console.log(t)
         if (t < 3600) {
-          this.timerElement.nativeElement.classList.remove('timer-mid');
           this.timerElement.nativeElement.classList.remove('timer-long');
           this.formatedTime = new Date(t * 1000).toISOString().substr(14, 5);
-        } else if (t < 36000) {
-          this.timerElement.nativeElement.classList.add('timer-mid');
-          this.formatedTime = new Date(t * 1000).toISOString().substr(12, 7);
         } else {
           this.timerElement.nativeElement.classList.add('timer-long');
           this.formatedTime = new Date(t * 1000).toISOString().substr(11, 8);
