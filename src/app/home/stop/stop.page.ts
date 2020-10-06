@@ -30,8 +30,7 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
-    // this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
-    this.breakDownTimeInclHours('05:01:01')
+    this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
   }
 
   breakDownTime(wholeTime) {

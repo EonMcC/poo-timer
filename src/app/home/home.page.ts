@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { APIService } from '../API.service';
 import { timer } from 'rxjs';
 import { DataServiceService } from './data-service.service';
+import { Auth } from 'aws-amplify';
 
 
 export interface stopData {
@@ -28,7 +29,8 @@ export class HomePage {
 
   constructor(
       private router: Router,
-      private dataService: DataServiceService
+      private dataService: DataServiceService,
+      private apiService: APIService
     ) {}
 
   set data(value: string) {
@@ -40,6 +42,8 @@ export class HomePage {
     setTimeout(() => {
       this.menuClick = false;
     }, 500)
+    // console.log(Auth.currentAuthenticatedUser())
+    this.saveToDb();
   }
 
   handleTimer(){
@@ -64,5 +68,9 @@ export class HomePage {
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
     }
+  }
+
+  saveToDb(){
+    this.apiService.CreatePooTimer({title: 'fromHome'})
   }
 }
