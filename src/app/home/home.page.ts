@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { APIService } from '../API.service.service';
 import { timer } from 'rxjs';
@@ -17,7 +17,7 @@ export interface stopData {
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
+export class HomePage implements OnInit {
 
   @ViewChild('timer') timerElement: ElementRef;
 
@@ -34,6 +34,18 @@ export class HomePage {
       private dataService: DataServiceService,
       private apiService: APIService
     ) {}
+
+    ngOnInit() {
+      Auth.currentAuthenticatedUser().then((data) => { 
+        const id = data.attributes.sub;
+        this.apiService.GetUser(id).then((user) => {
+          this.dataService.user = {
+            id: user.id,
+            email: user.email,
+          }
+        })
+      })
+    }
 
   set data(value: string) {
     this.dataService.stopTime = value;
@@ -75,7 +87,7 @@ export class HomePage {
     }
   }
 
-  saveToDb(time){
+  saveToDb(time) {
     Auth.currentAuthenticatedUser().then((data) => { 
       const userId = data.attributes.sub;
       const duration = time;

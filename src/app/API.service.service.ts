@@ -6,6 +6,7 @@ import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
 
 export type CreateUserInput = {
+  id: string;
   email: string;
   name?: string | null;
 };

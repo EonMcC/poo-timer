@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NavController, NavParams, AlertController } from "@ionic/angular";
 import { Auth } from 'aws-amplify';
 import { AuthService } from './auth.service';
+import { DataServiceService } from '../home/data-service.service';
+import { APIService } from '../API.service.service';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +20,8 @@ export class AuthComponent {
     public alertController: AlertController,
     public cognitoService: AuthService,
     private router: Router,
+    private dataService: DataServiceService,
+    private apiService: APIService
     ) {
       Auth.currentAuthenticatedUser({bypassCache: false}).then(user => {
         this.router.navigate(['/home'])
@@ -43,7 +47,17 @@ export class AuthComponent {
       console.log('signup with:', email, this.password)
       Auth.signUp(email, this.password, email).then(
         res => {
-          console.log(res)
+          console.log('return from signup', res)
+          const id = res.userSub;
+          console.log('details going to createUser', res.userSub, email);
+          this.apiService.CreateUser({id, email}).then((user) => {
+            try {
+              console.log('added user to DB')
+            } catch (err) {
+              console.log(res.userSub, email);
+              console.log('creating user error', err);
+            }
+          })
           this.promptVerificationCode(email);
         },
         err => {

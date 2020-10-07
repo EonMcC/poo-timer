@@ -7,6 +7,12 @@ import { stopData } from './home.page';
 export class DataServiceService {
 
   stopTime: string;
+  user: {
+    id: string;
+    email: string;
+    name?: string;
+    hourlyRate?: number;
+  }
 
   constructor() { }
 
