@@ -17,8 +17,6 @@ export class StopPage implements OnInit {
   showHours: boolean;
   showMinutes: boolean;
 
-  email: string;
-
 
   constructor(
       public alertController: AlertController,
@@ -33,7 +31,6 @@ export class StopPage implements OnInit {
 
   ngOnInit() {
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
-    this.email = this.dataService.user.email;
   }
 
   breakDownTime(wholeTime) {

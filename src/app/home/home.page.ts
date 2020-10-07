@@ -39,6 +39,7 @@ export class HomePage implements OnInit {
       Auth.currentAuthenticatedUser().then((data) => { 
         const id = data.attributes.sub;
         this.apiService.GetUser(id).then((user) => {
+          console.log('Current User', user)
           this.dataService.user = {
             id: user.id,
             email: user.email,
@@ -88,17 +89,15 @@ export class HomePage implements OnInit {
   }
 
   saveToDb(time) {
-    Auth.currentAuthenticatedUser().then((data) => { 
-      const userId = data.attributes.sub;
-      const duration = time;
-      const createdAt = moment.now();
-      this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
-        try {
-          console.log('successfully added poo', data)
-        } catch (error) {
-          console.log('error adding poo to DB', error)
-        }
-      })
+    const userId = this.dataService.user.id;
+    const duration = time;
+    const createdAt = moment.now();
+    this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
+      try {
+        console.log('successfully added poo', data)
+      } catch (error) {
+        console.log('error adding poo to DB', error)
+      }
     })
   }
 }
