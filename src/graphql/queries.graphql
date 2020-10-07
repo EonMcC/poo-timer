@@ -36,8 +36,8 @@ query ListUsers(
     nextToken
   }
 }
-query GetPoo($userId: String!, $pooId: String!) {
-  getPoo(userId: $userId, pooId: $pooId) {
+query GetPoo($pooId: String!) {
+  getPoo(pooId: $pooId) {
     pooId
     userId
     duration

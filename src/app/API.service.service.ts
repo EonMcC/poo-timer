@@ -29,7 +29,6 @@ export type DeleteUserInput = {
 };
 
 export type CreatePooInput = {
-  pooId: string;
   userId: string;
   duration?: number | null;
   createdAt?: number | null;
@@ -37,14 +36,13 @@ export type CreatePooInput = {
 
 export type UpdatePooInput = {
   pooId: string;
-  userId: string;
+  userId?: string | null;
   duration?: number | null;
   createdAt?: number | null;
 };
 
 export type DeletePooInput = {
   pooId: string;
-  userId: string;
 };
 
 export type TableUserFilterInput = {
@@ -475,9 +473,9 @@ export class APIService {
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
   }
-  async GetPoo(userId: string, pooId: string): Promise<GetPooQuery> {
-    const statement = `query GetPoo($userId: String!, $pooId: String!) {
-        getPoo(userId: $userId, pooId: $pooId) {
+  async GetPoo(pooId: string): Promise<GetPooQuery> {
+    const statement = `query GetPoo($pooId: String!) {
+        getPoo(pooId: $pooId) {
           __typename
           pooId
           userId
@@ -486,7 +484,6 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      userId,
       pooId
     };
     const response = (await API.graphql(

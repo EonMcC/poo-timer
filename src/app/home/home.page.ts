@@ -25,6 +25,7 @@ export class HomePage {
   todos: Array<any>;
   numbers = timer(0, 1000)
   timer: any;
+  unformatedTime: any;
   formatedTime = '00:00';
   timerRunning = false;
 
@@ -43,8 +44,9 @@ export class HomePage {
     setTimeout(() => {
       this.menuClick = false;
     }, 500)
-    // console.log(Auth.currentAuthenticatedUser())
-    this.saveToDb();
+    const now = moment.now();
+    console.log(now)
+    // this.saveToDb();
   }
 
   handleTimer(){
@@ -53,6 +55,7 @@ export class HomePage {
       console.log('Starting Timer');
       this.timer = this.numbers.subscribe(t => {
         console.log(t)
+        this.unformatedTime = t;
         if (t < 3600) {
           this.timerElement.nativeElement.classList.remove('timer-long');
           this.formatedTime = new Date(t * 1000).toISOString().substr(14, 5);
@@ -63,6 +66,7 @@ export class HomePage {
       });
     } else {
       console.log('Stopping Timer');
+      this.saveToDb(this.unformatedTime)
       this.timerRunning = false;
       this.timer.unsubscribe();
       this.dataService.stopTime = this.formatedTime;
@@ -71,9 +75,18 @@ export class HomePage {
     }
   }
 
-  saveToDb(){
-    const createdAt = moment.now();
-    this.apiService.CreatePoo({createdAt: createdAt})
-    console.log(moment.now())
+  saveToDb(time){
+    Auth.currentAuthenticatedUser().then((data) => { 
+      const userId = data.attributes.sub;
+      const duration = time;
+      const createdAt = moment.now();
+      this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
+        try {
+          console.log('successfully added poo', data)
+        } catch (error) {
+          console.log('error adding poo to DB', error)
+        }
+      })
+    })
   }
 }
