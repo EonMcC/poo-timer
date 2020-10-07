@@ -4,12 +4,14 @@ query GetUser($id: String!) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 query ListUsers(
@@ -22,6 +24,14 @@ query ListUsers(
       id
       email
       name
+      signupDate
+      firstPooDate
+      hourlyRate
+      totalPaid
+      currency
+      longestPooTime
+      numberOfPoos
+      totalPooTime
     }
     nextToken
   }

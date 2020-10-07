@@ -4,12 +4,14 @@ mutation CreateUser($input: CreateUserInput!) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 mutation UpdateUser($input: UpdateUserInput!) {
@@ -17,12 +19,14 @@ mutation UpdateUser($input: UpdateUserInput!) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 mutation DeleteUser($input: DeleteUserInput!) {
@@ -30,12 +34,14 @@ mutation DeleteUser($input: DeleteUserInput!) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 mutation CreatePoo($input: CreatePooInput!) {

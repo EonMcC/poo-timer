@@ -6,7 +6,7 @@ import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
 
 export type CreateUserInput = {
-  email?: string | null;
+  email: string;
   name?: string | null;
 };
 
@@ -14,6 +14,14 @@ export type UpdateUserInput = {
   id: string;
   email?: string | null;
   name?: string | null;
+  signupDate?: number | null;
+  firstPooDate?: number | null;
+  hourlyRate?: number | null;
+  totalPaid?: number | null;
+  currency?: string | null;
+  longestPooTime?: number | null;
+  numberOfPoos?: number | null;
+  totalPooTime?: number | null;
 };
 
 export type DeleteUserInput = {
@@ -80,43 +88,46 @@ export type TableFloatFilterInput = {
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type UpdateUserMutation = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type DeleteUserMutation = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type CreatePooMutation = {
@@ -146,15 +157,16 @@ export type DeletePooMutation = {
 export type GetUserQuery = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type ListUsersQuery = {
@@ -162,8 +174,16 @@ export type ListUsersQuery = {
   items: Array<{
     __typename: "User";
     id: string;
-    email: string | null;
+    email: string;
     name: string | null;
+    signupDate: number | null;
+    firstPooDate: number | null;
+    hourlyRate: number | null;
+    totalPaid: number | null;
+    currency: string | null;
+    longestPooTime: number | null;
+    numberOfPoos: number | null;
+    totalPooTime: number | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -191,43 +211,46 @@ export type ListPoosQuery = {
 export type OnCreateUserSubscription = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type OnUpdateUserSubscription = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type OnDeleteUserSubscription = {
   __typename: "User";
   id: string;
-  email: string | null;
+  email: string;
   name: string | null;
-  poos: {
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null;
+  signupDate: number | null;
+  firstPooDate: number | null;
+  hourlyRate: number | null;
+  totalPaid: number | null;
+  currency: string | null;
+  longestPooTime: number | null;
+  numberOfPoos: number | null;
+  totalPooTime: number | null;
 };
 
 export type OnCreatePooSubscription = {
@@ -265,13 +288,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -289,13 +313,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -313,13 +338,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -391,13 +417,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -421,6 +448,14 @@ export class APIService {
             id
             email
             name
+            signupDate
+            firstPooDate
+            hourlyRate
+            totalPaid
+            currency
+            longestPooTime
+            numberOfPoos
+            totalPooTime
           }
           nextToken
         }
@@ -500,13 +535,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`
     )
@@ -520,13 +556,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`
     )
@@ -540,13 +577,14 @@ export class APIService {
           id
           email
           name
-          poos {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
+          signupDate
+          firstPooDate
+          hourlyRate
+          totalPaid
+          currency
+          longestPooTime
+          numberOfPoos
+          totalPooTime
         }
       }`
     )

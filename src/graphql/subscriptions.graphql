@@ -4,12 +4,14 @@ subscription OnCreateUser($id: String, $email: String, $name: String) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 subscription OnUpdateUser($id: String, $email: String, $name: String) {
@@ -17,12 +19,14 @@ subscription OnUpdateUser($id: String, $email: String, $name: String) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 subscription OnDeleteUser($id: String, $email: String, $name: String) {
@@ -30,12 +34,14 @@ subscription OnDeleteUser($id: String, $email: String, $name: String) {
     id
     email
     name
-    poos {
-      pooId
-      userId
-      duration
-      createdAt
-    }
+    signupDate
+    firstPooDate
+    hourlyRate
+    totalPaid
+    currency
+    longestPooTime
+    numberOfPoos
+    totalPooTime
   }
 }
 subscription OnCreatePoo(
