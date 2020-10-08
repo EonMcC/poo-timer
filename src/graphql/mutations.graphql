@@ -12,6 +12,7 @@ mutation CreateUser($input: CreateUserInput!) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 mutation UpdateUser($input: UpdateUserInput!) {
@@ -27,6 +28,7 @@ mutation UpdateUser($input: UpdateUserInput!) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 mutation DeleteUser($input: DeleteUserInput!) {
@@ -42,6 +44,7 @@ mutation DeleteUser($input: DeleteUserInput!) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 mutation CreatePoo($input: CreatePooInput!) {
@@ -66,5 +69,23 @@ mutation DeletePoo($input: DeletePooInput!) {
     userId
     duration
     createdAt
+  }
+}
+mutation CreateTest($input: CreateTestInput!) {
+  createTest(input: $input) {
+    id
+    email
+  }
+}
+mutation UpdateTest($input: UpdateTestInput!) {
+  updateTest(input: $input) {
+    id
+    email
+  }
+}
+mutation DeleteTest($input: DeleteTestInput!) {
+  deleteTest(input: $input) {
+    id
+    email
   }
 }

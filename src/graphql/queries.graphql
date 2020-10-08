@@ -12,6 +12,7 @@ query GetUser($id: String!) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 query ListUsers(
@@ -32,6 +33,7 @@ query ListUsers(
       longestPooTime
       numberOfPoos
       totalPooTime
+      firstLogin
     }
     nextToken
   }
@@ -51,6 +53,25 @@ query ListPoos($filter: TablePooFilterInput, $limit: Int, $nextToken: String) {
       userId
       duration
       createdAt
+    }
+    nextToken
+  }
+}
+query GetTest($id: String!) {
+  getTest(id: $id) {
+    id
+    email
+  }
+}
+query ListTests(
+  $filter: TableTestFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
     }
     nextToken
   }

@@ -9,6 +9,7 @@ export type CreateUserInput = {
   id: string;
   email: string;
   name?: string | null;
+  firstLogin: boolean;
 };
 
 export type UpdateUserInput = {
@@ -23,6 +24,7 @@ export type UpdateUserInput = {
   longestPooTime?: number | null;
   numberOfPoos?: number | null;
   totalPooTime?: number | null;
+  firstLogin?: boolean | null;
 };
 
 export type DeleteUserInput = {
@@ -44,6 +46,20 @@ export type UpdatePooInput = {
 
 export type DeletePooInput = {
   pooId: string;
+};
+
+export type CreateTestInput = {
+  id: string;
+  email: string;
+};
+
+export type UpdateTestInput = {
+  id: string;
+  email?: string | null;
+};
+
+export type DeleteTestInput = {
+  id: string;
 };
 
 export type TableUserFilterInput = {
@@ -84,6 +100,11 @@ export type TableFloatFilterInput = {
   between?: Array<number | null> | null;
 };
 
+export type TableTestFilterInput = {
+  id?: TableStringFilterInput | null;
+  email?: TableStringFilterInput | null;
+};
+
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
@@ -97,6 +118,7 @@ export type CreateUserMutation = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type UpdateUserMutation = {
@@ -112,6 +134,7 @@ export type UpdateUserMutation = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type DeleteUserMutation = {
@@ -127,6 +150,7 @@ export type DeleteUserMutation = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type CreatePooMutation = {
@@ -153,6 +177,24 @@ export type DeletePooMutation = {
   createdAt: number | null;
 };
 
+export type CreateTestMutation = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
+export type UpdateTestMutation = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
+export type DeleteTestMutation = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
 export type GetUserQuery = {
   __typename: "User";
   id: string;
@@ -166,6 +208,7 @@ export type GetUserQuery = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type ListUsersQuery = {
@@ -183,6 +226,7 @@ export type ListUsersQuery = {
     longestPooTime: number | null;
     numberOfPoos: number | null;
     totalPooTime: number | null;
+    firstLogin: boolean | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -207,6 +251,22 @@ export type ListPoosQuery = {
   nextToken: string | null;
 };
 
+export type GetTestQuery = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
+export type ListTestsQuery = {
+  __typename: "TestConnection";
+  items: Array<{
+    __typename: "Test";
+    id: string;
+    email: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
 export type OnCreateUserSubscription = {
   __typename: "User";
   id: string;
@@ -220,6 +280,7 @@ export type OnCreateUserSubscription = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type OnUpdateUserSubscription = {
@@ -235,6 +296,7 @@ export type OnUpdateUserSubscription = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type OnDeleteUserSubscription = {
@@ -250,6 +312,7 @@ export type OnDeleteUserSubscription = {
   longestPooTime: number | null;
   numberOfPoos: number | null;
   totalPooTime: number | null;
+  firstLogin: boolean | null;
 };
 
 export type OnCreatePooSubscription = {
@@ -276,6 +339,24 @@ export type OnDeletePooSubscription = {
   createdAt: number | null;
 };
 
+export type OnCreateTestSubscription = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
+export type OnUpdateTestSubscription = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
+export type OnDeleteTestSubscription = {
+  __typename: "Test";
+  id: string;
+  email: string;
+};
+
 @Injectable({
   providedIn: "root"
 })
@@ -295,6 +376,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -320,6 +402,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -345,6 +428,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -409,6 +493,54 @@ export class APIService {
     )) as any;
     return <DeletePooMutation>response.data.deletePoo;
   }
+  async CreateTest(input: CreateTestInput): Promise<CreateTestMutation> {
+    const statement = `mutation CreateTest($input: CreateTestInput!) {
+        createTest(input: $input) {
+          __typename
+          id
+          email
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateTestMutation>response.data.createTest;
+  }
+  async UpdateTest(input: UpdateTestInput): Promise<UpdateTestMutation> {
+    const statement = `mutation UpdateTest($input: UpdateTestInput!) {
+        updateTest(input: $input) {
+          __typename
+          id
+          email
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateTestMutation>response.data.updateTest;
+  }
+  async DeleteTest(input: DeleteTestInput): Promise<DeleteTestMutation> {
+    const statement = `mutation DeleteTest($input: DeleteTestInput!) {
+        deleteTest(input: $input) {
+          __typename
+          id
+          email
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteTestMutation>response.data.deleteTest;
+  }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: String!) {
         getUser(id: $id) {
@@ -424,6 +556,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -455,6 +588,7 @@ export class APIService {
             longestPooTime
             numberOfPoos
             totalPooTime
+            firstLogin
           }
           nextToken
         }
@@ -525,6 +659,53 @@ export class APIService {
     )) as any;
     return <ListPoosQuery>response.data.listPoos;
   }
+  async GetTest(id: string): Promise<GetTestQuery> {
+    const statement = `query GetTest($id: String!) {
+        getTest(id: $id) {
+          __typename
+          id
+          email
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetTestQuery>response.data.getTest;
+  }
+  async ListTests(
+    filter?: TableTestFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListTestsQuery> {
+    const statement = `query ListTests($filter: TableTestFilterInput, $limit: Int, $nextToken: String) {
+        listTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            email
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListTestsQuery>response.data.listTests;
+  }
   OnCreateUserListener: Observable<OnCreateUserSubscription> = API.graphql(
     graphqlOperation(
       `subscription OnCreateUser($id: String, $email: String, $name: String) {
@@ -541,6 +722,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`
     )
@@ -562,6 +744,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`
     )
@@ -583,6 +766,7 @@ export class APIService {
           longestPooTime
           numberOfPoos
           totalPooTime
+          firstLogin
         }
       }`
     )
@@ -629,4 +813,40 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeletePooSubscription>;
+
+  OnCreateTestListener: Observable<OnCreateTestSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateTest($id: String, $email: String) {
+        onCreateTest(id: $id, email: $email) {
+          __typename
+          id
+          email
+        }
+      }`
+    )
+  ) as Observable<OnCreateTestSubscription>;
+
+  OnUpdateTestListener: Observable<OnUpdateTestSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateTest($id: String, $email: String) {
+        onUpdateTest(id: $id, email: $email) {
+          __typename
+          id
+          email
+        }
+      }`
+    )
+  ) as Observable<OnUpdateTestSubscription>;
+
+  OnDeleteTestListener: Observable<OnDeleteTestSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteTest($id: String, $email: String) {
+        onDeleteTest(id: $id, email: $email) {
+          __typename
+          id
+          email
+        }
+      }`
+    )
+  ) as Observable<OnDeleteTestSubscription>;
 }

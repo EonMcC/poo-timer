@@ -12,6 +12,7 @@ subscription OnCreateUser($id: String, $email: String, $name: String) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 subscription OnUpdateUser($id: String, $email: String, $name: String) {
@@ -27,6 +28,7 @@ subscription OnUpdateUser($id: String, $email: String, $name: String) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 subscription OnDeleteUser($id: String, $email: String, $name: String) {
@@ -42,6 +44,7 @@ subscription OnDeleteUser($id: String, $email: String, $name: String) {
     longestPooTime
     numberOfPoos
     totalPooTime
+    firstLogin
   }
 }
 subscription OnCreatePoo(
@@ -96,5 +99,23 @@ subscription OnDeletePoo(
     userId
     duration
     createdAt
+  }
+}
+subscription OnCreateTest($id: String, $email: String) {
+  onCreateTest(id: $id, email: $email) {
+    id
+    email
+  }
+}
+subscription OnUpdateTest($id: String, $email: String) {
+  onUpdateTest(id: $id, email: $email) {
+    id
+    email
+  }
+}
+subscription OnDeleteTest($id: String, $email: String) {
+  onDeleteTest(id: $id, email: $email) {
+    id
+    email
   }
 }
