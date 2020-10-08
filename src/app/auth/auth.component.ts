@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController, NavParams, AlertController } from "@ionic/angular";
 import { Auth } from 'aws-amplify';
-import { AuthService } from './auth.service';
 import { DataServiceService } from '../home/data-service.service';
 import { APIService } from '../API.service.service';
 
@@ -18,7 +17,6 @@ export class AuthComponent {
     public navCtrl: NavController,
     // public navParams: NavParams,
     public alertController: AlertController,
-    public cognitoService: AuthService,
     private router: Router,
     private dataService: DataServiceService,
     private apiService: APIService
@@ -50,7 +48,7 @@ export class AuthComponent {
           console.log('return from signup', res)
           const id = res.userSub;
           console.log('details going to createUser', res.userSub, email);
-          this.apiService.CreateUser({id, email}).then((user) => {
+          this.apiService.CreateUser({id, email, firstLogin: true}).then((user) => {
             try {
               console.log('added user to DB')
             } catch (err) {

@@ -18,6 +18,10 @@ const routes: Routes = [
   },
   {
     path: 'auth', component: AuthComponent
+  },
+  {
+    path: 'initial-setup',
+    loadChildren: () => import('./initial-setup/initial-setup.module').then( m => m.InitialSetupPageModule)
   }
 ];
 
