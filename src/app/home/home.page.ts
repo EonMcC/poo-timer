@@ -46,8 +46,9 @@ export class HomePage implements OnInit {
           this.dataService.user = {
             id: user.id,
             email: user.email,
-            hourlyRate: user.hourlyRate,
-            currency: user.currency
+            hourlyRate: user.hourlyRate ? user.hourlyRate : null,
+            currency: user.currency ? user.currency : null,
+            name: user.name ? user.name : 'User'
           }
           console.log('userin service', this.dataService.user);
         })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataServiceService } from '../data-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,10 +9,15 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private router: Router) { }
+  user: any;
+
+  constructor(
+      private router: Router,
+      private dataService: DataServiceService
+    ) { }
 
   ngOnInit() {
-    console.log('profile')
+    this.user = this.dataService.user;
   }
 
   goBack(){
