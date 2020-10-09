@@ -46,6 +46,7 @@ export class AuthComponent {
             this.dataService.user = {
               id: user.id,
               email: user.email,
+              hourlyRate: user.hourlyRate
             }
             this.router.navigate(['/initial-setup']);
           } else {

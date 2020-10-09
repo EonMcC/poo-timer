@@ -47,6 +47,7 @@ export class HomePage implements OnInit {
             this.dataService.user = {
               id: user.id,
               email: user.email,
+              hourlyRate: user.hourlyRate
             }
             console.log('userin service', this.dataService.user);
           })
@@ -88,6 +89,7 @@ export class HomePage implements OnInit {
       this.saveToDb(this.unformatedTime)
       this.timerRunning = false;
       this.timer.unsubscribe();
+      this.dataService.stopTimeRaw = this.unformatedTime;
       this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'

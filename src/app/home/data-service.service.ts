@@ -7,6 +7,7 @@ import { stopData } from './home.page';
 export class DataServiceService {
 
   stopTime: string;
+  stopTimeRaw: number;
   user: {
     id: string;
     email: string;

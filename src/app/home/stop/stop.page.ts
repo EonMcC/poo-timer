@@ -16,6 +16,7 @@ export class StopPage implements OnInit {
   seconds: string;
   showHours: boolean;
   showMinutes: boolean;
+  paid: string;
 
 
   constructor(
@@ -31,6 +32,22 @@ export class StopPage implements OnInit {
 
   ngOnInit() {
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
+    this.calculateMoney(this.dataService.stopTimeRaw, this.dataService.user.hourlyRate);
+  }
+
+  calculateMoney(time, hourlyRate) {
+    console.log('time', time);
+    console.log('hourlyRate', hourlyRate)
+    if (time > 0) {
+      const paidNumber = ((hourlyRate / 3600) * time);
+      if (paidNumber < .01) {
+        this.paid = `£${paidNumber.toFixed(3)}`;
+      } else {
+        this.paid = `£${paidNumber.toFixed(2)}`;
+      }
+      
+
+    }
   }
 
   breakDownTime(wholeTime) {
