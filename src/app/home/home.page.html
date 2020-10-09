@@ -47,7 +47,7 @@
 
   <div id="number-wrapper">
     <p #timer class="timer">{{formatedTime}}</p>
-    <p id="money-counter">£00.00</p>
+    <p id="money-counter" *ngIf="paid">{{paid}}</p>
   </div>
 
   <div id="btn-wrapper">

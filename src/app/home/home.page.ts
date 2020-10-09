@@ -20,6 +20,7 @@ export interface stopData {
 export class HomePage implements OnInit {
 
   @ViewChild('timer') timerElement: ElementRef;
+  @ViewChild('paid') paidElement: ElementRef;
 
   menuClick = false;
   todos: Array<any>;
@@ -28,6 +29,7 @@ export class HomePage implements OnInit {
   unformatedTime: any;
   formatedTime = '00:00';
   timerRunning = false;
+  paid: string;
 
   constructor(
       private router: Router,
@@ -80,6 +82,8 @@ export class HomePage implements OnInit {
           this.timerElement.nativeElement.classList.add('timer-long');
           this.formatedTime = new Date(t * 1000).toISOString().substr(11, 8);
         }
+
+        this.calculateMoney(t)
       });
     } else {
       console.log('Stopping Timer');
@@ -90,5 +94,24 @@ export class HomePage implements OnInit {
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
     }
+  }
+
+  calculateMoney(time) {
+    const hourlyRate = this.dataService.user.hourlyRate;
+    if (time > 0) {
+      const paidNumber = ((hourlyRate / 3600) * time);
+      if (paidNumber < .01) {
+        const paid = paidNumber.toFixed(3);
+        this.formatMoney(paid);
+      } else {
+        const paid = paidNumber.toFixed(2);
+        this.formatMoney(paid);
+      }
+    }
+  }
+
+  formatMoney(paid) {
+    const currency = this.dataService.user.currency;
+    this.paid = `${currency}${paid}`
   }
 }
