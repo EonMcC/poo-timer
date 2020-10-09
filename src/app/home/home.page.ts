@@ -82,7 +82,6 @@ export class HomePage implements OnInit {
           this.timerElement.nativeElement.classList.add('timer-long');
           this.formatedTime = new Date(t * 1000).toISOString().substr(11, 8);
         }
-
         this.calculateMoney(t)
       });
     } else {
@@ -93,6 +92,7 @@ export class HomePage implements OnInit {
       this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
+      this.paid = null;
     }
   }
 

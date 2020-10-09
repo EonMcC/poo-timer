@@ -43,8 +43,4 @@ export class Menu implements OnChanges {
     })
   }
 
-  goToInit(){
-    this.router.navigate(['/initial-setup'])
-  }
-
 }
