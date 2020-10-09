@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController  } from '@ionic/angular';
 import { DataServiceService } from '../data-service.service';
+import * as moment from 'moment';
+import { APIService } from 'src/app/API.service.service';
 
 @Component({
   selector: 'app-stop',
@@ -23,7 +25,8 @@ export class StopPage implements OnInit {
       public alertController: AlertController,
       public toastController: ToastController,
       private router: Router,
-      private dataService: DataServiceService
+      private dataService: DataServiceService,
+      private apiService: APIService
     ) { }
 
     get data():string {
@@ -92,9 +95,23 @@ export class StopPage implements OnInit {
     }
   }
 
+  acceptTime() {
+    const userId = this.dataService.user.id;
+    const duration = this.dataService.stopTimeRaw;
+    const createdAt = moment.now();
+    this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
+      try {
+        this.presentToast('save');
+        this.router.navigate(['/home']);
+      } catch (error) {
+        console.log('error adding poo to DB', error);
+        this.router.navigate(['/home']);
+      }
+    })
+  }
+
   discardTime(){
     this.presentAlertConfirm().then(ans => {
-
     })
   }
 
@@ -115,7 +132,9 @@ export class StopPage implements OnInit {
           text: 'Yes',
           handler: () => {
             console.log('Confirm Okay');
-            this.presentToast();
+            this.dataService.stopTime = null;
+            this.dataService.stopTimeRaw = null;
+            this.presentToast('discard');
             this.router.navigate(['/home']);
           }
         }
@@ -125,12 +144,23 @@ export class StopPage implements OnInit {
     await alert.present();
   }
 
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Time Discarded',
-      duration: 2000
-    });
-    toast.present();
+  async presentToast(action) {
+    console.log('action', action)
+    if (action === 'discard') {
+      console.log('1')
+      const toast = await this.toastController.create({
+        message: 'Poo Discarded',
+        duration: 2000
+      });
+      toast.present();
+    } else if (action === 'save') {
+      console.log('2')
+      const toast = await this.toastController.create({
+        message: 'Poo Saved',
+        duration: 2000
+      });
+      toast.present();
+    }
   }
 
 }

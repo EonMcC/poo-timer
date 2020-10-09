@@ -83,7 +83,6 @@ export class HomePage implements OnInit {
       });
     } else {
       console.log('Stopping Timer');
-      this.saveToDb(this.unformatedTime)
       this.timerRunning = false;
       this.timer.unsubscribe();
       this.dataService.stopTimeRaw = this.unformatedTime;
@@ -91,18 +90,5 @@ export class HomePage implements OnInit {
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
     }
-  }
-
-  saveToDb(time) {
-    const userId = this.dataService.user.id;
-    const duration = time;
-    const createdAt = moment.now();
-    this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
-      try {
-        console.log('successfully added poo', data)
-      } catch (error) {
-        console.log('error adding poo to DB', error)
-      }
-    })
   }
 }
