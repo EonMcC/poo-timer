@@ -21,6 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'initial-setup',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () => import('./initial-setup/initial-setup.module').then( m => m.InitialSetupPageModule)
   }
 ];

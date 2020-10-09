@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <div id="cog-cont"><ion-icon id="cog" name="cog"></ion-icon></div>
+  <h1>Settings</h1>
+  <h2>Change the things</h2>
+
+  <ion-list id="menu-list" lines="none">
+
+    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+      Currency
+      <span slot="end">£GBP</span>
+    </ion-item>
+
+    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+      Hourly Rate
+      <span slot="end">£GBP</span>
+    </ion-item>
+
+    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+      Clear Stats
+      <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
+    </ion-item>
+    
+    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+      Unregister
+      <ion-icon class="menu-icon" name="log-out-outline" slot="end" size="large"></ion-icon>
+    </ion-item>
+
+
+  </ion-list>
+
+
+  <div id="btn-wrapper">
+    <ion-button color="secondary" id="secondary-btn" (click)="goBack()">BACK</ion-button>
+  </div>
+</ion-content>

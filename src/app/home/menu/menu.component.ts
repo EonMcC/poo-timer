@@ -31,9 +31,9 @@ export class Menu implements OnChanges {
     this.menu.open('first');
   }
 
-  goToProfile(){
+  navigateTo(route){
     this.menu.close('first');
-    this.router.navigate(['/home/profile'])
+    this.router.navigate([route]);
   }
 
   handleSignOut(){

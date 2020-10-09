@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'stop',
     loadChildren: () => import('./stop/stop.module').then( m => m.StopPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 
