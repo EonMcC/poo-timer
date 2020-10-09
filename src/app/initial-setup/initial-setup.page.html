@@ -1,9 +1,95 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>initial-setup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <h1>Initial Setup</h1>
+  <p id="dont-worry">Don't worry, you only have to do this once!</p>
+
+  <form #initialSetupForm="ngForm" (ngSubmit)="onSubmit(initialSetupForm)">
+    <!-- name -->
+    <ion-item>
+      <ion-label
+        class="label" 
+        position="stacked"
+        text-wrap
+      >What would you like us to call you?</ion-label>
+      <ion-input
+        type="text"
+        placeholder="Enter your name/alias"
+        name="name"
+        [(ngModel)]="name"
+        value="string"
+      >
+      </ion-input>
+    </ion-item>
+
+    <!-- Hourly Rate -->
+    <ion-item>
+      <ion-label
+        class="label"
+        position="stacked"
+        text-wrap
+      >And how much do you get paid hourly?</ion-label>
+      <ion-input
+        type="number"
+        placeholder="Enter hourly wage"
+        name="wage"
+        [(ngModel)]="wage"
+        value="string"
+      >
+      </ion-input>
+    </ion-item>
+
+    <!-- currency -->
+    <ion-item>
+      <ion-label
+        class="label"
+        position="stacked"
+        text-wrap
+      >And what currency is that in?</ion-label>
+      <ion-select
+        type="search"
+        placeholder="Choose currency"
+        name="currency"
+        [(ngModel)]="currency"
+        value="string"
+        interface="popover"
+      >
+        <ion-select-option value="UND">Unicorn Dust</ion-select-option>
+        <ion-select-option value="P8">Pieces of Eight</ion-select-option>
+        <ion-select-option value="OLD">Old Money</ion-select-option>
+        <ion-select-option value="POUNDS">£ Pounds</ion-select-option>
+        <ion-select-option value="DOLLARS">$ Dollars</ion-select-option>
+        <ion-select-option value="EUROS">€ Euros</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+       <!-- Picture -->
+       <!-- <ion-item>
+        <ion-label
+          class="label"
+          position="stacked"
+          text-wrap
+        >And finally, upload a profile pic?</ion-label>
+        <ion-input
+          type="file"
+          name="profile"
+          [(ngModel)]="profile"
+          accept="image/png, image/jpeg"
+        >
+        </ion-input>
+      </ion-item> -->
+      <div id="btn-wrapper">
+        <ion-button
+          type="submit"
+          color="primary"
+          id="primary-btn"
+        >NEXT</ion-button>
+      </div>
+  </form>
+
+  <p id="disclaimer">Providing this information is 100% optional, but filling it in will improve
+    your Poo Timer experience. This data will not be shared with any third party.
+  </p>
+
+
 
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavController, NavParams, AlertController } from "@ionic/angular";
+import { NavController, NavParams, AlertController, ToastController } from "@ionic/angular";
 import { Auth } from 'aws-amplify';
 import { DataServiceService } from '../home/data-service.service';
 import { APIService } from '../API.service.service';
@@ -19,7 +19,8 @@ export class AuthComponent {
     public alertController: AlertController,
     private router: Router,
     private dataService: DataServiceService,
-    private apiService: APIService
+    private apiService: APIService,
+    public toastController: ToastController
     ) {
       Auth.currentAuthenticatedUser({bypassCache: false}).then(user => {
         this.router.navigate(['/home'])
@@ -38,8 +39,19 @@ export class AuthComponent {
     this.password = form.value.password;
 
     if (this.isLoginMode) {
-      Auth.signIn(email, this.password).then(user => {
-        this.router.navigate(['/home'])
+      Auth.signIn(email, this.password).then(cognitoUser => {
+        this.apiService.GetUser(cognitoUser.attributes.sub).then((user) => {
+          console.log(user)
+          if (user.firstLogin === true) {
+            this.dataService.user = {
+              id: user.id,
+              email: user.email,
+            }
+            this.router.navigate(['/initial-setup']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        })
       })
     } else {
       console.log('signup with:', email, this.password)
@@ -101,12 +113,21 @@ export class AuthComponent {
     Auth.confirmSignUp(email, verificationCode).then(
       res => {
         console.log(res)
+        this.presentToast();
         this.isLoginMode = true;
       },
       err => {
         console.log(err);
       }
     )
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'You\'re all signed up, please now login.',
+      duration: 2000
+    });
+    toast.present();
   }
 
 
