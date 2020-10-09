@@ -11,6 +11,7 @@ export class DataServiceService {
   user: {
     id: string;
     email: string;
+    signupDate: number;
     name?: string;
     hourlyRate?: number;
     currency?: string;

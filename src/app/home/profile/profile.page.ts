@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../data-service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +12,8 @@ export class ProfilePage implements OnInit {
 
   user: any;
   grandTotal: string;
+  signupDate: string;
+
   constructor(
       private router: Router,
       private dataService: DataServiceService
@@ -19,10 +22,15 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.user = this.dataService.user;
     this.calculateGrandTotal();
+    this.calculateSignupDate();
   }
 
   goBack(){
     this.router.navigate(['/home'])
+  }
+
+  calculateSignupDate() {
+    this.signupDate = moment(this.user.signupDate).format('MMM \'YY');
   }
 
   calculateGrandTotal() {

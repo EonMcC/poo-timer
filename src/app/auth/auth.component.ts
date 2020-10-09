@@ -5,6 +5,7 @@ import { NavController, NavParams, AlertController, ToastController } from "@ion
 import { Auth } from 'aws-amplify';
 import { DataServiceService } from '../home/data-service.service';
 import { APIService } from '../API.service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-auth',
@@ -46,10 +47,8 @@ export class AuthComponent {
             this.dataService.user = {
               id: user.id,
               email: user.email,
-              hourlyRate: user.hourlyRate ? user.hourlyRate : null,
-              currency: user.currency ? user.currency : null,
-              name: user.name ? user.name : 'User',
-              totalPooTime: user.totalPooTime ? user.totalPooTime : 0            
+              signupDate: user.signupDate,
+              totalPooTime: 0           
             }
             this.router.navigate(['/initial-setup']);
           } else {
@@ -64,7 +63,8 @@ export class AuthComponent {
           console.log('return from signup', res)
           const id = res.userSub;
           console.log('details going to createUser', res.userSub, email);
-          this.apiService.CreateUser({id, email, firstLogin: true}).then((user) => {
+          const signupDate = moment.now();
+          this.apiService.CreateUser({id, email, firstLogin: true, signupDate}).then((user) => {
             try {
               console.log('added user to DB')
             } catch (err) {

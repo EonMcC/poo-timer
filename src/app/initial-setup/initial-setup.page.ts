@@ -4,6 +4,7 @@ import { APIService } from '../API.service.service';
 import { DataServiceService } from '../home/data-service.service';
 import { ToastController  } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-initial-setup',
@@ -38,6 +39,9 @@ export class InitialSetupPage implements OnInit {
       firstLogin: false
     }).then((data) => {
       try {
+        this.dataService.user.currency = currency ? currency : null,
+        this.dataService.user.hourlyRate = hourlyRate ? hourlyRate : null,
+        this.dataService.user.name = name ? name : 'User',
         this.presentToast();
         this.router.navigate(['/home']);
       } catch (error) {

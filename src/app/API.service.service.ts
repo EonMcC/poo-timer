@@ -10,6 +10,7 @@ export type CreateUserInput = {
   email: string;
   name?: string | null;
   firstLogin: boolean;
+  signupDate: number;
 };
 
 export type UpdateUserInput = {
