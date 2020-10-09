@@ -36,24 +36,20 @@ export class HomePage implements OnInit {
     ) {}
 
     ngOnInit() {
-      // Check if this.dataService.user returns null or something else
-      console.log(this.dataService.user);
-      if (this.dataService.user === undefined) {
-        Auth.currentAuthenticatedUser().then((data) => { 
-          console.log('data', data)
-          const id = data.attributes.sub;
-          this.apiService.GetUser(id).then((user) => {
-            console.log('Current User', user)
-            this.dataService.user = {
-              id: user.id,
-              email: user.email,
-              hourlyRate: user.hourlyRate,
-              currency: user.currency
-            }
-            console.log('userin service', this.dataService.user);
-          })
+      Auth.currentAuthenticatedUser().then((data) => { 
+        console.log('data', data)
+        const id = data.attributes.sub;
+        this.apiService.GetUser(id).then((user) => {
+          console.log('Current User', user)
+          this.dataService.user = {
+            id: user.id,
+            email: user.email,
+            hourlyRate: user.hourlyRate,
+            currency: user.currency
+          }
+          console.log('userin service', this.dataService.user);
         })
-      }
+      })
     }
 
   set data(value: string) {
