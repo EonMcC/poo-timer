@@ -14,6 +14,7 @@ export class DataServiceService {
     name?: string;
     hourlyRate?: number;
     currency?: string;
+    totalPooTime?: number;
   }
 
   constructor() { }

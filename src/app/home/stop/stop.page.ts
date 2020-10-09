@@ -13,6 +13,7 @@ import { APIService } from 'src/app/API.service.service';
 
 export class StopPage implements OnInit {
 
+  user: any;
   hours: string;
   minutes: string;
   seconds: string;
@@ -34,15 +35,16 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
+    this.user = this.dataService.user;
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     
-    this.calculateMoney(this.dataService.stopTimeRaw, this.dataService.user.hourlyRate);
+    this.calculateMoney(this.dataService.stopTimeRaw, this.user.hourlyRate);
   }
 
   calculateMoney(time, hourlyRate) {
     console.log('time', time);
     console.log('hourlyRate', hourlyRate)
-    if (time > 0) {
+    if (time) {
       const paidNumber = ((hourlyRate / 3600) * time);
       if (paidNumber < .01) {
         const paid = paidNumber.toFixed(3);
@@ -55,7 +57,7 @@ export class StopPage implements OnInit {
   }
 
   formatMoney(paid) {
-    const currency = this.dataService.user.currency;
+    const currency = this.user.currency;
     if (currency === '£ Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);
@@ -97,13 +99,21 @@ export class StopPage implements OnInit {
   }
 
   acceptTime() {
-    const userId = this.dataService.user.id;
+    const userId = this.user.id;
     const duration = this.dataService.stopTimeRaw;
     const createdAt = moment.now();
+    const totalPooTime = this.user.totalPooTime + duration;
     this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
       try {
-        this.presentToast('save');
-        this.router.navigate(['/home']);
+        this.apiService.UpdateUser({id: userId, totalPooTime}).then((data) => {
+          try {
+            this.dataService.user.totalPooTime = totalPooTime;
+            this.presentToast('save');
+            this.router.navigate(['/home']);
+          } catch (error) {
+            console.log('error adding totalPooTime to user', error);
+          }
+        })
       } catch (error) {
         console.log('error adding poo to DB', error);
         this.router.navigate(['/home']);

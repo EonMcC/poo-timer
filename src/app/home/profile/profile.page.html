@@ -4,7 +4,7 @@
   <h1>{{user.name}}</h1>
 
   <p>{{user.name}} has been Poo Timing since <span>Feb '21</span>.</p>
-  <p *ngIf="user.hourlyRate">Currently rocking an hourly rate of <span>{{user.hourlyRate}}</span>, {{user.name}} has been paid a grand total of <span>£513.47</span> to poo at work.</p>
+  <p *ngIf="user.hourlyRate">Currently rocking an hourly rate of <span>{{user.hourlyRate}}</span>, {{user.name}} has been paid a grand total of <span>{{grandTotal}}</span> to poo at work.</p>
   <p>That's some great work {{user.name}}, we salute you</p>
 
   <div id="btn-wrapper">

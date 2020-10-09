@@ -48,7 +48,8 @@ export class HomePage implements OnInit {
             email: user.email,
             hourlyRate: user.hourlyRate ? user.hourlyRate : null,
             currency: user.currency ? user.currency : null,
-            name: user.name ? user.name : 'User'
+            name: user.name ? user.name : 'User',
+            totalPooTime: user.totalPooTime ? user.totalPooTime : 0   
           }
           console.log('userin service', this.dataService.user);
         })
@@ -99,7 +100,7 @@ export class HomePage implements OnInit {
 
   calculateMoney(time) {
     const hourlyRate = this.dataService.user.hourlyRate;
-    if (time > 0) {
+    if (time) {
       const paidNumber = ((hourlyRate / 3600) * time);
       if (paidNumber < .01) {
         const paid = paidNumber.toFixed(3);

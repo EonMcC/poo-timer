@@ -48,7 +48,8 @@ export class AuthComponent {
               email: user.email,
               hourlyRate: user.hourlyRate ? user.hourlyRate : null,
               currency: user.currency ? user.currency : null,
-              name: user.name ? user.name : 'User'              
+              name: user.name ? user.name : 'User',
+              totalPooTime: user.totalPooTime ? user.totalPooTime : 0            
             }
             this.router.navigate(['/initial-setup']);
           } else {
