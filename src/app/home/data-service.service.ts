@@ -13,6 +13,7 @@ export class DataServiceService {
     email: string;
     name?: string;
     hourlyRate?: number;
+    currency?: string;
   }
 
   constructor() { }

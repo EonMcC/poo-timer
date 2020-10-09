@@ -41,12 +41,23 @@ export class StopPage implements OnInit {
     if (time > 0) {
       const paidNumber = ((hourlyRate / 3600) * time);
       if (paidNumber < .01) {
-        this.paid = `£${paidNumber.toFixed(3)}`;
+        const paid = paidNumber.toFixed(3);
+        this.formatMoney(paid);
       } else {
-        this.paid = `£${paidNumber.toFixed(2)}`;
+        const paid = paidNumber.toFixed(2);
+        this.formatMoney(paid);
       }
-      
+    }
+  }
 
+  formatMoney(paid) {
+    const currency = this.dataService.user.currency;
+    if (currency === '£ Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money') {
+      const symbol = currency.slice(0,1);
+      const moneyType = currency.slice(2);
+      this.paid = `${symbol}${paid} ${moneyType}`
+    } else {
+      this.paid = `${currency}${paid}`
     }
   }
 
