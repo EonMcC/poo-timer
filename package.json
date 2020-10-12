@@ -21,6 +21,7 @@
     "@angular/router": "~10.0.0",
     "@aws-amplify/api-graphql": "^1.2.6",
     "@aws-amplify/ui-angular": "^0.4.6",
+    "@capacitor/android": "^2.4.2",
     "@capacitor/core": "2.4.2",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/splash-screen": "^5.0.0",
