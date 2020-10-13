@@ -136,8 +136,8 @@ export class StopPage implements OnInit {
           text: 'No',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+          handler: (data) => {
+            console.log('Cancel');
           }
         }, {
           text: 'Yes',

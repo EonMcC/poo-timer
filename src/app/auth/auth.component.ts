@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavController, NavParams, AlertController, ToastController } from "@ionic/angular";
+import { NavController, AlertController, ToastController } from "@ionic/angular";
 import { Auth } from 'aws-amplify';
 import { DataServiceService } from '../home/data-service.service';
 import { APIService } from '../API.service.service';
@@ -16,7 +16,6 @@ export class AuthComponent {
 
   constructor( 
     public navCtrl: NavController,
-    // public navParams: NavParams,
     public alertController: AlertController,
     private router: Router,
     private dataService: DataServiceService,

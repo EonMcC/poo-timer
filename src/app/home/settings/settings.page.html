@@ -5,22 +5,52 @@
 
   <ion-list id="menu-list" lines="none">
 
-    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
-      Currency
-      <span slot="end">{{user.currency}}</span>
+    <ion-item class="menu-item">
+      <ion-label
+        class="label"
+        position="stacked"
+      >Currency</ion-label>
+      <ion-select
+        type="search"
+        name="currency"
+        [(ngModel)]="user.currency"
+        value="string"
+        interface="popover"
+        (ionChange)="handleUpdateUser()"
+      >
+        <ion-select-option value="£ Unicorn Dust">£ Unicorn Dust</ion-select-option>
+        <ion-select-option value="$ Pieces of Eight">$ Pieces of Eight</ion-select-option>
+        <ion-select-option value="£ Old Money">£ Old Money</ion-select-option>
+        <ion-select-option value="£">£ Pounds</ion-select-option>
+        <ion-select-option value="$">$ Dollars</ion-select-option>
+        <ion-select-option value="€">€ Euros</ion-select-option>
+
+      </ion-select>
     </ion-item>
 
-    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
-      Hourly Rate
-      <span slot="end">{{user.currency + user.hourlyRate}}</span>
+    <ion-item class="menu-item">
+      <ion-label
+        class="label"
+        position="stacked"
+      >Hourly Rate</ion-label>
+      <ion-input
+        type="number"
+        name="wage"
+        [(ngModel)]="user.hourlyRate"
+        value="string"
+        inputmode="decimal"
+        enterkeyhit="done"
+        (ionBlur)="handleUpdateUser()"
+      >
+      </ion-input>
     </ion-item>
 
-    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+    <ion-item class="menu-item">
       Clear Stats
       <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
     </ion-item>
     
-    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+    <ion-item class="menu-item" (click)="handleUnregisterClick()">
       Unregister
       <ion-icon class="menu-icon" name="log-out-outline" slot="end" size="large"></ion-icon>
     </ion-item>
