@@ -1,0 +1,36 @@
+#bar-chart-cont {
+  margin: 32px auto 8px auto;
+  width: 102px;
+}
+
+#chart {
+  color: var(--ion-color-dark);
+  font-size: 102px;
+}
+
+h1 {
+  margin: 0px auto;
+  text-align: center;
+  font-size: 36px;
+  color: var(--ion-color-dark);
+}
+
+h2 {
+  margin: 0px auto 32px auto;
+  text-align: center;
+  font-size: 18px;
+  color: var(--ion-color-secondary);
+}
+
+#btn-wrapper {
+  position: absolute;
+  bottom: 32px;
+  width: 100%;
+}
+
+#secondary-btn {
+  display: block;
+  width: 90vw;
+  margin: 0 auto;
+  bottom: 32px;
+}
