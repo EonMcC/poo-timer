@@ -43,12 +43,7 @@ export class AuthComponent {
         this.apiService.GetUser(cognitoUser.attributes.sub).then((user) => {
           console.log(user)
           if (user.firstLogin === true) {
-            this.dataService.user = {
-              id: user.id,
-              email: user.email,
-              signupDate: user.signupDate,
-              totalPooTime: 0           
-            }
+            this.dataService.user = user;
             this.router.navigate(['/initial-setup']);
           } else {
             this.router.navigate(['/home']);
@@ -63,7 +58,21 @@ export class AuthComponent {
           const id = res.userSub;
           console.log('details going to createUser', res.userSub, email);
           const signupDate = moment.now();
-          this.apiService.CreateUser({id, email, firstLogin: true, signupDate}).then((user) => {
+          this.apiService.CreateUser({
+            id,
+            email,
+            name: 'User',
+            hourlyRate: null,
+            currency: null,
+            firstLogin: true,
+            signupDate,
+            longestPooTime: 0,
+            shortestPooTime: 0,
+            numberOfPoos: 0,
+            totalPooTime: 0,
+            lastPooDate: null,
+            pooStreak: 0
+          }).then((user) => {
             try {
               console.log('added user to DB')
             } catch (err) {

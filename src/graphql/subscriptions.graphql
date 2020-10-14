@@ -3,48 +3,51 @@ subscription OnCreateUser($id: String, $email: String, $name: String) {
   onCreateUser(id: $id, email: $email, name: $name) {
     id
     email
+    firstLogin
     name
     signupDate
-    firstPooDate
     hourlyRate
-    totalPaid
     currency
     longestPooTime
+    shortestPooTime
     numberOfPoos
     totalPooTime
-    firstLogin
+    lastPooDate
+    pooStreak
   }
 }
 subscription OnUpdateUser($id: String, $email: String, $name: String) {
   onUpdateUser(id: $id, email: $email, name: $name) {
     id
     email
+    firstLogin
     name
     signupDate
-    firstPooDate
     hourlyRate
-    totalPaid
     currency
     longestPooTime
+    shortestPooTime
     numberOfPoos
     totalPooTime
-    firstLogin
+    lastPooDate
+    pooStreak
   }
 }
 subscription OnDeleteUser($id: String, $email: String, $name: String) {
   onDeleteUser(id: $id, email: $email, name: $name) {
     id
     email
+    firstLogin
     name
     signupDate
-    firstPooDate
     hourlyRate
-    totalPaid
     currency
     longestPooTime
+    shortestPooTime
     numberOfPoos
     totalPooTime
-    firstLogin
+    lastPooDate
+    pooStreak
   }
 }
 subscription OnCreatePoo(

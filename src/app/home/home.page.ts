@@ -39,20 +39,9 @@ export class HomePage implements OnInit {
 
     ngOnInit() {
       Auth.currentAuthenticatedUser().then((data) => { 
-        console.log('data', data)
         const id = data.attributes.sub;
         this.apiService.GetUser(id).then((user) => {
-          console.log('Current User', user)
-          this.dataService.user = {
-            id: user.id,
-            email: user.email,
-            signupDate: user.signupDate,
-            hourlyRate: user.hourlyRate ? user.hourlyRate : null,
-            currency: user.currency ? user.currency : null,
-            name: user.name ? user.name : 'User',
-            totalPooTime: user.totalPooTime ? user.totalPooTime : 0   
-          }
-          console.log('userin service', this.dataService.user);
+          this.dataService.user = user;
         })
       })
     }

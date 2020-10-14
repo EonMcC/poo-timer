@@ -101,24 +101,56 @@ export class StopPage implements OnInit {
   acceptTime() {
     const userId = this.user.id;
     const duration = this.dataService.stopTimeRaw;
-    const createdAt = moment.now();
-    const totalPooTime = this.user.totalPooTime + duration;
-    this.apiService.CreatePoo({userId, duration, createdAt}).then((data) => {
+    this.calcTotalPooTime(duration);
+    this.calcTotalPoos();
+    this.calcPooStreak();
+    this.calcLongestPooTime(duration);
+    this.calcShortestPooTime(duration);
+    this.apiService.UpdateUser(this.user).then((data) => {
       try {
-        this.apiService.UpdateUser({id: userId, totalPooTime}).then((data) => {
-          try {
-            this.dataService.user.totalPooTime = totalPooTime;
-            this.presentToast('save');
-            this.router.navigate(['/home']);
-          } catch (error) {
-            console.log('error adding totalPooTime to user', error);
-          }
-        })
-      } catch (error) {
-        console.log('error adding poo to DB', error);
+        this.presentToast('save');
         this.router.navigate(['/home']);
+      } catch (error) {
+        console.log('error updating user', error);
       }
+    }).finally(() => {
+      this.router.navigate(['/home']);
     })
+  }
+
+  calcTotalPooTime(duration) {
+    this.user.totalPooTime += duration
+  }
+
+  calcTotalPoos() {
+    this.user.numberOfPoos += 1;
+  }
+
+  calcPooStreak() {
+    const createdAt = moment.now();
+    const today = moment().dayOfYear(createdAt);
+    const lastPooDate = this.user.lastPooDate;
+    if (lastPooDate !== null) {
+      if (today === lastPooDate + 1) {
+        this.user.pooStreak += 1;
+      } else {
+        this.user.pooStreak = 1;
+      }
+    } else {
+      this.user.pooStreak = 1;
+    }
+  }
+
+  calcLongestPooTime(duration) {
+    if (duration > this.user.longestPooTime) {
+      this.user.longestPooTime = duration;
+    }
+  }
+
+  calcShortestPooTime(duration) {
+    if (duration < this.user.shortestPooTime) {
+      this.user.shortestPooTime = duration;
+    }
   }
 
   discardTime(){

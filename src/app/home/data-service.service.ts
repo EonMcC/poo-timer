@@ -8,11 +8,13 @@ export interface User {
 	signupDate?: number;
 	firstPooDate?: number;
 	hourlyRate?: number;
-	totalPaid?: number;
 	currency?: string;
 	longestPooTime?: number;
+	shortestPooTime?: number;
 	numberOfPoos?: number;
 	totalPooTime?: number;
+	lastPooDate?: number;
+	pooStreak?: number,
 	firstLogin?: boolean;
 }
 

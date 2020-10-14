@@ -3,48 +3,51 @@ mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     id
     email
+    firstLogin
     name
     signupDate
-    firstPooDate
     hourlyRate
-    totalPaid
     currency
     longestPooTime
+    shortestPooTime
     numberOfPoos
     totalPooTime
-    firstLogin
+    lastPooDate
+    pooStreak
   }
 }
 mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     id
     email
+    firstLogin
     name
     signupDate
-    firstPooDate
     hourlyRate
-    totalPaid
     currency
     longestPooTime
+    shortestPooTime
     numberOfPoos
     totalPooTime
-    firstLogin
+    lastPooDate
+    pooStreak
   }
 }
 mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
     id
     email
+    firstLogin
     name
     signupDate
-    firstPooDate
     hourlyRate
-    totalPaid
     currency
     longestPooTime
+    shortestPooTime
     numberOfPoos
     totalPooTime
-    firstLogin
+    lastPooDate
+    pooStreak
   }
 }
 mutation CreatePoo($input: CreatePooInput!) {

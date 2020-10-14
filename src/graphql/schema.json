@@ -240,6 +240,17 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "firstLogin",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Boolean",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "name",
           "description" : null,
           "args" : [ ],
@@ -262,29 +273,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "firstPooDate",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
           "name" : "hourlyRate",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "totalPaid",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -311,7 +300,18 @@
           "args" : [ ],
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "shortestPooTime",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -333,18 +333,29 @@
           "args" : [ ],
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "firstLogin",
+          "name" : "lastPooDate",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Boolean",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "pooStreak",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -365,6 +376,15 @@
         "possibleTypes" : null
       }, {
         "kind" : "SCALAR",
+        "name" : "Boolean",
+        "description" : "Built-in Boolean",
+        "fields" : null,
+        "inputFields" : null,
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "SCALAR",
         "name" : "Float",
         "description" : "Built-in Float",
         "fields" : null,
@@ -376,15 +396,6 @@
         "kind" : "SCALAR",
         "name" : "Int",
         "description" : "Built-in Int",
-        "fields" : null,
-        "inputFields" : null,
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "SCALAR",
-        "name" : "Boolean",
-        "description" : "Built-in Boolean",
         "fields" : null,
         "inputFields" : null,
         "interfaces" : null,
@@ -1147,13 +1158,9 @@
           "name" : "email",
           "description" : null,
           "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "String",
-              "ofType" : null
-            }
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
           },
           "defaultValue" : null
         }, {
@@ -1166,29 +1173,93 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "hourlyRate",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "currency",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "firstLogin",
           "description" : null,
           "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "Boolean",
-              "ofType" : null
-            }
+            "kind" : "SCALAR",
+            "name" : "Boolean",
+            "ofType" : null
           },
           "defaultValue" : null
         }, {
           "name" : "signupDate",
           "description" : null,
           "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "Float",
-              "ofType" : null
-            }
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "longestPooTime",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "shortestPooTime",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "numberOfPoos",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "totalPooTime",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "lastPooDate",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "pooStreak",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
           },
           "defaultValue" : null
         } ],
@@ -1223,6 +1294,15 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "firstLogin",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Boolean",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -1241,25 +1321,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "firstPooDate",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
           "name" : "hourlyRate",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Float",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "totalPaid",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1281,7 +1343,16 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "shortestPooTime",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Float",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1304,11 +1375,20 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "firstLogin",
+          "name" : "lastPooDate",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Boolean",
+            "name" : "Float",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "pooStreak",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1890,33 +1970,6 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "TableBooleanFilterInput",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : [ {
-          "name" : "ne",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Boolean",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "eq",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Boolean",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        } ],
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "INPUT_OBJECT",
         "name" : "TableIntFilterInput",
         "description" : null,
         "fields" : null,
@@ -2003,6 +2056,33 @@
               "name" : "Int",
               "ofType" : null
             }
+          },
+          "defaultValue" : null
+        } ],
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "INPUT_OBJECT",
+        "name" : "TablePooTimerFilterInput",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : [ {
+          "name" : "id",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "TableIDFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "title",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "TableStringFilterInput",
+            "ofType" : null
           },
           "defaultValue" : null
         } ],
@@ -2123,24 +2203,24 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "TablePooTimerFilterInput",
+        "name" : "TableBooleanFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
-          "name" : "id",
+          "name" : "ne",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "TableIDFilterInput",
+            "kind" : "SCALAR",
+            "name" : "Boolean",
             "ofType" : null
           },
           "defaultValue" : null
         }, {
-          "name" : "title",
+          "name" : "eq",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "TableStringFilterInput",
+            "kind" : "SCALAR",
+            "name" : "Boolean",
             "ofType" : null
           },
           "defaultValue" : null
