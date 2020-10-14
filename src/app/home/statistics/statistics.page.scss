@@ -22,6 +22,29 @@ h2 {
   color: var(--ion-color-secondary);
 }
 
+.stat-square {
+  width: 150px;
+  height: 150px;
+  background: #6FCF97;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stat-header {
+  width: 150px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ion-color-secondary);
+  margin: 0px auto;
+}
+
+.stat {
+  width: 150px;
+}
+
 #btn-wrapper {
   position: absolute;
   bottom: 32px;
