@@ -67,7 +67,7 @@ export class AuthComponent {
             firstLogin: true,
             signupDate,
             longestPooTime: 0,
-            shortestPooTime: 0,
+            shortestPooTime: null,
             numberOfPoos: 0,
             totalPooTime: 0,
             lastPooDate: null,

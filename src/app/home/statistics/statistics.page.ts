@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataServiceService, User } from '../data-service.service';
 
 @Component({
   selector: 'app-statistics',
@@ -8,11 +9,15 @@ import { Router } from '@angular/router';
 })
 export class StatisticsPage implements OnInit {
 
+  user: User
+
   constructor(
-    private router: Router
+    private router: Router,
+    private dataService: DataServiceService
   ) { }
 
   ngOnInit() {
+    this.user = this.dataService.user;
   }
 
   goBack(){

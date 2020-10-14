@@ -145,6 +145,9 @@ export class StopPage implements OnInit {
     if (duration > this.user.longestPooTime) {
       this.user.longestPooTime = duration;
     }
+    if (this.user.shortestPooTime === null) {
+      this.user.shortestPooTime = duration;
+    }
   }
 
   calcShortestPooTime(duration) {
