@@ -5,9 +5,21 @@
   margin: 32px 0px 32px 24px;
 }
 
+ion-item {
+  --background: var(--ion-color-primary-tint);
+  --border-color: var(--ion-color-secondary);
+  margin-bottom: 24px;
+}
+
+.label {
+  font-size: 24px;
+  color: var(--ion-color-secondary);
+}
+
 a {
   margin-left: 18px;
-  color: var(--ion-color-secondary)
+  color: var(--ion-color-secondary);
+  text-decoration: underline;
 }
 
 #btn-wrapper {

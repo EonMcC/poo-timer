@@ -1,36 +1,38 @@
 <ion-content [fullscreen]="true">
 
   <h1 id="title">{{isLoginMode ? 'Please Login' : 'Please Signup'}}</h1>
-
-  <div class="row">
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
-      <ion-row>
-        <ion-col>
-          <ion-list inset>
-            <ion-item>
-              <ion-input
-                type="email"
-                placeholder="Email"
-                name="email"
-                [(ngModel)]="email"
-                required
-              >
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input
-                type="password"
-                placeholder="Password"
-                name="password"
-                [(ngModel)]="password"
-                required
-              >
-              </ion-input>
-            </ion-item>
-          </ion-list>
-          <a (click)="onSwitchMode()">{{isLoginMode ? 'Signup Instead' : 'Login Instead'}}</a>
-        </ion-col>
-      </ion-row>
+      <input name="email" style="display: none;">
+      <input name="password" style="display: none;">
+      <ion-item>
+        <ion-label
+          class="label"
+          position="stacked"
+        >Email</ion-label>
+        <ion-input
+          type="email"
+          placeholder="Enter Email"
+          name="email"
+          [(ngModel)]="email"
+          required
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          class="label"
+          position="stacked"
+        >Password</ion-label>
+        <ion-input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          [(ngModel)]="password"
+          required
+        >
+        </ion-input>
+      </ion-item>
+    <a (click)="onSwitchMode()">{{isLoginMode ? 'or Signup Instead' : 'or Login Instead'}}</a>
       <ion-row>
         <ion-col id="btn-wrapper">
           <ion-button
@@ -41,16 +43,7 @@
             [disabled]="!authForm.valid"
             id="primary-btn"
           >{{isLoginMode ? 'LOGIN' : 'SIGNUP'}}</ion-button>
-          <!-- <ion-button
-            ion-button
-            full
-            type="button"
-            color="secondary"
-            (click)="onSwitchMode()"
-            id="secondary-btn"
-          >{{isLoginMode ? 'SIGNUP' : 'LOGIN'}}</ion-button> -->
         </ion-col>
       </ion-row>
     </form>
-  </div>
 </ion-content>
