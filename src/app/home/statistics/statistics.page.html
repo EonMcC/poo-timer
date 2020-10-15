@@ -29,7 +29,7 @@
       <ion-col>
         <div class="stat-square">
           <p class="stat-header">Poo Streak</p>
-          <h1 class="stat">{{user.pooSteak}} days</h1>
+          <h1 class="stat">{{user.pooStreak}} days</h1>
         </div>
       </ion-col>
     </ion-row>
@@ -37,14 +37,14 @@
     <ion-row>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Longest Poo</p>
-          <h1 class="stat">45 mins<br>7s</h1>
+          <p class="stat-header">Shortest Poo</p>
+          <h1 class="stat">{{shortestPooFormated}}</h1>
         </div>
       </ion-col>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Shortest Poo</p>
-          <h1 class="stat">3 mins<br>15s</h1>
+          <p class="stat-header">Longest Poo</p>
+          <h1 class="stat">{{longestPooFormated}}</h1>
         </div>
       </ion-col>
     </ion-row>

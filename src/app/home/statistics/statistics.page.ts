@@ -10,6 +10,8 @@ import { DataServiceService, User } from '../data-service.service';
 export class StatisticsPage implements OnInit {
 
   user: User
+  shortestPooFormated: string;
+  longestPooFormated: string;
 
   constructor(
     private router: Router,
@@ -18,6 +20,26 @@ export class StatisticsPage implements OnInit {
 
   ngOnInit() {
     this.user = this.dataService.user;
+    this.formatLongestPoo();
+    this.formatShortestPoo();
+  }
+
+  formatShortestPoo() {
+    const t = this.user.shortestPooTime;
+    if (t < 3600) {
+      this.shortestPooFormated = new Date(t * 1000).toISOString().substr(14, 5);
+    } else {
+      this.shortestPooFormated = new Date(t * 1000).toISOString().substr(11, 8);
+    }
+  }
+
+  formatLongestPoo() {
+    const t = this.user.longestPooTime;
+    if (t < 3600) {
+      this.longestPooFormated = new Date(t * 1000).toISOString().substr(14, 5);
+    } else {
+      this.longestPooFormated = new Date(t * 1000).toISOString().substr(11, 8);
+    }
   }
 
   goBack(){
