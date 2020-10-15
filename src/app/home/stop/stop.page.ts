@@ -106,15 +106,22 @@ export class StopPage implements OnInit {
     this.calcPooStreak();
     this.calcLongestPooTime(duration);
     this.calcShortestPooTime(duration);
-    this.apiService.UpdateUser(this.user).then((data) => {
+    console.log('this.user', this.user)
+    this.apiService.UpdateUser({
+      id: this.user.id,
+      longestPooTime: this.user.longestPooTime,
+      shortestPooTime: this.user.shortestPooTime,
+      numberOfPoos: this.user.numberOfPoos,
+      totalPooTime: this.user.totalPooTime,
+      lastPooDate: this.user.lastPooDate,
+      pooStreak: this.user.pooStreak
+    }).then((data) => {
       try {
         this.presentToast('save');
         this.router.navigate(['/home']);
       } catch (error) {
         console.log('error updating user', error);
       }
-    }).finally(() => {
-      this.router.navigate(['/home']);
     })
   }
 
@@ -133,11 +140,14 @@ export class StopPage implements OnInit {
     if (lastPooDate !== null) {
       if (today === lastPooDate + 1) {
         this.user.pooStreak += 1;
+        this.user.lastPooDate = moment.now();
       } else {
         this.user.pooStreak = 1;
+        this.user.lastPooDate = moment.now();
       }
     } else {
       this.user.pooStreak = 1;
+      this.user.lastPooDate = moment.now();
     }
   }
 

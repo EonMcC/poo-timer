@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService, User } from '../data-service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-statistics',
@@ -10,6 +11,8 @@ import { DataServiceService, User } from '../data-service.service';
 export class StatisticsPage implements OnInit {
 
   user: User
+  totalPooTime: moment.DurationInputArg1;
+  totalPaid: string;
   shortestPooFormated: string;
   longestPooFormated: string;
 
@@ -20,8 +23,21 @@ export class StatisticsPage implements OnInit {
 
   ngOnInit() {
     this.user = this.dataService.user;
-    this.formatLongestPoo();
+    this.formatTotalPooTime();
+    this.calculateTotalPaid();
     this.formatShortestPoo();
+    this.formatLongestPoo();
+  }
+
+  formatTotalPooTime() {
+    const t = this.user.totalPooTime;
+    this.totalPooTime = moment.duration(t, 'seconds')
+  }
+
+  calculateTotalPaid() {
+    const t = (this.user.totalPooTime / 3600).toFixed(2);
+    const symbol = this.user.currency.slice(0,1);
+    this.totalPaid = symbol + t;
   }
 
   formatShortestPoo() {

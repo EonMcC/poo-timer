@@ -4,9 +4,9 @@ import { stopData } from './home.page';
 export interface User {
   id: string;
 	email?: string;
+	firstLogin?: boolean;
 	name?: string;
 	signupDate?: number;
-	firstPooDate?: number;
 	hourlyRate?: number;
 	currency?: string;
 	longestPooTime?: number;
@@ -15,7 +15,6 @@ export interface User {
 	totalPooTime?: number;
 	lastPooDate?: number;
 	pooStreak?: number,
-	firstLogin?: boolean;
 }
 
 @Injectable({
