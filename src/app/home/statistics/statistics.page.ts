@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class StatisticsPage implements OnInit {
 
   user: User
-  totalPooTime: moment.DurationInputArg1;
+  totalPooTime: string;
   totalPaid: string;
   shortestPooFormated: string;
   longestPooFormated: string;
@@ -31,7 +31,11 @@ export class StatisticsPage implements OnInit {
 
   formatTotalPooTime() {
     const t = this.user.totalPooTime;
-    this.totalPooTime = moment.duration(t, 'seconds')
+    if (t < 3600) {
+      this.totalPooTime = new Date(t * 1000).toISOString().substr(14, 5);
+    } else {
+      this.totalPooTime = new Date(t * 1000).toISOString().substr(11, 8);
+    }
   }
 
   calculateTotalPaid() {
