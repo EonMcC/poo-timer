@@ -41,37 +41,6 @@ export type DeleteUserInput = {
   id: string;
 };
 
-export type CreatePooInput = {
-  userId: string;
-  duration?: number | null;
-  createdAt?: number | null;
-};
-
-export type UpdatePooInput = {
-  pooId: string;
-  userId?: string | null;
-  duration?: number | null;
-  createdAt?: number | null;
-};
-
-export type DeletePooInput = {
-  pooId: string;
-};
-
-export type CreateTestInput = {
-  id: string;
-  email: string;
-};
-
-export type UpdateTestInput = {
-  id: string;
-  email?: string | null;
-};
-
-export type DeleteTestInput = {
-  id: string;
-};
-
 export type TableUserFilterInput = {
   id?: TableStringFilterInput | null;
   email?: TableStringFilterInput | null;
@@ -89,30 +58,6 @@ export type TableStringFilterInput = {
   notContains?: string | null;
   between?: Array<string | null> | null;
   beginsWith?: string | null;
-};
-
-export type TablePooFilterInput = {
-  pooId?: TableStringFilterInput | null;
-  userId?: TableStringFilterInput | null;
-  duration?: TableFloatFilterInput | null;
-  createdAt?: TableFloatFilterInput | null;
-};
-
-export type TableFloatFilterInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  contains?: number | null;
-  notContains?: number | null;
-  between?: Array<number | null> | null;
-};
-
-export type TableTestFilterInput = {
-  id?: TableStringFilterInput | null;
-  email?: TableStringFilterInput | null;
 };
 
 export type CreateUserMutation = {
@@ -166,48 +111,6 @@ export type DeleteUserMutation = {
   pooStreak: number | null;
 };
 
-export type CreatePooMutation = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type UpdatePooMutation = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type DeletePooMutation = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type CreateTestMutation = {
-  __typename: "Test";
-  id: string;
-  email: string;
-};
-
-export type UpdateTestMutation = {
-  __typename: "Test";
-  id: string;
-  email: string;
-};
-
-export type DeleteTestMutation = {
-  __typename: "Test";
-  id: string;
-  email: string;
-};
-
 export type GetUserQuery = {
   __typename: "User";
   id: string;
@@ -242,42 +145,6 @@ export type ListUsersQuery = {
     totalPooTime: number | null;
     lastPooDate: number | null;
     pooStreak: number | null;
-  } | null> | null;
-  nextToken: string | null;
-};
-
-export type GetPooQuery = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type ListPoosQuery = {
-  __typename: "PooConnection";
-  items: Array<{
-    __typename: "Poo";
-    pooId: string;
-    userId: string;
-    duration: number | null;
-    createdAt: number | null;
-  } | null> | null;
-  nextToken: string | null;
-};
-
-export type GetTestQuery = {
-  __typename: "Test";
-  id: string;
-  email: string;
-};
-
-export type ListTestsQuery = {
-  __typename: "TestConnection";
-  items: Array<{
-    __typename: "Test";
-    id: string;
-    email: string;
   } | null> | null;
   nextToken: string | null;
 };
@@ -331,48 +198,6 @@ export type OnDeleteUserSubscription = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
-};
-
-export type OnCreatePooSubscription = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type OnUpdatePooSubscription = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type OnDeletePooSubscription = {
-  __typename: "Poo";
-  pooId: string;
-  userId: string;
-  duration: number | null;
-  createdAt: number | null;
-};
-
-export type OnCreateTestSubscription = {
-  __typename: "Test";
-  id: string;
-  email: string;
-};
-
-export type OnUpdateTestSubscription = {
-  __typename: "Test";
-  id: string;
-  email: string;
-};
-
-export type OnDeleteTestSubscription = {
-  __typename: "Test";
-  id: string;
-  email: string;
 };
 
 @Injectable({
@@ -460,108 +285,6 @@ export class APIService {
     )) as any;
     return <DeleteUserMutation>response.data.deleteUser;
   }
-  async CreatePoo(input: CreatePooInput): Promise<CreatePooMutation> {
-    const statement = `mutation CreatePoo($input: CreatePooInput!) {
-        createPoo(input: $input) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreatePooMutation>response.data.createPoo;
-  }
-  async UpdatePoo(input: UpdatePooInput): Promise<UpdatePooMutation> {
-    const statement = `mutation UpdatePoo($input: UpdatePooInput!) {
-        updatePoo(input: $input) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdatePooMutation>response.data.updatePoo;
-  }
-  async DeletePoo(input: DeletePooInput): Promise<DeletePooMutation> {
-    const statement = `mutation DeletePoo($input: DeletePooInput!) {
-        deletePoo(input: $input) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeletePooMutation>response.data.deletePoo;
-  }
-  async CreateTest(input: CreateTestInput): Promise<CreateTestMutation> {
-    const statement = `mutation CreateTest($input: CreateTestInput!) {
-        createTest(input: $input) {
-          __typename
-          id
-          email
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateTestMutation>response.data.createTest;
-  }
-  async UpdateTest(input: UpdateTestInput): Promise<UpdateTestMutation> {
-    const statement = `mutation UpdateTest($input: UpdateTestInput!) {
-        updateTest(input: $input) {
-          __typename
-          id
-          email
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateTestMutation>response.data.updateTest;
-  }
-  async DeleteTest(input: DeleteTestInput): Promise<DeleteTestMutation> {
-    const statement = `mutation DeleteTest($input: DeleteTestInput!) {
-        deleteTest(input: $input) {
-          __typename
-          id
-          email
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteTestMutation>response.data.deleteTest;
-  }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: String!) {
         getUser(id: $id) {
@@ -631,104 +354,6 @@ export class APIService {
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
   }
-  async GetPoo(pooId: string): Promise<GetPooQuery> {
-    const statement = `query GetPoo($pooId: String!) {
-        getPoo(pooId: $pooId) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      pooId
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetPooQuery>response.data.getPoo;
-  }
-  async ListPoos(
-    filter?: TablePooFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListPoosQuery> {
-    const statement = `query ListPoos($filter: TablePooFilterInput, $limit: Int, $nextToken: String) {
-        listPoos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            pooId
-            userId
-            duration
-            createdAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListPoosQuery>response.data.listPoos;
-  }
-  async GetTest(id: string): Promise<GetTestQuery> {
-    const statement = `query GetTest($id: String!) {
-        getTest(id: $id) {
-          __typename
-          id
-          email
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetTestQuery>response.data.getTest;
-  }
-  async ListTests(
-    filter?: TableTestFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListTestsQuery> {
-    const statement = `query ListTests($filter: TableTestFilterInput, $limit: Int, $nextToken: String) {
-        listTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            email
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListTestsQuery>response.data.listTests;
-  }
   OnCreateUserListener: Observable<OnCreateUserSubscription> = API.graphql(
     graphqlOperation(
       `subscription OnCreateUser($id: String, $email: String, $name: String) {
@@ -797,82 +422,4 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteUserSubscription>;
-
-  OnCreatePooListener: Observable<OnCreatePooSubscription> = API.graphql(
-    graphqlOperation(
-      `subscription OnCreatePoo($pooId: String, $userId: String, $duration: Float, $createdAt: Float) {
-        onCreatePoo(pooId: $pooId, userId: $userId, duration: $duration, createdAt: $createdAt) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`
-    )
-  ) as Observable<OnCreatePooSubscription>;
-
-  OnUpdatePooListener: Observable<OnUpdatePooSubscription> = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdatePoo($pooId: String, $userId: String, $duration: Float, $createdAt: Float) {
-        onUpdatePoo(pooId: $pooId, userId: $userId, duration: $duration, createdAt: $createdAt) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`
-    )
-  ) as Observable<OnUpdatePooSubscription>;
-
-  OnDeletePooListener: Observable<OnDeletePooSubscription> = API.graphql(
-    graphqlOperation(
-      `subscription OnDeletePoo($pooId: String, $userId: String, $duration: Float, $createdAt: Float) {
-        onDeletePoo(pooId: $pooId, userId: $userId, duration: $duration, createdAt: $createdAt) {
-          __typename
-          pooId
-          userId
-          duration
-          createdAt
-        }
-      }`
-    )
-  ) as Observable<OnDeletePooSubscription>;
-
-  OnCreateTestListener: Observable<OnCreateTestSubscription> = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateTest($id: String, $email: String) {
-        onCreateTest(id: $id, email: $email) {
-          __typename
-          id
-          email
-        }
-      }`
-    )
-  ) as Observable<OnCreateTestSubscription>;
-
-  OnUpdateTestListener: Observable<OnUpdateTestSubscription> = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateTest($id: String, $email: String) {
-        onUpdateTest(id: $id, email: $email) {
-          __typename
-          id
-          email
-        }
-      }`
-    )
-  ) as Observable<OnUpdateTestSubscription>;
-
-  OnDeleteTestListener: Observable<OnDeleteTestSubscription> = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteTest($id: String, $email: String) {
-        onDeleteTest(id: $id, email: $email) {
-          __typename
-          id
-          email
-        }
-      }`
-    )
-  ) as Observable<OnDeleteTestSubscription>;
 }

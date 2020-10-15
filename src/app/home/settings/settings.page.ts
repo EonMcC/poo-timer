@@ -44,6 +44,50 @@ export class SettingsPage implements OnInit {
     toast.present();
   }
 
+  async handleDeleteStatsClick() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm',
+      message: 'This action will delete all stats; are you sure you want to do this? This action cannot be reversed.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'danger',
+          handler: (data) => {
+            console.log('Cancel');
+          }
+        }, {
+          text: 'Delete',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteStats();
+          }
+        }
+      ]
+    })
+    alert.present();
+  }
+
+  deleteStats() {
+    this.user.totalPooTime = 0;
+    this.user.numberOfPoos = 0;
+    this.user.pooStreak = 0;
+    this.user.shortestPooTime = null;
+    this.user.longestPooTime = 0;
+    this.apiService.UpdateUser({
+      id: this.user.id,
+      totalPooTime: this.user.totalPooTime,
+      numberOfPoos: this.user.numberOfPoos,
+      pooStreak: this.user.pooStreak,
+      shortestPooTime: this.user.shortestPooTime,
+      longestPooTime: this.user.longestPooTime
+    }).then((data) => {
+      const toastMessage = 'Stats deleted.'
+      this.presentToast(toastMessage)
+    });
+  }
+
   handleUnregisterClick() {
     this.presentUnregisterAlert();
   }
@@ -52,7 +96,7 @@ export class SettingsPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirm',
-      message: 'Are you sure you want to unregister? You will lose all saved data. This action cannot be reverse.',
+      message: 'Are you sure you want to unregister? You will lose all saved data. This action cannot be reversed.',
       buttons: [
         {
           text: 'No',
@@ -78,18 +122,20 @@ export class SettingsPage implements OnInit {
       try {
         Auth.signOut().then(() => {
           this.dataService.user = null;
-          this.presentUnregisterToast(true);
+          const toastMessage = 'Account unregistered. Bye Bye';
+          this.presentToast(toastMessage);
           this.router.navigate(['/auth']);
         });
       } catch (error) {
-        this.presentUnregisterToast(false);
+        const toastMessage = 'Deletion Failed, please try again later';
+        this.presentToast(toastMessage);
       }
     })
   }
 
-  async presentUnregisterToast(choice: boolean) {
+  async presentToast(message: string) {
     const toast = await this.toastController.create({
-      message: choice ? 'Account unregistered. Bye Bye': 'Deletion Failed, please try again later',
+      message: message,
       duration: 2000
     });
     toast.present();
