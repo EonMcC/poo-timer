@@ -42,12 +42,19 @@ export class HomePage implements OnInit {
         const id = data.attributes.sub;
         this.apiService.GetUser(id).then((user) => {
           this.dataService.user = user;
+          this.setPaid();
         })
       })
     }
 
   set data(value: string) {
     this.dataService.stopTime = value;
+  }
+
+  setPaid() {
+    if (this.dataService.user.currency) {
+      this.paid = this.dataService.user.currency.slice(0,1) + 0;
+    }
   }
 
   openMenu(){
@@ -84,7 +91,7 @@ export class HomePage implements OnInit {
       this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
-      this.paid = null;
+      this.setPaid();
     }
   }
 

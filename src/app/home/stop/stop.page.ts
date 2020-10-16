@@ -58,7 +58,7 @@ export class StopPage implements OnInit {
 
   formatMoney(paid) {
     const currency = this.user.currency;
-    if (currency === '£ Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money') {
+    if (currency === '£ Pieces of Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);
       this.paid = `${symbol}${paid} ${moneyType}`
