@@ -20,7 +20,7 @@ app-poobert {
   font-family: Annie Use Your Telescope;
   width: 320px;
   color: var(--ion-color-secondary);
-  margin: 40px auto 0px auto;
+  margin: 48px auto 0px auto;
 }
 
 .timer {
@@ -52,12 +52,8 @@ text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
   position: absolute;
   width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   bottom: 32px;
-
-  & ion-button {
-    box-shadow: 0px 5px 5px rgba(0,0,0,0.4);
-  }
 }
 

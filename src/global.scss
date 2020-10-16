@@ -31,33 +31,34 @@ ion-content {
 
 #primary-btn {
   --border-color: var(--ion-color-primary-contrast);
-  --border-radius: 0px;
+  --border-radius: 20px;
   --border-width: 5px;
   --border-style: solid;
-  width: 159px;
-  height: 65px;
-  font-size: 36px;
+  max-width: 45vw;
+  height: 80px;
+  font-size: 40px;
   line-height: 36px;
+  background: none;
 }
 
 #secondary-btn {
   --border-color: var(--ion-color-secondary-contrast);
-  --border-radius: 0px;
+  --border-radius: 20px;
   --border-width: 5px;
   --border-style: solid;
-  width: 159px;
-  height: 65px;
-  font-size: 36px;
+  max-width: 45vw;
+  height: 80px;
+  font-size: 40px;
   line-height: 36px;
 }
 
 #danger-btn {
   --border-color: var(--ion-color-danger-contrast);
-  --border-radius: 0px;
+  --border-radius: 20px;
   --border-width: 5px;
   --border-style: solid;
-  width: 159px;
-  height: 65px;
-  font-size: 36px;
+  max-width: 45vw;
+  height: 80px;
+  font-size: 40px;
   line-height: 36px;
 }
