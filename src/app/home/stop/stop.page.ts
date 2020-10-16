@@ -106,6 +106,7 @@ export class StopPage implements OnInit {
     this.calcPooStreak();
     this.calcLongestPooTime(duration);
     this.calcShortestPooTime(duration);
+    this.calcTotalPaid(duration);
     console.log('this.user', this.user)
     this.apiService.UpdateUser({
       id: this.user.id,
@@ -164,6 +165,11 @@ export class StopPage implements OnInit {
     if (duration < this.user.shortestPooTime) {
       this.user.shortestPooTime = duration;
     }
+  }
+
+  calcTotalPaid(duration) {
+    const time = duration / 3600;
+    this.user.totalPaid = this.user.totalPaid += (time * this.user.hourlyRate);
   }
 
   discardTime(){

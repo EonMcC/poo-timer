@@ -14,6 +14,7 @@ mutation CreateUser($input: CreateUserInput!) {
     totalPooTime
     lastPooDate
     pooStreak
+    totalPaid
   }
 }
 mutation UpdateUser($input: UpdateUserInput!) {
@@ -31,6 +32,7 @@ mutation UpdateUser($input: UpdateUserInput!) {
     totalPooTime
     lastPooDate
     pooStreak
+    totalPaid
   }
 }
 mutation DeleteUser($input: DeleteUserInput!) {
@@ -48,5 +50,6 @@ mutation DeleteUser($input: DeleteUserInput!) {
     totalPooTime
     lastPooDate
     pooStreak
+    totalPaid
   }
 }

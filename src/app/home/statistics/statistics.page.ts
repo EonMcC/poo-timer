@@ -39,9 +39,13 @@ export class StatisticsPage implements OnInit {
   }
 
   calculateTotalPaid() {
-    const t = (this.user.totalPooTime / 3600).toFixed(2);
     const symbol = this.user.currency.slice(0,1);
-    this.totalPaid = symbol + t;
+    if (this.user.totalPaid) {
+      const total = this.user.totalPaid.toFixed(2);
+      this.totalPaid = symbol + total;
+    } else {
+      this.totalPaid = symbol + 0;
+    }
   }
 
   formatShortestPoo() {

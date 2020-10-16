@@ -71,7 +71,8 @@ export class AuthComponent {
             numberOfPoos: 0,
             totalPooTime: 0,
             lastPooDate: null,
-            pooStreak: 0
+            pooStreak: 0,
+            totalPaid: 0
           }).then((user) => {
             try {
               console.log('added user to DB')

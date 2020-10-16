@@ -19,6 +19,7 @@ export type CreateUserInput = {
   totalPooTime?: number | null;
   lastPooDate?: number | null;
   pooStreak?: number | null;
+  totalPaid?: number | null;
 };
 
 export type UpdateUserInput = {
@@ -35,6 +36,7 @@ export type UpdateUserInput = {
   totalPooTime?: number | null;
   lastPooDate?: number | null;
   pooStreak?: number | null;
+  totalPaid?: number | null;
 };
 
 export type DeleteUserInput = {
@@ -75,6 +77,7 @@ export type CreateUserMutation = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 export type UpdateUserMutation = {
@@ -92,6 +95,7 @@ export type UpdateUserMutation = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 export type DeleteUserMutation = {
@@ -109,6 +113,7 @@ export type DeleteUserMutation = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 export type GetUserQuery = {
@@ -126,6 +131,7 @@ export type GetUserQuery = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 export type ListUsersQuery = {
@@ -145,6 +151,7 @@ export type ListUsersQuery = {
     totalPooTime: number | null;
     lastPooDate: number | null;
     pooStreak: number | null;
+    totalPaid: number | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -164,6 +171,7 @@ export type OnCreateUserSubscription = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 export type OnUpdateUserSubscription = {
@@ -181,6 +189,7 @@ export type OnUpdateUserSubscription = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 export type OnDeleteUserSubscription = {
@@ -198,6 +207,7 @@ export type OnDeleteUserSubscription = {
   totalPooTime: number | null;
   lastPooDate: number | null;
   pooStreak: number | null;
+  totalPaid: number | null;
 };
 
 @Injectable({
@@ -221,6 +231,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -248,6 +259,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -275,6 +287,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -302,6 +315,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -335,6 +349,7 @@ export class APIService {
             totalPooTime
             lastPooDate
             pooStreak
+            totalPaid
           }
           nextToken
         }
@@ -372,6 +387,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`
     )
@@ -395,6 +411,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`
     )
@@ -418,6 +435,7 @@ export class APIService {
           totalPooTime
           lastPooDate
           pooStreak
+          totalPaid
         }
       }`
     )

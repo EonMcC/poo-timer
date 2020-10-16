@@ -15,6 +15,7 @@ export interface User {
 	totalPooTime?: number;
 	lastPooDate?: number;
 	pooStreak?: number,
+	totalPaid?: number,
 }
 
 @Injectable({

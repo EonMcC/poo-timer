@@ -14,6 +14,7 @@ query GetUser($id: String!) {
     totalPooTime
     lastPooDate
     pooStreak
+    totalPaid
   }
 }
 query ListUsers(
@@ -36,6 +37,7 @@ query ListUsers(
       totalPooTime
       lastPooDate
       pooStreak
+      totalPaid
     }
     nextToken
   }
