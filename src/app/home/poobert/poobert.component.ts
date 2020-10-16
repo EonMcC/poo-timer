@@ -9,7 +9,8 @@ import { DataServiceService } from '../data-service.service';
 export class PoobertComponent implements OnInit {
 
   poobertEmotion = 'normal';
-  emotions = ['normal', 'shocked', 'creepy']
+  emotions = ['shocked', 'creepy']
+  iteration = 0;
 
   constructor(
     private dataService: DataServiceService
@@ -17,9 +18,14 @@ export class PoobertComponent implements OnInit {
 
   ngOnInit() {
     setInterval(() => {
-      const index = Math.floor(Math.random() * 3);
-      this.poobertEmotion = this.emotions[index];
-      console.log(this.emotions[index]);
+      if (this.iteration % 2 !== 0) {
+        const index = Math.floor(Math.random() * 2);
+        this.poobertEmotion = this.emotions[index];
+        this.iteration += 1
+      } else {
+        this.poobertEmotion = 'normal';
+        this.iteration += 1;
+      }
     }, 10000);
   }
 

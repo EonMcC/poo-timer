@@ -1,5 +1,6 @@
 <div [ngSwitch]="poobertEmotion">
-  <svg *ngSwitchCase="'normal'" width="252" height="255" viewBox="0 0 252 255" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <svg id="shadow" *ngSwitchCase="'normal'" width="252" height="255" viewBox="0 0 252 255" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M3.32173 -2.5H226.225L248.839 237.41C248.049 237.73 246.987 238.147 245.679 238.628C242.565 239.772 238.07 241.275 232.576 242.697C221.57 245.546 206.644 248.046 190.821 246.743C175.022 245.442 158.388 240.357 143.813 228.088C129.24 215.821 116.52 196.199 108.848 165.46C102.944 141.802 92.2838 123.743 79.3969 106.732C73.0699 98.3801 66.1887 90.2587 59.086 81.876L58.7411 81.469C51.5033 72.9266 44.0279 64.0894 36.5738 54.3503C21.6778 34.8882 13.125 19.8197 8.30721 9.67014C5.89822 4.59514 4.42245 0.748669 3.55422 -1.80391C3.47127 -2.04776 3.39387 -2.27981 3.32173 -2.5Z" fill="#BB6BD9" stroke="black" stroke-width="5"/>
   <g filter="url(#filter0_d)">
   <ellipse cx="136.891" cy="38.8909" rx="21.5" ry="33.5" transform="rotate(45 136.891 38.8909)" fill="#EB5757"/>
@@ -43,7 +44,7 @@
   </svg>
 
   <div *ngSwitchCase="'shocked'">
-    <svg *ngSwitchCase="'shocked'" width="252" height="255" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="shadow" *ngSwitchCase="'shocked'" width="252" height="255" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.32173 2.5H226.72L248.843 242.408C248.053 242.729 246.989 243.146 245.679 243.628C242.565 244.772 238.07 246.275 232.576 247.697C221.57 250.546 206.644 253.046 190.821 251.743C175.022 250.442 158.388 245.357 143.813 233.088C129.24 220.821 116.52 201.199 108.848 170.46C102.944 146.802 92.2838 128.743 79.3969 111.732C73.0699 103.38 66.1887 95.2587 59.086 86.876L58.7411 86.469C51.5033 77.9266 44.0279 69.0894 36.5738 59.3503C21.6778 39.8882 13.125 24.8197 8.30721 14.6701C5.89822 9.59514 4.42245 5.74867 3.55422 3.19609C3.47127 2.95224 3.39387 2.72019 3.32173 2.5Z" fill="#BB6BD9" stroke="black" stroke-width="5"/>
       <ellipse cx="111.944" cy="112.944" rx="16.74" ry="15" transform="rotate(50.8943 111.944 112.944)" fill="black"/>
       <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="89" y="90" width="46" height="46">
@@ -87,7 +88,7 @@
     </svg>
     <div id="speech-bubble">
       <p>Wow!</p>
-      <svg width="300" height="224" viewBox="0 0 300 224" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="shadow" width="300" height="224" viewBox="0 0 300 224" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="path-1-inside-1" fill="white">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M272.646 160L233 0L193.354 160H10C4.47715 160 0 164.477 0 170V214C0 219.523 4.47715 224 9.99999 224H287C292.523 224 297 219.523 297 214V170C297 164.477 292.523 160 287 160H272.646Z"/>
         </mask>
@@ -98,7 +99,7 @@
   </div>
     
   <div *ngSwitchCase="'creepy'">
-    <svg width="252" height="255" viewBox="0 0 252 255" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="shadow" width="252" height="255" viewBox="0 0 252 255" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3.32173 2.5H226.225L248.839 242.41C248.049 242.73 246.987 243.147 245.679 243.628C242.565 244.772 238.07 246.275 232.576 247.697C221.57 250.546 206.644 253.046 190.821 251.743C175.022 250.442 158.388 245.357 143.813 233.088C129.24 220.821 116.52 201.199 108.848 170.46C102.944 146.802 92.2838 128.743 79.3969 111.732C73.0699 103.38 66.1887 95.2587 59.086 86.876L58.7411 86.469C51.5033 77.9266 44.0279 69.0894 36.5738 59.3503C21.6778 39.8882 13.125 24.8197 8.30721 14.6701C5.89822 9.59514 4.42245 5.74867 3.55422 3.19609C3.47127 2.95224 3.39387 2.72019 3.32173 2.5Z" fill="#BB6BD9" stroke="black" stroke-width="5"/>
       <g filter="url(#filter0_d)">
       <ellipse cx="136.891" cy="43.8908" rx="21.5" ry="33.5" transform="rotate(45 136.891 43.8908)" fill="#EB5757"/>
@@ -137,7 +138,7 @@
     </svg>
     <div id="speech-bubble">
       <p>Don't let the boss see me!</p>
-      <svg width="300" height="224" viewBox="0 0 300 224" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="shadow" width="300" height="224" viewBox="0 0 300 224" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="path-1-inside-1" fill="white">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M272.646 160L233 0L193.354 160H10C4.47715 160 0 164.477 0 170V214C0 219.523 4.47715 224 9.99999 224H287C292.523 224 297 219.523 297 214V170C297 164.477 292.523 160 287 160H272.646Z"/>
         </mask>
@@ -146,6 +147,7 @@
       </svg>
     </div>
   </div>
+
 </div>
 
 
