@@ -27,7 +27,11 @@ export class SettingsPage implements OnInit {
   }
 
   handleUpdateUser() {
-    this.apiService.UpdateUser(this.user).then((data) => {
+    this.apiService.UpdateUser({
+      id: this.user.id,
+      currency: this.user.currency,
+      hourlyRate: this.user.hourlyRate
+    }).then((data) => {
       try {
         this.presentUpdateToast(true);
       } catch (error) {

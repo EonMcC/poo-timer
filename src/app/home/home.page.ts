@@ -104,6 +104,6 @@ export class HomePage implements OnInit {
 
   formatMoney(paid) {
     const currency = this.dataService.user.currency;
-    this.paid = `${currency}${paid}`
+    this.paid = `${currency.slice(0,1)}${paid}`
   }
 }
