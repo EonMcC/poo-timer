@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { Menu } from './menu/menu.component';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { PoobertComponent } from './poobert/poobert.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HomePageRoutingModule } from './home-routing.module';
   ],
   declarations: [
     HomePage,
-    Menu
+    Menu,
+    PoobertComponent
   ]
 })
 export class HomePageModule {}
