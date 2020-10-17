@@ -71,6 +71,7 @@ text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 16px;
+  background: var(--ion-color-background);
 
   & ion-button {
     max-width: 45vw;

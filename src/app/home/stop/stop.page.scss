@@ -28,14 +28,11 @@ p {
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 16px;
+  background: var(--ion-color-background);
 
   & ion-button {
     max-width: 45vw;
   }
-}
-
-.my-custom-class #alert-2-msg {
-  font-size: 16px;
 }
 
 ::ng-deep .alert-message.sc-ion-alert-ios, .alert-input-group.sc-ion-alert-ios {
