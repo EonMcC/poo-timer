@@ -29,24 +29,32 @@ export class AuthComponent {
 
   isLoginMode = true;
   password: string;
+  checking = false;
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
   onSubmit(form: NgForm) {
+    this.checking = true;
     const email = form.value.email.slice();
     this.password = form.value.password;
 
     if (this.isLoginMode) {
       Auth.signIn(email, this.password).then(cognitoUser => {
         this.apiService.GetUser(cognitoUser.attributes.sub).then((user) => {
-          console.log(user)
-          if (user.firstLogin === true) {
-            this.dataService.user = user;
-            this.router.navigate(['/initial-setup']);
-          } else {
-            this.router.navigate(['/home']);
+          try {
+            if (user.firstLogin === true) {
+              this.dataService.user = user;
+              this.checking = false;
+              this.router.navigate(['/initial-setup']);
+            } else {
+              this.checking = false;
+              this.router.navigate(['/home']);
+            }   
+          } catch (error) {
+            console.log(error)
+            this.presentToast('Login Faied, please try again.');
           }
         })
       })
@@ -75,8 +83,10 @@ export class AuthComponent {
             totalPaid: 0
           }).then((user) => {
             try {
+              this.checking = false;
               console.log('added user to DB')
             } catch (err) {
+              this.checking = false;
               console.log(res.userSub, email);
               console.log('creating user error', err);
             }
@@ -122,22 +132,25 @@ export class AuthComponent {
   }
 
   verifyUser(email, verificationCode) {
+    this.checking = true;
     console.log('email', email, 'verCode', verificationCode)
     Auth.confirmSignUp(email, verificationCode).then(
       res => {
+        this.checking = false;
         console.log(res)
-        this.presentToast();
+        this.presentToast('You\'re all signed up, please now login.');
         this.isLoginMode = true;
       },
       err => {
+        this.checking = false;
         console.log(err);
       }
     )
   }
 
-  async presentToast() {
+  async presentToast(message) {
     const toast = await this.toastController.create({
-      message: 'You\'re all signed up, please now login.',
+      message: message,
       duration: 2000
     });
     toast.present();
