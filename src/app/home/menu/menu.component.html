@@ -3,20 +3,20 @@
 <ion-content id="main-menu">
   <ion-list id="menu-list" lines="none">
 
-    <ion-item class="menu-item" (click)="navigateTo('/home/profile')">
+    <ion-item class="menu-item top-menu-item" (click)="navigateTo('/home/profile')">
       <ion-icon name="person" slot="start" size="large"></ion-icon>
       Profile
       <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
     </ion-item>
 
 
-    <ion-item (click)="navigateTo('/home/settings')" class="menu-item">
+    <ion-item (click)="navigateTo('/home/settings')" class="menu-item top-menu-item">
       <ion-icon name="settings" slot="start" size="large"></ion-icon>
       Settings
       <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
     </ion-item>
 
-    <ion-item (click)="navigateTo('/home/statistics')" class="menu-item">
+    <ion-item (click)="navigateTo('/home/statistics')" class="menu-item top-menu-item">
       <ion-icon name="bar-chart" slot="start" size="large"></ion-icon>
       Statistics
       <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
