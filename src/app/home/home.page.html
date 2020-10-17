@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content>
 
   <app-poobert></app-poobert>
 
@@ -11,12 +11,11 @@
 
   <p id="watermark">Go on<br><span>Poo Time</span> it!</p>
 
+</ion-content>
   <div id="btn-wrapper">
     <ion-button color="secondary" id="secondary-btn" (click)="openMenu()">MENU</ion-button>
     <ion-button *ngIf="!timerRunning" color="primary" id="primary-btn" (click)="handleTimer()">START</ion-button>
     <ion-button *ngIf="timerRunning" color="danger" id="danger-btn" (click)="handleTimer()">STOP</ion-button>
   </div>
-
-</ion-content>
 
 <app-menu [menuClick]="menuClick"></app-menu>

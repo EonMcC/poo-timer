@@ -66,12 +66,11 @@ text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
 }
 
 #btn-wrapper {
-  position: absolute;
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  bottom: 32px;
+  margin-bottom: 32px;
 
   & ion-button {
     max-width: 45vw;

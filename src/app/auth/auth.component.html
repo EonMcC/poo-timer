@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-spinner *ngIf="checking"></ion-spinner>
     <h1 id="title">{{isLoginMode ? 'Please Login' : 'Please Signup'}}</h1>
       <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">

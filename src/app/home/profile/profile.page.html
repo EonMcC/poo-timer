@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content>
 
   <div id="avatar"></div>
   <h1>{{user.name}}</h1>
@@ -7,7 +7,8 @@
   <p *ngIf="user.hourlyRate">Currently rocking an hourly rate of <span>{{user.hourlyRate}}</span>, {{user.name}} has been paid a grand total of <span>{{grandTotal}}</span> to poo at work.</p>
   <p>That's some great work {{user.name}}, we salute you</p>
 
-  <div id="btn-wrapper">
-    <ion-button color="secondary" id="secondary-btn" (click)="goBack()">BACK</ion-button>
-  </div>
 </ion-content>
+
+<div id="btn-wrapper">
+  <ion-button color="secondary" id="secondary-btn" (click)="goBack()">BACK</ion-button>
+</div>
