@@ -25,6 +25,7 @@ export class InitialSetupPage implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    console.log('on submit')
     const id = this.dataService.user.id;
     const name = form.value.name;
     const hourlyRate = form.value.wage;
@@ -57,6 +58,10 @@ export class InitialSetupPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  handleClick() {
+    console.log('click')
   }
 
 }

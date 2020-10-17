@@ -33,6 +33,7 @@ ion-item {
   margin-bottom: 16px;
   width: 100%;
   background: var(--ion-color-background);
+  z-index:15;
 }
 
 #primary-btn {
@@ -40,4 +41,5 @@ ion-item {
   width: 90vw;
   margin: 0 auto;
   bottom: 32px;
+  z-index: 100;
 }
