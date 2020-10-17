@@ -22,11 +22,14 @@ p {
   margin-left: 57px;
 }
 
-
 #btn-wrapper {
   width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+
+  & ion-button {
+    max-width: 45vw;
+  }
 }
