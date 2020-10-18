@@ -12,7 +12,7 @@ export class PoobertComponent implements OnInit, AfterViewInit {
   pooStreak: number;
 
   poobertEmotion = 'normal';
-  emotions = ['sad']
+  emotions = ['boss']
   iteration = 0;
 
   constructor(
@@ -44,7 +44,7 @@ export class PoobertComponent implements OnInit, AfterViewInit {
   setPooStreak() {
     if (this.user.pooStreak && this.user.pooStreak > 1) {
       this.pooStreak = this.user.pooStreak;
-      this.emotions.push('shocked');
+      this.emotions.push('wow');
     }
   }
 
