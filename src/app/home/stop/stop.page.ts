@@ -135,18 +135,23 @@ export class StopPage implements OnInit {
   }
 
   calcPooStreak() {
-    const createdAt = moment.now();
-    const today = moment().dayOfYear(createdAt);
+    console.log('poostreak', this.user)
+    const today = moment.now();
     const lastPooDate = this.user.lastPooDate;
-    if (lastPooDate !== null) {
-      if (today === lastPooDate + 1) {
+    console.log('lastpoodatea', lastPooDate)
+    if (this.user.lastPooDate !== null) {
+      console.log('if 1')
+      if (today - lastPooDate > 86400000 && today - lastPooDate < 172800000) {
+        console.log('if 2')
         this.user.pooStreak += 1;
         this.user.lastPooDate = moment.now();
       } else {
+        console.log('else')
         this.user.pooStreak = 1;
         this.user.lastPooDate = moment.now();
       }
     } else {
+      console.log('shouldnt be here')
       this.user.pooStreak = 1;
       this.user.lastPooDate = moment.now();
     }

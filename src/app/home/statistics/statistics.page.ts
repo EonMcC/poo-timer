@@ -23,6 +23,7 @@ export class StatisticsPage implements OnInit {
 
   ngOnInit() {
     this.user = this.dataService.user;
+    console.log(this.user)
     this.formatTotalPooTime();
     this.calculateTotalPaid();
     this.formatShortestPoo();
