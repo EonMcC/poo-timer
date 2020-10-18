@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService, User } from '../data-service.service';
-import { APIService } from '../../API.service.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Auth } from 'aws-amplify';
 
@@ -17,7 +16,6 @@ export class SettingsPage implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataServiceService,
-    private apiService: APIService,
     private toastController: ToastController,
     public alertController: AlertController
   ) { }
@@ -27,17 +25,17 @@ export class SettingsPage implements OnInit {
   }
 
   handleUpdateUser() {
-    this.apiService.UpdateUser({
-      id: this.user.id,
-      currency: this.user.currency,
-      hourlyRate: this.user.hourlyRate
-    }).then((data) => {
-      try {
-        this.presentUpdateToast(true);
-      } catch (error) {
-        this.presentUpdateToast(false);
-      }
-    })
+    // this.apiService.UpdateUser({
+    //   id: this.user.id,
+    //   currency: this.user.currency,
+    //   hourlyRate: this.user.hourlyRate
+    // }).then((data) => {
+    //   try {
+    //     this.presentUpdateToast(true);
+    //   } catch (error) {
+    //     this.presentUpdateToast(false);
+    //   }
+    // })
   }
 
   async presentUpdateToast(choice: boolean) {
@@ -81,18 +79,18 @@ export class SettingsPage implements OnInit {
     this.user.shortestPooTime = null;
     this.user.longestPooTime = 0;
     this.user.totalPaid = 0;
-    this.apiService.UpdateUser({
-      id: this.user.id,
-      totalPooTime: this.user.totalPooTime,
-      numberOfPoos: this.user.numberOfPoos,
-      pooStreak: this.user.pooStreak,
-      shortestPooTime: this.user.shortestPooTime,
-      longestPooTime: this.user.longestPooTime,
-      totalPaid: this.user.totalPaid
-    }).then((data) => {
-      const toastMessage = 'Stats deleted.'
-      this.presentToast(toastMessage)
-    });
+    // this.apiService.UpdateUser({
+    //   id: this.user.id,
+    //   totalPooTime: this.user.totalPooTime,
+    //   numberOfPoos: this.user.numberOfPoos,
+    //   pooStreak: this.user.pooStreak,
+    //   shortestPooTime: this.user.shortestPooTime,
+    //   longestPooTime: this.user.longestPooTime,
+    //   totalPaid: this.user.totalPaid
+    // }).then((data) => {
+    //   const toastMessage = 'Stats deleted.'
+    //   this.presentToast(toastMessage)
+    // });
   }
 
   handleUnregisterClick() {
@@ -125,19 +123,19 @@ export class SettingsPage implements OnInit {
   }
 
   unregister() {
-    this.apiService.DeleteUser({id: this.user.id}).then((data) => {
-      try {
-        Auth.signOut().then(() => {
-          this.dataService.user = null;
-          const toastMessage = 'Account unregistered. Bye Bye';
-          this.presentToast(toastMessage);
-          this.router.navigate(['/auth']);
-        });
-      } catch (error) {
-        const toastMessage = 'Deletion Failed, please try again later';
-        this.presentToast(toastMessage);
-      }
-    })
+    // this.apiService.DeleteUser({id: this.user.id}).then((data) => {
+    //   try {
+    //     Auth.signOut().then(() => {
+    //       this.dataService.user = null;
+    //       const toastMessage = 'Account unregistered. Bye Bye';
+    //       this.presentToast(toastMessage);
+    //       this.router.navigate(['/auth']);
+    //     });
+    //   } catch (error) {
+    //     const toastMessage = 'Deletion Failed, please try again later';
+    //     this.presentToast(toastMessage);
+    //   }
+    // })
   }
 
   async presentToast(message: string) {

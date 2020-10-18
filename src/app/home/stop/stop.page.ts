@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, ToastController  } from '@ionic/angular';
 import { DataServiceService } from '../data-service.service';
 import * as moment from 'moment';
-import { APIService } from 'src/app/API.service.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-stop',
@@ -27,7 +27,7 @@ export class StopPage implements OnInit {
       public toastController: ToastController,
       private router: Router,
       private dataService: DataServiceService,
-      private apiService: APIService
+      private storageService: StorageService
     ) { }
 
     get data():string {
@@ -35,6 +35,8 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
+
+
     this.user = this.dataService.user;
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     
@@ -105,23 +107,29 @@ export class StopPage implements OnInit {
     this.calcLongestPooTime(duration);
     this.calcShortestPooTime(duration);
     this.calcTotalPaid();
-    this.apiService.UpdateUser({
-      id: this.user.id,
-      longestPooTime: this.user.longestPooTime,
-      shortestPooTime: this.user.shortestPooTime,
-      numberOfPoos: this.user.numberOfPoos,
-      totalPooTime: this.user.totalPooTime,
-      lastPooDate: this.user.lastPooDate,
-      pooStreak: this.user.pooStreak,
-      totalPaid: this.user.totalPaid
-    }).then((data) => {
-      try {
-        this.presentToast('save');
-        this.router.navigate(['/home']);
-      } catch (error) {
-        console.log('error updating user', error);
-      }
+
+    const createdAt = moment.now()
+    this.storageService.addPoo({id: 1, duration, createdAt}).then((poo) => {
+      console.log('returnedPoo', poo);
     })
+
+    // this.apiService.UpdateUser({
+    //   id: this.user.id,
+    //   longestPooTime: this.user.longestPooTime,
+    //   shortestPooTime: this.user.shortestPooTime,
+    //   numberOfPoos: this.user.numberOfPoos,
+    //   totalPooTime: this.user.totalPooTime,
+    //   lastPooDate: this.user.lastPooDate,
+    //   pooStreak: this.user.pooStreak,
+    //   totalPaid: this.user.totalPaid
+    // }).then((data) => {
+    //   try {
+    //     this.presentToast('save');
+    //     this.router.navigate(['/home']);
+    //   } catch (error) {
+    //     console.log('error updating user', error);
+    //   }
+    // })
   }
 
   calcTotalPooTime(duration) {

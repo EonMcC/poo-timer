@@ -1,10 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { APIService } from '../API.service.service';
 import { timer } from 'rxjs';
 import { DataServiceService } from './data-service.service';
-import { Auth } from 'aws-amplify';
 import * as moment from 'moment';
+import { StorageService } from '../services/storage.service';
 
 
 export interface stopData {
@@ -34,18 +33,26 @@ export class HomePage implements OnInit {
   constructor(
       private router: Router,
       private dataService: DataServiceService,
-      private apiService: APIService
+      private storageService: StorageService
     ) {}
 
     ngOnInit() {
-      Auth.currentAuthenticatedUser().then((data) => { 
-        const id = data.attributes.sub;
-        this.apiService.GetUser(id).then((user) => {
-          this.dataService.user = user;
-          console.log('firstuser', this.dataService.user)
-          this.setPaid();
-        })
+      // this.storageService.clearPoos()
+      const createdAt = moment.now()
+      this.storageService.addPoo({id: 1, duration: 5, createdAt}).then((poo) => {
+        console.log('returnedPoo', poo);
       })
+      // this.storageService.getPoos().then((poos) => {
+      //   console.log('poos', poos)
+      // })
+      // Auth.currentAuthenticatedUser().then((data) => { 
+      //   const id = data.attributes.sub;
+      //   this.apiService.GetUser(id).then((user) => {
+      //     this.dataService.user = user;
+      //     console.log('firstuser', this.dataService.user)
+      //     this.setPaid();
+      //   })
+      // })
     }
 
   set data(value: string) {

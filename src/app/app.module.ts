@@ -9,22 +9,21 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import Amplify from 'aws-amplify';
-import awsconfig from '../aws-exports';
-import { AuthComponent } from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
-
-Amplify.configure(awsconfig);
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AuthComponent,
-    
+    AppComponent
   ],
   entryComponents: [],
-  imports: [AmplifyUIAngularModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    FormsModule,
+    IonicStorageModule.forRoot()
+  ],
   providers: [
     StatusBar,
     SplashScreen,
