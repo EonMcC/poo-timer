@@ -42,6 +42,7 @@ export class HomePage implements OnInit {
         const id = data.attributes.sub;
         this.apiService.GetUser(id).then((user) => {
           this.dataService.user = user;
+          console.log('firstuser', this.dataService.user)
           this.setPaid();
         })
       })

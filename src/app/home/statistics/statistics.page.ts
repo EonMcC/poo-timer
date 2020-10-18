@@ -40,6 +40,7 @@ export class StatisticsPage implements OnInit {
   }
 
   calculateTotalPaid() {
+    console.log('user', this.user)
     const symbol = this.user.currency.slice(0,1);
     if (this.user.totalPaid) {
       const total = this.user.totalPaid.toFixed(2);

@@ -79,13 +79,15 @@ export class SettingsPage implements OnInit {
     this.user.pooStreak = 0;
     this.user.shortestPooTime = null;
     this.user.longestPooTime = 0;
+    this.user.totalPaid = 0;
     this.apiService.UpdateUser({
       id: this.user.id,
       totalPooTime: this.user.totalPooTime,
       numberOfPoos: this.user.numberOfPoos,
       pooStreak: this.user.pooStreak,
       shortestPooTime: this.user.shortestPooTime,
-      longestPooTime: this.user.longestPooTime
+      longestPooTime: this.user.longestPooTime,
+      totalPaid: this.user.totalPaid
     }).then((data) => {
       const toastMessage = 'Stats deleted.'
       this.presentToast(toastMessage)

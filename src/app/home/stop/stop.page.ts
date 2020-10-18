@@ -42,8 +42,6 @@ export class StopPage implements OnInit {
   }
 
   calculateMoney(time, hourlyRate) {
-    console.log('time', time);
-    console.log('hourlyRate', hourlyRate)
     if (time) {
       const paidNumber = ((hourlyRate / 3600) * time);
       if (paidNumber < .01) {
@@ -106,8 +104,7 @@ export class StopPage implements OnInit {
     this.calcPooStreak();
     this.calcLongestPooTime(duration);
     this.calcShortestPooTime(duration);
-    this.calcTotalPaid(duration);
-    console.log('this.user', this.user)
+    this.calcTotalPaid();
     this.apiService.UpdateUser({
       id: this.user.id,
       longestPooTime: this.user.longestPooTime,
@@ -115,7 +112,8 @@ export class StopPage implements OnInit {
       numberOfPoos: this.user.numberOfPoos,
       totalPooTime: this.user.totalPooTime,
       lastPooDate: this.user.lastPooDate,
-      pooStreak: this.user.pooStreak
+      pooStreak: this.user.pooStreak,
+      totalPaid: this.user.totalPaid
     }).then((data) => {
       try {
         this.presentToast('save');
@@ -135,23 +133,17 @@ export class StopPage implements OnInit {
   }
 
   calcPooStreak() {
-    console.log('poostreak', this.user)
     const today = moment.now();
     const lastPooDate = this.user.lastPooDate;
-    console.log('lastpoodatea', lastPooDate)
     if (this.user.lastPooDate !== null) {
-      console.log('if 1')
       if (today - lastPooDate > 86400000 && today - lastPooDate < 172800000) {
-        console.log('if 2')
         this.user.pooStreak += 1;
         this.user.lastPooDate = moment.now();
       } else {
-        console.log('else')
         this.user.pooStreak = 1;
         this.user.lastPooDate = moment.now();
       }
     } else {
-      console.log('shouldnt be here')
       this.user.pooStreak = 1;
       this.user.lastPooDate = moment.now();
     }
@@ -172,9 +164,16 @@ export class StopPage implements OnInit {
     }
   }
 
-  calcTotalPaid(duration) {
-    const time = duration / 3600;
-    this.user.totalPaid = this.user.totalPaid += (time * this.user.hourlyRate);
+  calcTotalPaid() {
+    console.log('user', this.user)
+    console.log('stoptimeraw', this.dataService.stopTimeRaw)
+    if (this.user.hourlyRate) {
+      console.log('userTotalPooTime', this.user.totalPooTime)
+      const time = this.user.totalPooTime;
+      this.user.totalPaid = (this.user.hourlyRate / 3600) * time;
+    } else {
+      this.user.totalPaid = 0;
+    }
   }
 
   discardTime(){
@@ -198,7 +197,6 @@ export class StopPage implements OnInit {
         }, {
           text: 'Yes',
           handler: () => {
-            console.log('Confirm Okay');
             this.dataService.stopTime = null;
             this.dataService.stopTimeRaw = null;
             this.presentToast('discard');
@@ -212,16 +210,13 @@ export class StopPage implements OnInit {
   }
 
   async presentToast(action) {
-    console.log('action', action)
     if (action === 'discard') {
-      console.log('1')
       const toast = await this.toastController.create({
         message: 'Poo Discarded',
         duration: 2000
       });
       toast.present();
     } else if (action === 'save') {
-      console.log('2')
       const toast = await this.toastController.create({
         message: 'Poo Saved',
         duration: 2000
