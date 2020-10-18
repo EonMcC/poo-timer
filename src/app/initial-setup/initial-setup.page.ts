@@ -55,6 +55,7 @@ export class InitialSetupPage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Details saved, you\'re good to go!',
+      position: 'top',
       duration: 2000
     });
     toast.present();

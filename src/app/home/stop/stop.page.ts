@@ -213,12 +213,14 @@ export class StopPage implements OnInit {
     if (action === 'discard') {
       const toast = await this.toastController.create({
         message: 'Poo Discarded',
+        position: 'top',
         duration: 2000
       });
       toast.present();
     } else if (action === 'save') {
       const toast = await this.toastController.create({
         message: 'Poo Saved',
+        position: 'top',
         duration: 2000
       });
       toast.present();

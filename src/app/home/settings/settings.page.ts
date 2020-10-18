@@ -43,6 +43,7 @@ export class SettingsPage implements OnInit {
   async presentUpdateToast(choice: boolean) {
     const toast = await this.toastController.create({
       message: choice ? 'Setting Updated': 'Update Failed, please try again later',
+      position: 'middle',
       duration: 2000
     });
     toast.present();
@@ -142,6 +143,7 @@ export class SettingsPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
+      position: 'middle',
       duration: 2000
     });
     toast.present();

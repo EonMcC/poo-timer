@@ -151,6 +151,7 @@ export class AuthComponent {
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
+      position: 'middle',
       duration: 2000
     });
     toast.present();
