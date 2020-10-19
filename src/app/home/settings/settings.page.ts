@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService, User } from '../data-service.service';
+import { DataServiceService, User } from '../../services/data-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Auth } from 'aws-amplify';
 

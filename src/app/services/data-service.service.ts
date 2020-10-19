@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { stopData } from './home.page';
+import { stopData } from '../home/home.page';
 
 export interface User {
   id: string;

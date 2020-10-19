@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DataServiceService } from '../home/data-service.service';
+import { DataServiceService } from '../services/data-service.service';
 import { ToastController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { userInfo } from 'os';

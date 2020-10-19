@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController  } from '@ionic/angular';
-import { DataServiceService } from '../data-service.service';
+import { DataServiceService } from '../../services/data-service.service';
 import * as moment from 'moment';
-import { StorageService } from 'src/app/services/storage.service';
+import { ItemStorageService } from 'src/app/services/item-storage.service';
 
 @Component({
   selector: 'app-stop',
@@ -27,7 +27,7 @@ export class StopPage implements OnInit {
       public toastController: ToastController,
       private router: Router,
       private dataService: DataServiceService,
-      private storageService: StorageService
+      private itemStorageService: ItemStorageService
     ) { }
 
     get data():string {
@@ -101,7 +101,7 @@ export class StopPage implements OnInit {
   acceptTime() {
     const userId = this.user.id;
     const duration = this.dataService.stopTimeRaw;
-    this.calcTotalPooTime(duration);
+    this.calcTotItemTime(duration);
     this.calcTotalPoos();
     this.calcPooStreak();
     this.calcLongestPooTime(duration);
@@ -109,7 +109,7 @@ export class StopPage implements OnInit {
     this.calcTotalPaid();
 
     const createdAt = moment.now()
-    this.storageService.addPoo({id: 1, duration, createdAt}).then((poo) => {
+    this.itemStorageService.addPoo({id: 1, duration, createdAt}).then((poo) => {
       console.log('returnedPoo', poo);
     })
 

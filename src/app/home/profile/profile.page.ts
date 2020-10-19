@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService } from '../data-service.service';
+import { DataServiceService } from '../../services/data-service.service';
 import * as moment from 'moment';
 
 @Component({

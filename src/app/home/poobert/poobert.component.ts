@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { DataServiceService, User } from '../data-service.service';
+import { DataServiceService, User } from '../../services/data-service.service';
 
 @Component({
   selector: 'app-poobert',

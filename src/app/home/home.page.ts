@@ -1,9 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
-import { DataServiceService } from './data-service.service';
+import { DataServiceService } from '../services/data-service.service';
 import * as moment from 'moment';
-import { StorageService } from '../services/storage.service';
+import { ItemStorageService } from '../services/item-storage.service';
+import { UserStorageService } from '../services/user-storage.service';
 
 
 export interface stopData {
@@ -33,15 +34,22 @@ export class HomePage implements OnInit {
   constructor(
       private router: Router,
       private dataService: DataServiceService,
-      private storageService: StorageService
+      private itemStorageService: ItemStorageService,
+      private userStorageService: UserStorageService
     ) {}
 
     ngOnInit() {
-      // this.storageService.clearPoos()
-      const createdAt = moment.now()
-      this.storageService.addPoo({id: 1, duration: 5, createdAt}).then((poo) => {
-        console.log('returnedPoo', poo);
+      // this.userStorageService.addUser({id: 2, name: 'Eon'}).then((user) => {
+      //   console.log('usre', user);
+      // })
+      this.userStorageService.getUser().then((user) => {
+        console.log('getUser', user);
       })
+      // this.pooStorageService.clearPoos()
+      // const createdAt = moment.now()
+      // this.pooStorageService.addPoo({id: 1, duration: 5, createdAt}).then((poo) => {
+      //   console.log('returnedPoo', poo);
+      // })
       // this.storageService.getPoos().then((poos) => {
       //   console.log('poos', poos)
       // })
