@@ -3,7 +3,6 @@ import { Storage } from '@ionic/storage'
 
 export interface User {
   id: number;
-	firstLogin: boolean;
 	userName: string
 	signupDate: number
 	hourlyRate?: number
@@ -24,6 +23,11 @@ export class UserStorageService {
   }
 
   getUser(): Promise<User> {
+    
     return this.storage.get(USER_KEY)
+  }
+
+  clearItems() {
+    this.storage.clear()
   }
 }

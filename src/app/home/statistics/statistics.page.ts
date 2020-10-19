@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService, User } from '../../services/data-service.service';
+import { DataServiceService } from '../../services/data-service.service';
 import * as moment from 'moment';
 
 @Component({
@@ -10,7 +10,7 @@ import * as moment from 'moment';
 })
 export class StatisticsPage implements OnInit {
 
-  user: User
+  // user: User
   totalPooTime: string;
   totalPaid: string;
   shortestPooFormated: string;
@@ -22,8 +22,8 @@ export class StatisticsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.dataService.user;
-    console.log(this.user)
+    // this.user = this.dataService.user;
+    // console.log(this.user)
     this.formatTotalPooTime();
     this.calculateTotalPaid();
     this.formatShortestPoo();
@@ -31,41 +31,41 @@ export class StatisticsPage implements OnInit {
   }
 
   formatTotalPooTime() {
-    const t = this.user.totalPooTime;
-    if (t < 3600) {
-      this.totalPooTime = new Date(t * 1000).toISOString().substr(14, 5);
-    } else {
-      this.totalPooTime = new Date(t * 1000).toISOString().substr(11, 8);
-    }
+    // const t = this.user.totalPooTime;
+    // if (t < 3600) {
+    //   this.totalPooTime = new Date(t * 1000).toISOString().substr(14, 5);
+    // } else {
+    //   this.totalPooTime = new Date(t * 1000).toISOString().substr(11, 8);
+    // }
   }
 
   calculateTotalPaid() {
-    console.log('user', this.user)
-    const symbol = this.user.currency.slice(0,1);
-    if (this.user.totalPaid) {
-      const total = this.user.totalPaid.toFixed(2);
-      this.totalPaid = symbol + total;
-    } else {
-      this.totalPaid = symbol + 0;
-    }
+    // console.log('user', this.user)
+    // const symbol = this.user.currency.slice(0,1);
+    // if (this.user.totalPaid) {
+    //   const total = this.user.totalPaid.toFixed(2);
+    //   this.totalPaid = symbol + total;
+    // } else {
+    //   this.totalPaid = symbol + 0;
+    // }
   }
 
   formatShortestPoo() {
-    const t = this.user.shortestPooTime;
-    if (t < 3600) {
-      this.shortestPooFormated = new Date(t * 1000).toISOString().substr(14, 5);
-    } else {
-      this.shortestPooFormated = new Date(t * 1000).toISOString().substr(11, 8);
-    }
+    // const t = this.user.shortestPooTime;
+    // if (t < 3600) {
+    //   this.shortestPooFormated = new Date(t * 1000).toISOString().substr(14, 5);
+    // } else {
+    //   this.shortestPooFormated = new Date(t * 1000).toISOString().substr(11, 8);
+    // }
   }
 
   formatLongestPoo() {
-    const t = this.user.longestPooTime;
-    if (t < 3600) {
-      this.longestPooFormated = new Date(t * 1000).toISOString().substr(14, 5);
-    } else {
-      this.longestPooFormated = new Date(t * 1000).toISOString().substr(11, 8);
-    }
+    // const t = this.user.longestPooTime;
+    // if (t < 3600) {
+    //   this.longestPooFormated = new Date(t * 1000).toISOString().substr(14, 5);
+    // } else {
+    //   this.longestPooFormated = new Date(t * 1000).toISOString().substr(11, 8);
+    // }
   }
 
   goBack(){

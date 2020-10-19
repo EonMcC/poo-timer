@@ -1,22 +1,6 @@
 import { Injectable } from '@angular/core';
 import { stopData } from '../home/home.page';
-
-export interface User {
-  id: string;
-	email?: string;
-	firstLogin?: boolean;
-	name?: string;
-	signupDate?: number;
-	hourlyRate?: number;
-	currency?: string;
-	longestPooTime?: number;
-	shortestPooTime?: number;
-	numberOfPoos?: number;
-	totalPooTime?: number;
-	lastPooDate?: number;
-	pooStreak?: number,
-	totalPaid?: number,
-}
+import { User } from './user-storage.service';
 
 @Injectable({
   providedIn: 'root'

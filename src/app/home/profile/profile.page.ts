@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService } from '../../services/data-service.service';
 import * as moment from 'moment';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,13 +16,15 @@ export class ProfilePage implements OnInit {
 
   constructor(
       private router: Router,
-      private dataService: DataServiceService
+      private userStorageService: UserStorageService
     ) { }
 
   ngOnInit() {
-    this.user = this.dataService.user;
-    this.calculateGrandTotal();
-    this.calculateSignupDate();
+    this.userStorageService.getUser().then((user) => {
+      this.user = user;
+      this.calculateGrandTotal();
+      this.calculateSignupDate();
+    });
   }
 
   goBack(){
@@ -51,7 +53,7 @@ export class ProfilePage implements OnInit {
   }
 
   formatMoney(paid) {
-    const currency = this.dataService.user.currency;
+    const currency = this.user.currency;
     if (currency === '£ Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);

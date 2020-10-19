@@ -1,10 +1,11 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { timer } from 'rxjs';
+import { TimeoutError, timer } from 'rxjs';
 import { DataServiceService } from '../services/data-service.service';
 import * as moment from 'moment';
 import { ItemStorageService } from '../services/item-storage.service';
 import { UserStorageService } from '../services/user-storage.service';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 
 export interface stopData {
@@ -35,16 +36,18 @@ export class HomePage implements OnInit {
       private router: Router,
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
-      private userStorageService: UserStorageService
+      private userStorageService: UserStorageService,
+      private splashScreen: SplashScreen
     ) {}
 
     ngOnInit() {
+      this.getUser();
       // this.userStorageService.addUser({id: 2, name: 'Eon'}).then((user) => {
       //   console.log('usre', user);
       // })
-      this.userStorageService.getUser().then((user) => {
-        console.log('getUser', user);
-      })
+      // this.userStorageService.getUser().then((user) => {
+      //   console.log('getUser', user);
+      // })
       // this.pooStorageService.clearPoos()
       // const createdAt = moment.now()
       // this.pooStorageService.addPoo({id: 1, duration: 5, createdAt}).then((poo) => {
@@ -62,6 +65,22 @@ export class HomePage implements OnInit {
       //   })
       // })
     }
+
+    getUser() {
+      this.userStorageService.getUser().then((user) => {
+        if (user) {
+          this.dataService.user = user;
+        } else {
+          this.router.navigate(['/initial-setup'])
+        }
+      })
+    }
+
+    clear() {
+      console.log('clear')
+      this.userStorageService.clearItems()
+    }
+
 
   set data(value: string) {
     this.dataService.stopTime = value;

@@ -4,6 +4,7 @@ import { AlertController, ToastController  } from '@ionic/angular';
 import { DataServiceService } from '../../services/data-service.service';
 import * as moment from 'moment';
 import { ItemStorageService } from 'src/app/services/item-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-stop',
@@ -27,7 +28,8 @@ export class StopPage implements OnInit {
       public toastController: ToastController,
       private router: Router,
       private dataService: DataServiceService,
-      private itemStorageService: ItemStorageService
+      private itemStorageService: ItemStorageService,
+      private userStorageService: UserStorageService
     ) { }
 
     get data():string {
@@ -35,12 +37,19 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
-
-
-    this.user = this.dataService.user;
+    this.getUser();
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
-    
     this.calculateMoney(this.dataService.stopTimeRaw, this.user.hourlyRate);
+  }
+
+  getUser() {
+    this.userStorageService.getUser().then((user) => {
+      if (user) {
+        this.dataService.user = user;
+      } else {
+        this.router.navigate(['/initial-setup'])
+      }
+    })
   }
 
   calculateMoney(time, hourlyRate) {
@@ -101,7 +110,7 @@ export class StopPage implements OnInit {
   acceptTime() {
     const userId = this.user.id;
     const duration = this.dataService.stopTimeRaw;
-    this.calcTotItemTime(duration);
+    // this.calcTotItemTime(duration);
     this.calcTotalPoos();
     this.calcPooStreak();
     this.calcLongestPooTime(duration);
@@ -109,7 +118,7 @@ export class StopPage implements OnInit {
     this.calcTotalPaid();
 
     const createdAt = moment.now()
-    this.itemStorageService.addPoo({id: 1, duration, createdAt}).then((poo) => {
+    this.itemStorageService.addItem({id: 1, duration, createdAt}).then((poo) => {
       console.log('returnedPoo', poo);
     })
 

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataServiceService, User } from '../../services/data-service.service';
+import { DataServiceService } from '../../services/data-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +10,7 @@ import { Auth } from 'aws-amplify';
 })
 export class SettingsPage implements OnInit {
 
-  user: User;
+  // user: User;
 
   constructor(
     private router: Router,
@@ -21,7 +20,7 @@ export class SettingsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.dataService.user
+    // this.user = this.dataService.user
   }
 
   handleUpdateUser() {
@@ -73,12 +72,12 @@ export class SettingsPage implements OnInit {
   }
 
   deleteStats() {
-    this.user.totalPooTime = 0;
-    this.user.numberOfPoos = 0;
-    this.user.pooStreak = 0;
-    this.user.shortestPooTime = null;
-    this.user.longestPooTime = 0;
-    this.user.totalPaid = 0;
+    // this.user.totalPooTime = 0;
+    // this.user.numberOfPoos = 0;
+    // this.user.pooStreak = 0;
+    // this.user.shortestPooTime = null;
+    // this.user.longestPooTime = 0;
+    // this.user.totalPaid = 0;
     // this.apiService.UpdateUser({
     //   id: this.user.id,
     //   totalPooTime: this.user.totalPooTime,

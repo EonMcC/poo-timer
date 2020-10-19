@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-menu',
@@ -38,9 +37,9 @@ export class Menu implements OnChanges {
 
   handleSignOut(){
     this.menu.close('first');
-    Auth.signOut().then(() => {
-      this.router.navigate(['/auth'])
-    })
+    // Auth.signOut().then(() => {
+    //   this.router.navigate(['/auth'])
+    // })
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { DataServiceService, User } from '../../services/data-service.service';
+import { DataServiceService } from '../../services/data-service.service';
 
 @Component({
   selector: 'app-poobert',
@@ -8,7 +8,7 @@ import { DataServiceService, User } from '../../services/data-service.service';
 })
 export class PoobertComponent implements OnInit, AfterViewInit {
 
-  user: User;
+  // user: User;
   pooStreak: number;
 
   poobertEmotion = 'normal';
@@ -34,18 +34,18 @@ export class PoobertComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.user = this.dataService.user;
-      console.log(this.user)
-      this.setPooStreak()
-    }, 3000)
+    // setTimeout(() => {
+    //   this.user = this.dataService.user;
+    //   console.log(this.user)
+    //   this.setPooStreak()
+    // }, 3000)
   }
 
   setPooStreak() {
-    if (this.user.pooStreak && this.user.pooStreak > 1) {
-      this.pooStreak = this.user.pooStreak;
-      this.emotions.push('wow');
-    }
+    // if (this.user.pooStreak && this.user.pooStreak > 1) {
+    //   this.pooStreak = this.user.pooStreak;
+    //   this.emotions.push('wow');
+    // }
   }
 
 }

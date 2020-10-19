@@ -1,11 +1,11 @@
 <ion-content>
 
   <div id="avatar"></div>
-  <h1>{{user.name}}</h1>
+  <h1 *ngIf="user">{{user.userName}}</h1>
 
-  <p>{{user.name}} has been Poo Timing since <span>{{signupDate}}</span>.</p>
-  <p *ngIf="user.hourlyRate">Currently rocking an hourly rate of <span>{{user.hourlyRate}}</span>, {{user.name}} has been paid a grand total of <span>{{grandTotal}}</span> to poo at work.</p>
-  <p>That's some great work {{user.name}}, we salute you</p>
+  <p *ngIf="user">{{user.userName}} has been Poo Timing since <span>{{signupDate}}</span>.</p>
+  <p *ngIf="user && user.hourlyRate">Currently rocking an hourly rate of <span>{{user.hourlyRate}}</span>, {{user.userName}} has been paid a grand total of <span>{{grandTotal}}</span> to poo at work.</p>
+  <p *ngIf="user">That's some great work {{user.userName}}, we salute you</p>
 
 </ion-content>
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DataServiceService } from '../services/data-service.service';
 import { ToastController  } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { userInfo } from 'os';
+import { UserStorageService } from '../services/user-storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-initial-setup',
@@ -13,40 +13,25 @@ import { userInfo } from 'os';
 export class InitialSetupPage implements OnInit {
 
   constructor(
-    private dataService: DataServiceService,
     public toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private userStorageService: UserStorageService
   ) { }
 
   ngOnInit() {
-    console.log('initial setup onInit', this.dataService.user)
   }
 
   onSubmit(form: NgForm) {
-    console.log('on submit')
-    const id = this.dataService.user.id;
-    const name = form.value.name;
+    const userName = form.value.name;
     const hourlyRate = form.value.wage;
     const currency = form.value.currency;
+    const signupDate = moment.now();
 
-    console.log('id', id)
-    // this.apiService.UpdateUser({
-    //   id,
-    //   name,
-    //   hourlyRate,
-    //   currency,
-    //   firstLogin: false
-    // }).then((data) => {
-    //   try {
-    //     this.dataService.user.currency = currency ? currency : null,
-    //     this.dataService.user.hourlyRate = hourlyRate ? hourlyRate : null,
-    //     this.dataService.user.name = name ? name : 'User',
-    //     this.presentToast();
-    //     this.router.navigate(['/home']);
-    //   } catch (error) {
-    //     console.log('updateUser error', error);
-    //   }
-    // })
+    this.userStorageService.addUser({id: 1, userName, hourlyRate, currency, signupDate}).then((user) => {
+      console.log('signedUpUser', user);
+      this.presentToast();
+      this.router.navigate(['/home'])
+    })
     form.reset();
   }
 
@@ -57,10 +42,6 @@ export class InitialSetupPage implements OnInit {
       duration: 2000
     });
     toast.present();
-  }
-
-  handleClick() {
-    console.log('click')
   }
 
 }
