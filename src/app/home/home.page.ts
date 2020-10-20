@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { ItemStorageService } from '../services/item-storage.service';
 import { UserStorageService } from '../services/user-storage.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { EnvironmentStorageService } from '../services/environment-storage.service';
 
 
 export interface stopData {
@@ -37,7 +38,8 @@ export class HomePage implements OnInit {
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
       private userStorageService: UserStorageService,
-      private splashScreen: SplashScreen
+      private splashScreen: SplashScreen,
+      private environmentStorageService: EnvironmentStorageService
     ) {}
 
     ngOnInit() {
@@ -70,6 +72,13 @@ export class HomePage implements OnInit {
       this.userStorageService.getUser().then((user) => {
         if (user) {
           this.dataService.user = user;
+          this.environmentStorageService.listEnvironments().then((data) => {
+            data.forEach((env) => {
+              if (env.id === this.dataService.user.activeEnvironmentId) {
+                this.dataService.environment = env;
+              }
+            })
+          })
         } else {
           this.router.navigate(['/initial-setup'])
         }
@@ -87,8 +96,8 @@ export class HomePage implements OnInit {
   }
 
   setPaid() {
-    if (this.dataService.user.currency) {
-      this.paid = this.dataService.user.currency.slice(0,1) + 0;
+    if (this.dataService.environment.currency) {
+      this.paid = this.dataService.environment.currency.slice(0,1) + 0;
     }
   }
 
@@ -97,9 +106,6 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       this.menuClick = false;
     }, 500)
-    const now = moment.now();
-    console.log(now)
-    // this.saveToDb();
   }
 
   handleTimer(){
@@ -116,7 +122,9 @@ export class HomePage implements OnInit {
           this.timerElement.nativeElement.classList.add('timer-long');
           this.formatedTime = new Date(t * 1000).toISOString().substr(11, 8);
         }
-        this.calculateMoney(t)
+        if (this.dataService.environment.hourlyRate) {
+          this.calculateMoney(t)
+        }
       });
     } else {
       console.log('Stopping Timer');
@@ -131,7 +139,7 @@ export class HomePage implements OnInit {
   }
 
   calculateMoney(time) {
-    const hourlyRate = this.dataService.user.hourlyRate;
+    const hourlyRate = this.dataService.environment.hourlyRate;
     if (time) {
       const paidNumber = ((hourlyRate / 3600) * time);
       if (paidNumber < .01) {
@@ -145,7 +153,7 @@ export class HomePage implements OnInit {
   }
 
   formatMoney(paid) {
-    const currency = this.dataService.user.currency;
+    const currency = this.dataService.environment.currency;
     this.paid = `${currency.slice(0,1)}${paid}`
   }
 }

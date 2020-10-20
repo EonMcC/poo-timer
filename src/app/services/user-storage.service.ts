@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage'
 
 export interface User {
-  id: number;
 	userName: string
-	signupDate: number
-	hourlyRate?: number
-	currency?: string
+  signupDate: number
+  activeEnvironmentId: number
 }
 
 const USER_KEY = 'users'
