@@ -3,8 +3,10 @@ import { Storage } from '@ionic/storage';
 
 export interface Item {
   id: number;
+  environmentID: number;
   createdAt: number;
   duration: number;
+  worth: number;
 }
 
 const ITEMS_KEY = 'items'

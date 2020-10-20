@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage'
 export interface User {
 	userName: string
   signupDate: number
-  activeEnvironmentId: number
+  activeEnvironmentID: number
 }
 
 const USER_KEY = 'users'

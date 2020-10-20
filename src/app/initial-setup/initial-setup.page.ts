@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserStorageService } from '../services/user-storage.service';
 import * as moment from 'moment';
 import { EnvironmentStorageService } from '../services/environment-storage.service';
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-initial-setup',
@@ -17,7 +18,8 @@ export class InitialSetupPage implements OnInit {
     public toastController: ToastController,
     private router: Router,
     private userStorageService: UserStorageService,
-    private environmentStorageService: EnvironmentStorageService
+    private environmentStorageService: EnvironmentStorageService,
+    private dataService: DataServiceService
   ) { }
 
   ngOnInit() {
@@ -29,8 +31,9 @@ export class InitialSetupPage implements OnInit {
     const hourlyRate = form.value.wage || null;
     const currency = form.value.currency || null;
 
-    this.userStorageService.addUser({userName, signupDate, activeEnvironmentId: 1}).then((user) => {
+    this.userStorageService.addUser({userName, signupDate, activeEnvironmentID: 1}).then((user) => {
       console.log('signedUpUser', user);
+      this.dataService.user = user;
       this.environmentStorageService.addEnvironment({
         id: 1,
         name: 'poo-timer',
@@ -40,8 +43,11 @@ export class InitialSetupPage implements OnInit {
         longestTime: 0,
         shortestTime: 0,
         totalTime: 0,
+        itemCount: 0,
+        totalPaid: 0,
+        lastItemID: 0
       }).then((env) => {
-        console.log('newEnvironment', env)
+        this.dataService.environment = env[0];
         this.presentToast();
         this.router.navigate(['/home'])
       })

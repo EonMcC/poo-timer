@@ -44,28 +44,6 @@ export class HomePage implements OnInit {
 
     ngOnInit() {
       this.getUser();
-      // this.userStorageService.addUser({id: 2, name: 'Eon'}).then((user) => {
-      //   console.log('usre', user);
-      // })
-      // this.userStorageService.getUser().then((user) => {
-      //   console.log('getUser', user);
-      // })
-      // this.pooStorageService.clearPoos()
-      // const createdAt = moment.now()
-      // this.pooStorageService.addPoo({id: 1, duration: 5, createdAt}).then((poo) => {
-      //   console.log('returnedPoo', poo);
-      // })
-      // this.storageService.getPoos().then((poos) => {
-      //   console.log('poos', poos)
-      // })
-      // Auth.currentAuthenticatedUser().then((data) => { 
-      //   const id = data.attributes.sub;
-      //   this.apiService.GetUser(id).then((user) => {
-      //     this.dataService.user = user;
-      //     console.log('firstuser', this.dataService.user)
-      //     this.setPaid();
-      //   })
-      // })
     }
 
     getUser() {
@@ -74,7 +52,7 @@ export class HomePage implements OnInit {
           this.dataService.user = user;
           this.environmentStorageService.listEnvironments().then((data) => {
             data.forEach((env) => {
-              if (env.id === this.dataService.user.activeEnvironmentId) {
+              if (env.id === this.dataService.user.activeEnvironmentID) {
                 this.dataService.environment = env;
               }
             })

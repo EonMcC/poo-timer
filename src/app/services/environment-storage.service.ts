@@ -11,6 +11,9 @@ export interface Environment {
   longestTime: number;
   shortestTime: number;
   totalTime: number;
+  itemCount: number;
+  totalPaid: number;
+  lastItemID: number;
 }
 
 const ENV_KEY = "environments"

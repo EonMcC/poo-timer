@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController  } from '@ionic/angular';
-import { DataServiceService } from '../../services/data-service.service';
+import { DataServiceService } from 'src/app/services/data-service.service';
 import * as moment from 'moment';
 import { ItemStorageService } from 'src/app/services/item-storage.service';
-import { UserStorageService } from 'src/app/services/user-storage.service';
+import { User, UserStorageService } from 'src/app/services/user-storage.service';
+import { Environment } from 'src/app/services/environment-storage.service';
 
 @Component({
   selector: 'app-stop',
@@ -14,13 +15,15 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 
 export class StopPage implements OnInit {
 
-  user: any;
+  user: User;
+  environment: Environment
   hours: string;
   minutes: string;
   seconds: string;
   showHours: boolean;
   showMinutes: boolean;
   paid: string;
+  paidRaw: number;
 
 
   constructor(
@@ -37,36 +40,29 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
-    this.getUser();
+    this.user = this.dataService.user;
+    this.environment = this.dataService.environment;
+    console.log('this.environment', this.environment)
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
-    this.calculateMoney(this.dataService.stopTimeRaw, this.user.hourlyRate);
-  }
-
-  getUser() {
-    this.userStorageService.getUser().then((user) => {
-      if (user) {
-        this.dataService.user = user;
-      } else {
-        this.router.navigate(['/initial-setup'])
-      }
-    })
+    this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
   }
 
   calculateMoney(time, hourlyRate) {
     if (time) {
-      const paidNumber = ((hourlyRate / 3600) * time);
-      if (paidNumber < .01) {
-        const paid = paidNumber.toFixed(3);
+      this.paidRaw = ((hourlyRate / 3600) * time);
+      if (this.paidRaw < .01) {
+        const paid = this.paidRaw.toFixed(3);
         this.formatMoney(paid);
       } else {
-        const paid = paidNumber.toFixed(2);
+        const paid = this.paidRaw.toFixed(2);
         this.formatMoney(paid);
       }
     }
   }
 
   formatMoney(paid) {
-    const currency = this.user.currency;
+    console.log('paid', paid, 'currency', this.environment.currency)
+    const currency = this.environment.currency;
     if (currency === '£ Pieces of Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);
@@ -108,88 +104,69 @@ export class StopPage implements OnInit {
   }
 
   acceptTime() {
-    const userId = this.user.id;
     const duration = this.dataService.stopTimeRaw;
     // this.calcTotItemTime(duration);
     this.calcTotalPoos();
-    this.calcPooStreak();
+    // this.calcPooStreak();
     this.calcLongestPooTime(duration);
     this.calcShortestPooTime(duration);
     this.calcTotalPaid();
-
     const createdAt = moment.now()
-    this.itemStorageService.addItem({id: 1, duration, createdAt}).then((poo) => {
+
+    const environmentID = this.user.activeEnvironmentID;
+    const id = this.environment.lastItemID + 1;
+
+    this.itemStorageService.addItem({id, environmentID, duration, createdAt, worth: this.paidRaw}).then((poo) => {
       console.log('returnedPoo', poo);
     })
-
-    // this.apiService.UpdateUser({
-    //   id: this.user.id,
-    //   longestPooTime: this.user.longestPooTime,
-    //   shortestPooTime: this.user.shortestPooTime,
-    //   numberOfPoos: this.user.numberOfPoos,
-    //   totalPooTime: this.user.totalPooTime,
-    //   lastPooDate: this.user.lastPooDate,
-    //   pooStreak: this.user.pooStreak,
-    //   totalPaid: this.user.totalPaid
-    // }).then((data) => {
-    //   try {
-    //     this.presentToast('save');
-    //     this.router.navigate(['/home']);
-    //   } catch (error) {
-    //     console.log('error updating user', error);
-    //   }
-    // })
   }
 
   calcTotalPooTime(duration) {
-    this.user.totalPooTime += duration
+    this.environment.totalTime += duration
   }
 
   calcTotalPoos() {
-    this.user.numberOfPoos += 1;
+    this.environment.itemCount += 1;
   }
 
-  calcPooStreak() {
-    const today = moment.now();
-    const lastPooDate = this.user.lastPooDate;
-    if (this.user.lastPooDate !== null) {
-      if (today - lastPooDate > 86400000 && today - lastPooDate < 172800000) {
-        this.user.pooStreak += 1;
-        this.user.lastPooDate = moment.now();
-      } else {
-        this.user.pooStreak = 1;
-        this.user.lastPooDate = moment.now();
-      }
-    } else {
-      this.user.pooStreak = 1;
-      this.user.lastPooDate = moment.now();
-    }
-  }
+  // calcPooStreak() {
+  //   const today = moment.now();
+  //   const lastPooDate = this.user.lastPooDate;
+  //   if (this.user.lastPooDate !== null) {
+  //     if (today - lastPooDate > 86400000 && today - lastPooDate < 172800000) {
+  //       this.user.pooStreak += 1;
+  //       this.user.lastPooDate = moment.now();
+  //     } else {
+  //       this.user.pooStreak = 1;
+  //       this.user.lastPooDate = moment.now();
+  //     }
+  //   } else {
+  //     this.user.pooStreak = 1;
+  //     this.user.lastPooDate = moment.now();
+  //   }
+  // }
 
   calcLongestPooTime(duration) {
-    if (duration > this.user.longestPooTime) {
-      this.user.longestPooTime = duration;
+    if (duration > this.environment.longestTime) {
+      this.environment.longestTime = duration;
     }
-    if (this.user.shortestPooTime === null) {
-      this.user.shortestPooTime = duration;
+    if (this.environment.shortestTime === null) {
+      this.environment.shortestTime = duration;
     }
   }
 
   calcShortestPooTime(duration) {
-    if (duration < this.user.shortestPooTime) {
-      this.user.shortestPooTime = duration;
+    if (duration < this.environment.shortestTime) {
+      this.environment.shortestTime = duration;
     }
   }
 
   calcTotalPaid() {
-    console.log('user', this.user)
-    console.log('stoptimeraw', this.dataService.stopTimeRaw)
-    if (this.user.hourlyRate) {
-      console.log('userTotalPooTime', this.user.totalPooTime)
-      const time = this.user.totalPooTime;
-      this.user.totalPaid = (this.user.hourlyRate / 3600) * time;
+    if (this.environment.hourlyRate) {
+      const time = this.environment.totalTime;
+      this.environment.totalPaid = (this.environment.hourlyRate / 3600) * time;
     } else {
-      this.user.totalPaid = 0;
+      this.environment.totalPaid = 0;
     }
   }
 
