@@ -3,8 +3,8 @@
   <div id="avatar"></div>
   <h1 *ngIf="user">{{user.userName}}</h1>
 
-  <p *ngIf="user">{{user.userName}} has been Poo Timing since <span>{{signupDate}}</span>.</p>
-  <p *ngIf="user && user.hourlyRate">Currently rocking an hourly rate of <span>{{user.hourlyRate}}</span>, {{user.userName}} has been paid a grand total of <span>{{grandTotal}}</span> to poo at work.</p>
+  <p *ngIf="user && firstTimeDate">{{user.userName}} has been Poo Timing since <span>{{firstTimeDate}}</span>.</p>
+  <p *ngIf="user && environment.hourlyRate">Currently rocking an hourly rate of <span>{{environment.hourlyRate}}</span>, {{user.userName}} has been paid a grand total of <span>{{grandTotal}}</span> to poo at work.</p>
   <p *ngIf="user">That's some great work {{user.userName}}, we salute you</p>
 
 </ion-content>

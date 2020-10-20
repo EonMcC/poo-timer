@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { UserStorageService } from 'src/app/services/user-storage.service';
+import { DataServiceService } from 'src/app/services/data-service.service';
+import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { User, UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,21 +12,23 @@ import { UserStorageService } from 'src/app/services/user-storage.service';
 })
 export class ProfilePage implements OnInit {
 
-  user: any;
+  user: User;
+  environment: Environment
   grandTotal: string;
-  signupDate: string;
+  firstTimeDate: string;
 
   constructor(
       private router: Router,
-      private userStorageService: UserStorageService
+      private userStorageService: UserStorageService,
+      private environmentStorageService: EnvironmentStorageService,
+      private dataService: DataServiceService
     ) { }
 
   ngOnInit() {
-    this.userStorageService.getUser().then((user) => {
-      this.user = user;
+      this.user = this.dataService.user;
+      this.environment = this.dataService.environment;
       this.calculateGrandTotal();
       this.calculateSignupDate();
-    });
   }
 
   goBack(){
@@ -32,20 +36,21 @@ export class ProfilePage implements OnInit {
   }
 
   calculateSignupDate() {
-    this.signupDate = moment(this.user.signupDate).format('MMM \'YY');
+    if(this.environment.firstTimeDate !== null) {
+      this.firstTimeDate = moment(this.environment.firstTimeDate).format('MMM \'YY');
+    }
+    console.log(this.firstTimeDate)
   }
 
   calculateGrandTotal() {
-    const time = this.user.totalPooTime;
-    const hourlyRate = this.user.hourlyRate;
-    if (time) {
-      const paidNumber = ((hourlyRate / 3600) * time);
-      if (paidNumber < .01) {
-        const paid = paidNumber.toFixed(3);
-        this.formatMoney(paid);
+    const paid = this.environment.totalPaid;
+    if (paid) {
+      if (paid < .01) {
+        const paidNumber = paid.toFixed(3);
+        this.formatMoney(paidNumber);
       } else {
-        const paid = paidNumber.toFixed(2);
-        this.formatMoney(paid);
+        const paidNumber = paid.toFixed(2);
+        this.formatMoney(paidNumber);
       }
     } else {
       this.grandTotal = 'nothing';
@@ -53,8 +58,8 @@ export class ProfilePage implements OnInit {
   }
 
   formatMoney(paid) {
-    const currency = this.user.currency;
-    if (currency === '£ Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money') {
+    const currency = this.environment.currency;
+    if (currency === '£ Pieces of Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);
       this.grandTotal = `${symbol}${paid} ${moneyType}`

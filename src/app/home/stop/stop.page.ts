@@ -118,7 +118,7 @@ export class StopPage implements OnInit {
   acceptTime() {
     const today = moment.now();
     const duration = this.dataService.stopTimeRaw;
-    this.calcTotalPoos();
+    this.calcTotals(duration);
     this.calcStreak(today);
 
     if (this.firstTime) {
@@ -161,12 +161,10 @@ export class StopPage implements OnInit {
     })
   }
 
-  calcTotalPooTime(duration) {
+  calcTotals(duration) {
     this.environment.totalTime += duration
-  }
-
-  calcTotalPoos() {
     this.environment.itemCount += 1;
+    this.environment.totalPaid = this.environment.totalPaid += this.paidRaw;
   }
 
   calcStreak(date) {
