@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { stopData } from '../home/home.page';
 import { Environment } from './environment-storage.service';
 import { User } from './user-storage.service';
 
@@ -14,6 +13,5 @@ export class DataServiceService {
   environment: Environment
 
   constructor() { }
-
 
 }

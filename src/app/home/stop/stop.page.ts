@@ -5,7 +5,8 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 import * as moment from 'moment';
 import { ItemStorageService } from 'src/app/services/item-storage.service';
 import { User, UserStorageService } from 'src/app/services/user-storage.service';
-import { Environment } from 'src/app/services/environment-storage.service';
+import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-stop',
@@ -24,6 +25,9 @@ export class StopPage implements OnInit {
   showMinutes: boolean;
   paid: string;
   paidRaw: number;
+  longestTime = null;
+  shortestTime = null;
+  firstTime = false;
 
 
   constructor(
@@ -32,7 +36,8 @@ export class StopPage implements OnInit {
       private router: Router,
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
-      private userStorageService: UserStorageService
+      private userStorageService: UserStorageService,
+      private environmentStorageService: EnvironmentStorageService
     ) { }
 
     get data():string {
@@ -42,9 +47,17 @@ export class StopPage implements OnInit {
   ngOnInit() {
     this.user = this.dataService.user;
     this.environment = this.dataService.environment;
-    console.log('this.environment', this.environment)
+    this.ifFirstTime();
+    this.calcLongestPooTime(this.dataService.stopTimeRaw);
+    this.calcShortestPooTime(this.dataService.stopTimeRaw);
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
+  }
+
+  ifFirstTime() {
+    if(!this.environment.firstTimeDate) {
+      this.firstTime = true;
+    }
   }
 
   calculateMoney(time, hourlyRate) {
@@ -61,7 +74,6 @@ export class StopPage implements OnInit {
   }
 
   formatMoney(paid) {
-    console.log('paid', paid, 'currency', this.environment.currency)
     const currency = this.environment.currency;
     if (currency === '£ Pieces of Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
       const symbol = currency.slice(0,1);
@@ -104,20 +116,48 @@ export class StopPage implements OnInit {
   }
 
   acceptTime() {
+    const today = moment.now();
     const duration = this.dataService.stopTimeRaw;
-    // this.calcTotItemTime(duration);
     this.calcTotalPoos();
-    // this.calcPooStreak();
-    this.calcLongestPooTime(duration);
+    this.calcStreak(today);
+
+    if (this.firstTime) {
+      this.environment.firstTimeDate = today;
+    }
+    if (this.longestTime !== null) {
+      this.environment.longestTime = this.longestTime;
+    }
+    if (this.shortestTime !== null) {
+      this.environment.shortestTime = this.shortestTime;
+    }
+    this.environment.lastTimeDate = today;
+    this.environment.lastItemID += 1;
+
+
+    this.environmentStorageService.updateEnvironment(this.environment)
+
+
     this.calcShortestPooTime(duration);
     this.calcTotalPaid();
     const createdAt = moment.now()
 
     const environmentID = this.user.activeEnvironmentID;
-    const id = this.environment.lastItemID + 1;
 
-    this.itemStorageService.addItem({id, environmentID, duration, createdAt, worth: this.paidRaw}).then((poo) => {
+    const isLongest = this.longestTime ? true : false;
+    const isShortest = this.shortestTime ? true : false;
+
+    this.itemStorageService.addItem({
+      id: this.environment.lastItemID,
+      environmentID,
+      duration,
+      createdAt,
+      worth: this.paidRaw,
+      isLongest,
+      isShortest
+    }).then((poo) => {
       console.log('returnedPoo', poo);
+      this.presentToast('Time Saved');
+      this.router.navigate(['/home']);
     })
   }
 
@@ -129,35 +169,36 @@ export class StopPage implements OnInit {
     this.environment.itemCount += 1;
   }
 
-  // calcPooStreak() {
-  //   const today = moment.now();
-  //   const lastPooDate = this.user.lastPooDate;
-  //   if (this.user.lastPooDate !== null) {
-  //     if (today - lastPooDate > 86400000 && today - lastPooDate < 172800000) {
-  //       this.user.pooStreak += 1;
-  //       this.user.lastPooDate = moment.now();
-  //     } else {
-  //       this.user.pooStreak = 1;
-  //       this.user.lastPooDate = moment.now();
-  //     }
-  //   } else {
-  //     this.user.pooStreak = 1;
-  //     this.user.lastPooDate = moment.now();
-  //   }
-  // }
+  calcStreak(date) {
+    if (this.environment.lastTimeDate !== null) {
+      const lastTimeDate = moment(this.environment.lastTimeDate).startOf('day');
+      const today = moment(date).startOf('day');
+      const diffTime = today.diff(lastTimeDate, 'days');
+      if (diffTime > 0) {
+        this.environment.streak += 1;
+      } else {
+        this.environment.streak = 1;
+      }
+    } else {
+      this.environment.streak = 1;
+    }
+  }
 
   calcLongestPooTime(duration) {
     if (duration > this.environment.longestTime) {
-      this.environment.longestTime = duration;
+      this.longestTime = duration;
+      // this.environment.longestTime = duration;
     }
     if (this.environment.shortestTime === null) {
-      this.environment.shortestTime = duration;
+      this.shortestTime = duration;
+      // this.environment.shortestTime = duration;
     }
   }
 
   calcShortestPooTime(duration) {
     if (duration < this.environment.shortestTime) {
-      this.environment.shortestTime = duration;
+      this.shortestTime = duration;
+      // this.environment.shortestTime = duration;
     }
   }
 
@@ -193,7 +234,7 @@ export class StopPage implements OnInit {
           handler: () => {
             this.dataService.stopTime = null;
             this.dataService.stopTimeRaw = null;
-            this.presentToast('discard');
+            this.presentToast('Time Discarded');
             this.router.navigate(['/home']);
           }
         }
@@ -203,22 +244,13 @@ export class StopPage implements OnInit {
     await alert.present();
   }
 
-  async presentToast(action) {
-    if (action === 'discard') {
+  async presentToast(message) {
       const toast = await this.toastController.create({
-        message: 'Poo Discarded',
-        position: 'top',
-        duration: 2000
-      });
-      toast.present();
-    } else if (action === 'save') {
-      const toast = await this.toastController.create({
-        message: 'Poo Saved',
+        message: message,
         position: 'top',
         duration: 2000
       });
       toast.present();
     }
-  }
 
 }

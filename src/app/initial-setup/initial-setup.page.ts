@@ -32,7 +32,6 @@ export class InitialSetupPage implements OnInit {
     const currency = form.value.currency || null;
 
     this.userStorageService.addUser({userName, signupDate, activeEnvironmentID: 1}).then((user) => {
-      console.log('signedUpUser', user);
       this.dataService.user = user;
       this.environmentStorageService.addEnvironment({
         id: 1,
@@ -45,7 +44,9 @@ export class InitialSetupPage implements OnInit {
         totalTime: 0,
         itemCount: 0,
         totalPaid: 0,
-        lastItemID: 0
+        lastItemID: 0,
+        lastTimeDate: null,
+        streak: null
       }).then((env) => {
         this.dataService.environment = env[0];
         this.presentToast();

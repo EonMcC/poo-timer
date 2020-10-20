@@ -14,6 +14,8 @@ export interface Environment {
   itemCount: number;
   totalPaid: number;
   lastItemID: number;
+  lastTimeDate: number;
+  streak: number;
 }
 
 const ENV_KEY = "environments"
@@ -42,7 +44,7 @@ export class EnvironmentStorageService {
 
   updateEnvironment(environment: Environment) {
     return this.storage.get(ENV_KEY).then((environments: Environment[]) => {
-     if (!environments || HTMLIonItemSlidingElement.length === 0) {
+     if (!environments) {
        return null;
      }
 
