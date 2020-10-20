@@ -35,7 +35,7 @@ export class InitialSetupPage implements OnInit {
       this.dataService.user = user;
       this.environmentStorageService.addEnvironment({
         id: 1,
-        name: 'poo-timer',
+        name: 'Poo',
         firstTimeDate: null,
         hourlyRate,
         currency,
