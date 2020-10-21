@@ -2,7 +2,7 @@
 
   <app-poobert></app-poobert>
 
-  <h1 id="title">Poo Timer</h1>
+  <h1 id="title" *ngIf="environment">{{environment.name}} Timer</h1>
 
   <div id="number-wrapper">
     <p #timer class="timer">{{formatedTime}}</p>
@@ -20,4 +20,4 @@
     <ion-button *ngIf="timerRunning" color="danger" id="danger-btn" (click)="handleTimer()">STOP</ion-button>
   </div>
 
-<app-menu [menuClick]="menuClick"></app-menu>
+<app-menu [menuClick]="menuClick" [environment]="environment"></app-menu>

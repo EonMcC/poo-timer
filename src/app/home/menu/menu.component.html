@@ -1,5 +1,5 @@
 <ion-menu class="menu" side="start" menuId="first" content-id="main-menu">
-  <p id="menu-title">Poo Timer</p>
+  <p id="menu-title" *ngIf="environment">{{environment.name}} Timer</p>
 <ion-content id="main-menu">
   <ion-list id="menu-list" lines="none">
 

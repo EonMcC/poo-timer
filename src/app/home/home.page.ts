@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import { ItemStorageService } from '../services/item-storage.service';
 import { UserStorageService } from '../services/user-storage.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { EnvironmentStorageService } from '../services/environment-storage.service';
+import { Environment, EnvironmentStorageService } from '../services/environment-storage.service';
 
 
 export interface stopData {
@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
   formatedTime = '00:00';
   timerRunning = false;
   paid: string;
+  environment: Environment
 
   constructor(
       private router: Router,
@@ -51,9 +52,10 @@ export class HomePage implements OnInit {
         if (user) {
           this.dataService.user = user;
           this.environmentStorageService.listEnvironments().then((data) => {
-            data.forEach((env) => {
-              if (env.id === this.dataService.user.activeEnvironmentID) {
-                this.dataService.environment = env;
+            data.forEach((environment) => {
+              if (environment.id === this.dataService.user.activeEnvironmentID) {
+                this.environment = environment;
+                this.dataService.environment = environment;
               }
             })
           })
