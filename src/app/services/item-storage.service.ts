@@ -72,6 +72,20 @@ export class ItemStorageService {
     })
   }
 
+  deleteEnvironmentItems(environmentID: number) {
+    this.storage.get(ITEMS_KEY).then((items: Item[]) => {
+      
+      let toKeep: Item[] = [];
+
+      for (let i of items) {
+        if (i.environmentID !== environmentID) {
+          toKeep.push(i)
+        }
+      }
+      return this.storage.set(ITEMS_KEY, toKeep);
+    })
+  }
+
   clearItems() {
     this.storage.clear()
   }

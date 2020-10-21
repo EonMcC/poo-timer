@@ -4,6 +4,7 @@ import { DataServiceService } from '../../services/data-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import { ItemStorageService } from 'src/app/services/item-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +21,8 @@ export class SettingsPage implements OnInit {
     private toastController: ToastController,
     public alertController: AlertController,
     private environmentStorageService: EnvironmentStorageService,
-    private userStorageService: UserStorageService
+    private userStorageService: UserStorageService,
+    private itemStorageService: ItemStorageService
   ) { }
 
   ngOnInit() {
@@ -108,10 +110,17 @@ export class SettingsPage implements OnInit {
     this.environmentStorageService.deleteEnvironment(this.environment.id).then((data) => {
       try {
         this.dataService.environment = null;
+        this.itemStorageService.deleteEnvironmentItems(this.dataService.user.activeEnvironmentID);
         this.dataService.user.activeEnvironmentID = 1;
-        
         this.userStorageService.updateUser(this.dataService.user);
         this.presentToast('Account unregistered. Bye Bye');
+        this.environmentStorageService.listEnvironments().then((data) => {
+          if (data.length > 0) {
+            this.router.navigate(['/environment-select']);
+          } else {
+            this.router.navigate(['/initial-setup']);
+          }
+        })
         this.router.navigate(['/home']);
       } catch (error) {
         this.presentToast('Deletion Failed, please try again later');
