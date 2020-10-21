@@ -20,6 +20,10 @@ export class UserStorageService {
     return this.storage.set(USER_KEY, user)
   }
 
+  updateUser(user: User): Promise<any> {
+    return this.storage.set(USER_KEY, user)
+  }
+
   getUser(): Promise<User> {
     
     return this.storage.get(USER_KEY)

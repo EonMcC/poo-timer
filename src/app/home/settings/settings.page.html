@@ -13,10 +13,10 @@
       <ion-select
         type="search"
         name="currency"
-        [(ngModel)]="user.currency"
+        [(ngModel)]="environment.currency"
         value="string"
         interface="popover"
-        (ionChange)="handleUpdateUser()"
+        (ionChange)="handleUpdateEnvironment()"
       >
         <ion-select-option value="£ Pieces of Unicorn Dust">£ Unicorn Dust</ion-select-option>
         <ion-select-option value="$ Pieces of Eight">$ Pieces of Eight</ion-select-option>
@@ -36,11 +36,11 @@
       <ion-input
         type="number"
         name="wage"
-        [(ngModel)]="user.hourlyRate"
+        [(ngModel)]="environment.hourlyRate"
         value="string"
         inputmode="decimal"
         enterkeyhit="done"
-        (ionBlur)="handleUpdateUser()"
+        (ionBlur)="handleUpdateEnvironment()"
       >
       </ion-input>
     </ion-item>
@@ -50,8 +50,8 @@
       <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
     </ion-item>
     
-    <ion-item class="menu-item" (click)="handleUnregisterClick()">
-      Unregister
+    <ion-item class="menu-item" (click)="handleDeleteClick()">
+      Delete Environment
       <ion-icon class="menu-icon" name="log-out-outline" slot="end" size="large"></ion-icon>
     </ion-item>
 

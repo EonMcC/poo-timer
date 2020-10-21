@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,40 +12,29 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class SettingsPage implements OnInit {
 
-  // user: User;
+  environment: Environment;
 
   constructor(
     private router: Router,
     private dataService: DataServiceService,
     private toastController: ToastController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private environmentStorageService: EnvironmentStorageService,
+    private userStorageService: UserStorageService
   ) { }
 
   ngOnInit() {
-    // this.user = this.dataService.user
+    this.environment = this.dataService.environment
   }
 
-  handleUpdateUser() {
-    // this.apiService.UpdateUser({
-    //   id: this.user.id,
-    //   currency: this.user.currency,
-    //   hourlyRate: this.user.hourlyRate
-    // }).then((data) => {
-    //   try {
-    //     this.presentUpdateToast(true);
-    //   } catch (error) {
-    //     this.presentUpdateToast(false);
-    //   }
-    // })
-  }
-
-  async presentUpdateToast(choice: boolean) {
-    const toast = await this.toastController.create({
-      message: choice ? 'Setting Updated': 'Update Failed, please try again later',
-      position: 'middle',
-      duration: 2000
-    });
-    toast.present();
+  handleUpdateEnvironment() {
+    this.environmentStorageService.updateEnvironment(this.environment).then((data) => {
+      try {
+        this.presentToast('Setting Updated');
+      } catch (error) {
+        this.presentToast('Update Failed, please try again later');
+      }
+    })
   }
 
   async handleDeleteStatsClick() {
@@ -72,35 +63,27 @@ export class SettingsPage implements OnInit {
   }
 
   deleteStats() {
-    // this.user.totalPooTime = 0;
-    // this.user.numberOfPoos = 0;
-    // this.user.pooStreak = 0;
-    // this.user.shortestPooTime = null;
-    // this.user.longestPooTime = 0;
-    // this.user.totalPaid = 0;
-    // this.apiService.UpdateUser({
-    //   id: this.user.id,
-    //   totalPooTime: this.user.totalPooTime,
-    //   numberOfPoos: this.user.numberOfPoos,
-    //   pooStreak: this.user.pooStreak,
-    //   shortestPooTime: this.user.shortestPooTime,
-    //   longestPooTime: this.user.longestPooTime,
-    //   totalPaid: this.user.totalPaid
-    // }).then((data) => {
-    //   const toastMessage = 'Stats deleted.'
-    //   this.presentToast(toastMessage)
-    // });
+    this.environment.totalTime = 0;
+    this.environment.itemCount = 0;
+    this.environment.streak = 0;
+    this.environment.shortestTime = null;
+    this.environment.longestTime = 0;
+    this.environment.totalPaid = 0;
+    this.environmentStorageService.updateEnvironment(this.environment).then((data) => {
+      const toastMessage = 'Stats deleted.'
+      this.presentToast(toastMessage)
+    });
   }
 
-  handleUnregisterClick() {
-    this.presentUnregisterAlert();
+  handleDeleteClick() {
+    this.presentDeleteAlert();
   }
 
-  async presentUnregisterAlert() {
+  async presentDeleteAlert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirm',
-      message: 'Are you sure you want to unregister? You will lose all saved data. This action cannot be reversed.',
+      message: 'Are you sure you want to delete this environment? You will lose all saved data. This action cannot be reversed.',
       buttons: [
         {
           text: 'No',
@@ -113,7 +96,7 @@ export class SettingsPage implements OnInit {
           text: 'Yes',
           handler: () => {
             console.log('Confirm Okay');
-            this.unregister();
+            this.deleteEnvironment();
           }
         }
       ]
@@ -121,20 +104,19 @@ export class SettingsPage implements OnInit {
     alert.present();
   }
 
-  unregister() {
-    // this.apiService.DeleteUser({id: this.user.id}).then((data) => {
-    //   try {
-    //     Auth.signOut().then(() => {
-    //       this.dataService.user = null;
-    //       const toastMessage = 'Account unregistered. Bye Bye';
-    //       this.presentToast(toastMessage);
-    //       this.router.navigate(['/auth']);
-    //     });
-    //   } catch (error) {
-    //     const toastMessage = 'Deletion Failed, please try again later';
-    //     this.presentToast(toastMessage);
-    //   }
-    // })
+  deleteEnvironment() {
+    this.environmentStorageService.deleteEnvironment(this.environment.id).then((data) => {
+      try {
+        this.dataService.environment = null;
+        this.dataService.user.activeEnvironmentID = 1;
+        
+        this.userStorageService.updateUser(this.dataService.user);
+        this.presentToast('Account unregistered. Bye Bye');
+        this.router.navigate(['/home']);
+      } catch (error) {
+        this.presentToast('Deletion Failed, please try again later');
+      }
+    })
   }
 
   async presentToast(message: string) {
