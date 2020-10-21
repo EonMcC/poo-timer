@@ -23,6 +23,9 @@ export class InitialSetupPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.dataService.environment) {
+      this.router.navigate(['/home']);
+    }
   }
 
   onSubmit(form: NgForm) {
