@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { env } from 'process';
+import { environment } from 'src/environments/environment';
 
 export interface Environment {
   id: number;
@@ -40,6 +41,16 @@ export class EnvironmentStorageService {
 
   listEnvironments(): Promise<Environment[]> {
     return this.storage.get(ENV_KEY);
+  }
+
+  getEnvironment(id): Promise<Environment> {
+    return this.storage.get(ENV_KEY).then((environments: Environment[]) => {
+      for (let i of environments) {
+        if (i.id === id) {
+          return i
+        }
+      }
+    })
   }
 
   updateEnvironment(environment: Environment) {
