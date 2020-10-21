@@ -187,7 +187,7 @@ export class StopPage implements OnInit {
       this.longestTime = duration;
       // this.environment.longestTime = duration;
     }
-    if (this.environment.shortestTime === null) {
+    if (this.environment.shortestTime === 0) {
       this.shortestTime = duration;
       // this.environment.shortestTime = duration;
     }
