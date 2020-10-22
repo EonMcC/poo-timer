@@ -74,6 +74,7 @@ export class ItemStorageService {
 
   deleteEnvironmentItems(environmentID: number) {
     this.storage.get(ITEMS_KEY).then((items: Item[]) => {
+      console.log('items', items)
       
       let toKeep: Item[] = [];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
@@ -10,7 +10,7 @@ import { User, UserStorageService } from 'src/app/services/user-storage.service'
   templateUrl: './environment-select.page.html',
   styleUrls: ['./environment-select.page.scss'],
 })
-export class EnvironmentSelectPage implements OnInit {
+export class EnvironmentSelectPage  {
 
   environments: Array<Environment>;
   user: User;
@@ -20,11 +20,15 @@ export class EnvironmentSelectPage implements OnInit {
     private environmentStorageService: EnvironmentStorageService,
     private userStorageService: UserStorageService,
     private router: Router
-  ) { }
+  ) { 
 
-  ngOnInit() {
+  }
+
+  ionViewWillEnter () {
+    console.log('init')
     this.environmentStorageService.listEnvironments().then((environments) => {
       this.environments = environments;
+      console.log('environments', environments)
     })
     this.user = this.dataService.user;
   }

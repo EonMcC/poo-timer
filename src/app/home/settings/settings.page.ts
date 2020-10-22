@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
 import { AlertController, ToastController } from '@ionic/angular';
@@ -22,8 +22,11 @@ export class SettingsPage implements OnInit {
     public alertController: AlertController,
     private environmentStorageService: EnvironmentStorageService,
     private userStorageService: UserStorageService,
-    private itemStorageService: ItemStorageService
-  ) { }
+    private itemStorageService: ItemStorageService,
+    public ngZone: NgZone
+  ) { 
+
+  }
 
   ngOnInit() {
     this.environment = this.dataService.environment
@@ -115,13 +118,8 @@ export class SettingsPage implements OnInit {
         this.userStorageService.updateUser(this.dataService.user);
         this.presentToast('Account unregistered. Bye Bye');
         this.environmentStorageService.listEnvironments().then((data) => {
-          if (data.length > 0) {
-            this.router.navigate(['/environment-select']);
-          } else {
-            this.router.navigate(['/initial-setup']);
-          }
+          this.router.navigate(['/environment-select']);
         })
-        this.router.navigate(['/home']);
       } catch (error) {
         this.presentToast('Deletion Failed, please try again later');
       }
