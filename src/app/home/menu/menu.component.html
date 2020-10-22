@@ -26,10 +26,11 @@
 
   <p id="watermark">Have<br> you <span>Poo Timed</span> it yet?</p>
 
-  <ion-list id="menu-list-bottom" lines="none" (click)="handleSignOut()">
-    <ion-item class="menu-item">
-      <ion-icon name="log-out" slot="start" size="large"></ion-icon>
-      Logout
+  <ion-list id="menu-list-bottom" lines="none" (click)="navigateTo('/environment-select')">
+    <ion-item class="menu-item menu-item-bottom">
+      <!-- <ion-icon name="change-environment" slot="start" size="large"></ion-icon> -->
+      Change Environment
+      <ion-icon class="chevron" name="chevron-forward" slot="end" size="large"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

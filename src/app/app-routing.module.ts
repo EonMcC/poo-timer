@@ -16,6 +16,14 @@ const routes: Routes = [
   {
     path: 'initial-setup',
     loadChildren: () => import('./initial-setup/initial-setup.module').then( m => m.InitialSetupPageModule)
+  },
+  {
+    path: 'environment-select',
+    loadChildren: () => import('./timer-environment/environment-select/environment-select.module').then( m => m.EnvironmentSelectPageModule)
+  },
+  {
+    path: 'environment-setup',
+    loadChildren: () => import('./timer-environment/environment-setup/environment-setup.module').then( m => m.EnvironmentSetupPageModule)
   }
 ];
 
