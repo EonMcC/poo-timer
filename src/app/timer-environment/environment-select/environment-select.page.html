@@ -2,36 +2,18 @@
   <h1>Select Environment</h1>
   <p id="change">Change the timer</p>
 
-    <ion-item>
+    <ion-item *ngFor="let environment of environments" (click)="selectEnvironment(environment)">
       <ion-label
         class="label"
         position="stacked"
         text-wrap
-      >[] Timer</ion-label>
-      <p>Hourly Rate: </p>
-      <p>Currency: </p>
-      <p>Timing Since: </p>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label
-        class="label"
-        position="stacked"
-        text-wrap
-      >[] Timer</ion-label>
-      <p>Hourly Rate: </p>
-      <p>Currency: </p>
-      <p>Timing Since: </p>
+      >{{environment.name}} Timer</ion-label>
+      <p *ngIf="environment.hourlyRate">Hourly Rate: {{environment.hourlyRate}}</p>
+      <p *ngIf="environment.currency">Currency: {{environment.currency}}</p>
+      <p *ngIf="environment.firstTimeDate">Timing Since: {{calculateTimingSinceDate(environment.firstTimeDate)}}</p>
     </ion-item>
   
 </ion-content>
-
-<div id="btn-wrapper">
-  <ion-button
-    color="secondary"
-    id="secondary-btn"
-  >BACK</ion-button>
-</div>
 
 
 
