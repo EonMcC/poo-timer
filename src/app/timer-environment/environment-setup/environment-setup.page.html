@@ -1,9 +1,104 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>environment-setup</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <h1>Environment Setup</h1>
+  <p id="sub-heading">Add a new environment</p>
 
+  <form #environmentSetupForm="ngForm" (ngSubmit)="onSubmit(environmentSetupForm)">
+    <!-- name -->
+    <ion-item>
+      <ion-label
+        class="label" 
+        position="stacked"
+        text-wrap
+      >What would you like to time?</ion-label>
+      <ion-input
+        type="text"
+        placeholder="Run, Sleep etc."
+        name="name"
+        [(ngModel)]="name"
+        value="string"
+        required
+      >
+      </ion-input>
+    </ion-item>
+
+    <!-- same? -->
+    <ion-item>
+      <ion-label
+        class="label"
+        position="stacked"
+        text-wrap
+      >Use the same wage and currency as Poo Timer?</ion-label>
+      <ion-select
+        type="search"
+        placeholder="Select"
+        name="same"
+        [(ngModel)]="same"
+        value="boolean"
+        interface="popover"
+        required
+      >
+        <ion-select-option [value]="true">Yes</ion-select-option>
+        <ion-select-option [value]="false">No</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+        <!-- hourlyRate -->
+        <ion-item *ngIf="!same">
+          <ion-label
+            class="label" 
+            position="stacked"
+            text-wrap
+          >What is your time worth for this task?</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Enter hourly rate"
+            name="hourlyRate"
+            [(ngModel)]="hourlyRate"
+            value="number"
+            [required]="!same"
+          >
+          </ion-input>
+        </ion-item>
+
+    <!-- currency -->
+    <ion-item *ngIf="!same">
+      <ion-label
+        class="label"
+        position="stacked"
+        text-wrap
+      >And what currency is that in?</ion-label>
+      <ion-select
+        type="search"
+        placeholder="Choose currency"
+        name="currency"
+        [(ngModel)]="currency"
+        value="string"
+        interface="popover"
+        [required]="!same"
+      >
+        <ion-select-option value="£ Pieces of Unicorn Dust">Unicorn Dust</ion-select-option>
+        <ion-select-option value="$ Pieces of Eight">Pieces of Eight</ion-select-option>
+        <ion-select-option value="£ Old Money Pounds">Old Money</ion-select-option>
+        <ion-select-option value="£">£ Pounds</ion-select-option>
+        <ion-select-option value="$">$ Dollars</ion-select-option>
+        <ion-select-option value="€">€ Euros</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+
+      <div id="btn-wrapper">
+        <ion-button
+          type="submit"
+          color="primary"
+          id="primary-btn"
+        >Next</ion-button>
+      </div>
+  </form>
+  
 </ion-content>
+
+
+
+
