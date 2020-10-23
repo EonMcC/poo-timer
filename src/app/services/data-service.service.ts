@@ -7,6 +7,7 @@ import { User } from './user-storage.service';
 })
 export class DataServiceService {
 
+  startTime: number;
   stopTime: string;
   stopTimeRaw: number;
   user: User;

@@ -7,6 +7,7 @@ import { ItemStorageService } from '../services/item-storage.service';
 import { UserStorageService } from '../services/user-storage.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Environment, EnvironmentStorageService } from '../services/environment-storage.service';
+import { Time } from '@angular/common';
 
 
 export interface stopData {
@@ -27,12 +28,16 @@ export class HomePage implements OnInit {
   menuClick = false;
   todos: Array<any>;
   numbers = timer(0, 1000)
+  timerStartMoment: number;
+  momentStart: number;
+  momentEnd: number;
   timer: any;
   unformatedTime: any;
   formatedTime = '00:00';
   timerRunning = false;
   paid: string;
   environment: Environment
+  intervalFn: NodeJS.Timer;
 
   constructor(
       private router: Router,
@@ -91,25 +96,50 @@ export class HomePage implements OnInit {
   handleTimer(){
     if (this.timerRunning === false) {
       this.timerRunning = true;
-      console.log('Starting Timer');
-      this.timer = this.numbers.subscribe(t => {
-        console.log(t)
-        this.unformatedTime = t;
-        if (t < 3600) {
+      this.dataService.startTime = moment.now();
+      this.intervalFn = setInterval(() => {
+        this.unformatedTime = ((moment.now() - this.dataService.startTime) / 1000).toFixed(0);
+        console.log('unformatedTime', this.unformatedTime)
+        if (this.unformatedTime < 3600) {
           this.timerElement.nativeElement.classList.remove('timer-long');
-          this.formatedTime = new Date(t * 1000).toISOString().substr(14, 5);
+          this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
         } else {
           this.timerElement.nativeElement.classList.add('timer-long');
-          this.formatedTime = new Date(t * 1000).toISOString().substr(11, 8);
+          this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(11, 8);
         }
         if (this.dataService.environment.hourlyRate) {
-          this.calculateMoney(t)
+          this.calculateMoney(this.unformatedTime)
         }
-      });
+      }, 1000);
+
+      // this.timer = this.numbers.subscribe(t => {
+      //   console.log(t)
+      //   let startTime = 0;
+      //   if (moment.now() - this.timerStartMoment > 1500) {
+      //     console.log('greater')
+      //     startTime = moment.now() - this.timerStartMoment
+      //   }
+      //   this.unformatedTime = t + ( startTime / 1000);
+      //   console.log('unfor', this.unformatedTime)
+
+      //   this.momentEnd = startTime;
+
+      //   if (this.unformatedTime < 3600) {
+      //     this.timerElement.nativeElement.classList.remove('timer-long');
+      //     this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
+      //   } else {
+      //     this.timerElement.nativeElement.classList.add('timer-long');
+      //     this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(11, 8);
+      //   }
+      //   if (this.dataService.environment.hourlyRate) {
+      //     this.calculateMoney(this.unformatedTime)
+      //   }
+      // });
     } else {
       console.log('Stopping Timer');
       this.timerRunning = false;
-      this.timer.unsubscribe();
+      // this.timer.unsubscribe();
+      clearInterval(this.intervalFn);
       this.dataService.stopTimeRaw = this.unformatedTime;
       this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
