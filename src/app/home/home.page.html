@@ -5,8 +5,10 @@
   <h1 id="title" *ngIf="environment">{{environment.name}} Timer</h1>
 
   <div id="number-wrapper">
-    <p #timer class="timer">{{formatedTime}}</p>
-    <p id="money-counter">{{paid}}</p>
+    <div id="inside-number-wrapper">
+      <p #timer class="timer">{{formatedTime}}</p>
+      <p id="money-counter">{{paid}}</p>
+    </div>
   </div>
 
   <ion-button (click)="clear()">Clear</ion-button>

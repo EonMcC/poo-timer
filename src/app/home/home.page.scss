@@ -19,18 +19,21 @@ app-poobert {
 }
 
 #number-wrapper {
-  // font-family: Annie Use Your Telescope;
   width: 95vw;
   color: var(--ion-color-secondary);
   margin:148px auto 0px auto;
+  display: grid;
+}
+
+#inside-number-wrapper {
+  width: fit-content;
+  margin: 0px auto 0px auto;
 }
 
 .timer {
-  // height: 160px;
-  // font-size: 160px;
   font-size: 110px;
   text-align: center;
-  margin: 0px auto 0px auto;
+  margin: 0px;
   text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
 }
 
@@ -43,11 +46,9 @@ app-poobert {
 #money-counter {
   font-size: 64px;
   height: 64px;
-  width: 90vw;
   line-height: 64px;
   text-align: right;
   margin: 0px;
-  padding-right: 17px;
   text-shadow: 0px 5px 5px rgba(0,0,0,0.4);
 }
 
