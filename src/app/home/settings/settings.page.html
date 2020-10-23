@@ -50,9 +50,9 @@
       <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
     </ion-item>
     
-    <ion-item class="menu-item" (click)="handleDeleteClick()">
+    <ion-item *ngIf="environment.id !== 1" class="menu-item" (click)="handleDeleteClick()">
       Delete Environment
-      <ion-icon class="menu-icon" name="log-out-outline" slot="end" size="large"></ion-icon>
+      <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
     </ion-item>
 
 

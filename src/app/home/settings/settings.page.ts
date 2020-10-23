@@ -29,7 +29,9 @@ export class SettingsPage implements OnInit {
   }
 
   ngOnInit() {
+    
     this.environment = this.dataService.environment
+    console.log('settings init', this.environment)
   }
 
   handleUpdateEnvironment() {
@@ -116,7 +118,7 @@ export class SettingsPage implements OnInit {
         this.itemStorageService.deleteEnvironmentItems(this.dataService.user.activeEnvironmentID);
         this.dataService.user.activeEnvironmentID = 1;
         this.userStorageService.updateUser(this.dataService.user);
-        this.presentToast('Account unregistered. Bye Bye');
+        this.presentToast('Environment deleted. Bye Bye');
         this.environmentStorageService.listEnvironments().then((data) => {
           this.router.navigate(['/environment-select']);
         })
