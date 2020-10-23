@@ -72,7 +72,7 @@ export class EnvironmentStorageService {
     })
   }
 
-  deleteEnvironment(id: number): Promise<Environment> {
+  deleteEnvironment(id: number): Promise<Environment[]> {
     return this.storage.get(ENV_KEY).then((environments: Environment[]) => {
       if (!environments || environments.length === 0) {
         return null;

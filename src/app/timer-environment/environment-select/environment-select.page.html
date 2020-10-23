@@ -4,15 +4,27 @@
 
     <ion-item *ngFor="let environment of environments" (click)="selectEnvironment(environment)">
       <ion-label
-        class="label"
-        position="stacked"
+      class="label"
+      position="stacked"
       >{{environment.name}} Timer</ion-label>
       <p *ngIf="environment.hourlyRate">Hourly Rate: {{environment.hourlyRate}}</p>
       <p *ngIf="environment.currency">Currency: {{environment.currency}}</p>
       <p *ngIf="environment.firstTimeDate">Timing Since: {{calculateTimingSinceDate(environment.firstTimeDate)}}</p>
+      <ion-icon
+        *ngIf="environment.id !== 1"
+        class="menu-icon"
+        name="trash-outline"
+        slot="end"
+        size="large"
+        (click)="handleTrashClick($event, environment)"
+      ></ion-icon>
     </ion-item>
-  
+    
 </ion-content>
+
+<div id="btn-wrapper">
+  <ion-button color="primary" id="primary-btn" (click)="addNewEnvironment()">ADD NEW</ion-button>
+</div>
 
 
 
