@@ -5,13 +5,8 @@ import { DataGuardGuard } from './data-guard.guard';
 const routes: Routes = [
   {
     path: 'home',
-    canLoad: [DataGuardGuard],
+    // canLoad: [DataGuardGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'initial-setup',
-    pathMatch: 'full'
   },
   {
     path: 'initial-setup',
@@ -24,6 +19,11 @@ const routes: Routes = [
   {
     path: 'environment-setup',
     loadChildren: () => import('./timer-environment/environment-setup/environment-setup.module').then( m => m.EnvironmentSetupPageModule)
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   }
 ];
 
