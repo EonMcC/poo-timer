@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimeoutError, timer } from 'rxjs';
 import { DataServiceService } from '../services/data-service.service';
@@ -20,7 +20,7 @@ export interface stopData {
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage implements OnInit {
+export class HomePage {
 
   @ViewChild('timer') timerElement: ElementRef;
   @ViewChild('paid') paidElement: ElementRef;
@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
       private environmentStorageService: EnvironmentStorageService
     ) {}
 
-    ngOnInit() {
+    ionViewWillEnter() {
       this.getUser();
     }
 
