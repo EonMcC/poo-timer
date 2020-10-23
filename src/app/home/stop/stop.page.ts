@@ -231,6 +231,7 @@ export class StopPage implements OnInit {
           }
         }, {
           text: 'Yes',
+          cssClass: 'danger',
           handler: () => {
             this.dataService.stopTime = null;
             this.dataService.stopTimeRaw = null;

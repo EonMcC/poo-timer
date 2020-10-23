@@ -34,3 +34,10 @@ p {
 ::ng-deep .alert-message.sc-ion-alert-ios, .alert-input-group.sc-ion-alert-ios {
   font-size: 16px
 }
+
+::ng-deep .alert-button.sc-ion-alert-ios:first-child {
+  color: var(--ion-color-secondary);
+}
+::ng-deep .alert-button.sc-ion-alert-ios:last-child {
+  color: #EB5757;
+}
