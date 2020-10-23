@@ -174,7 +174,9 @@ export class StopPage implements OnInit {
       const diffTime = today.diff(lastTimeDate, 'days');
       if (diffTime > 0) {
         this.environment.streak += 1;
-      } else {
+      } else if (diffTime === 0) {
+        this.environment.streak = this.environment.streak;
+      }  else {
         this.environment.streak = 1;
       }
     } else {
