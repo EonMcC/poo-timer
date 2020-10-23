@@ -5,32 +5,28 @@ h1{
   text-align: center;
 }
 
-#dont-worry {
-  font-size: 14px;
+#sub-heading {
+  font-size: 18px;
   color: var(--ion-color-dark);
-  margin: 0px auto 24px auto;
+  margin: 0px auto 16px auto;
   text-align: center;
 }
 
 ion-item {
   --background: var(--ion-color-primary-tint);
   --border-color: var(--ion-color-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 0px;
+  font-size: 34px;
 }
 
 .label {
-  font-size: 48px;
+  font-size: 32px;
   color: var(--ion-color-secondary);
-}
-
-#disclaimer {
-  font-size: 14px;
-  color: var(--ion-color-secondary);
-  margin: 32px 24px;
+  margin-bottom: 24px;
 }
 
 #btn-wrapper {
-  margin-bottom: 16px;
+  margin: 16px auto;
   width: 100%;
   background: var(--ion-color-background);
   z-index:15;

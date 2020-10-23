@@ -1,6 +1,6 @@
 <ion-content>
   <h1>Initial Setup</h1>
-  <p id="dont-worry">First things first</p>
+  <p id="sub-heading">First things first</p>
 
   <form #initialSetupForm="ngForm" (ngSubmit)="onSubmit(initialSetupForm)">
     <!-- name -->
@@ -16,6 +16,7 @@
         name="name"
         [(ngModel)]="name"
         value="string"
+        required
       >
       </ion-input>
     </ion-item>
@@ -33,6 +34,7 @@
         name="wage"
         [(ngModel)]="wage"
         value="string"
+        required
       >
       </ion-input>
     </ion-item>
@@ -51,6 +53,7 @@
         [(ngModel)]="currency"
         value="string"
         interface="popover"
+        required
       >
         <ion-select-option value="£ Pieces of Unicorn Dust">Unicorn Dust</ion-select-option>
         <ion-select-option value="$ Pieces of Eight">Pieces of Eight</ion-select-option>
@@ -58,25 +61,9 @@
         <ion-select-option value="£">£ Pounds</ion-select-option>
         <ion-select-option value="$">$ Dollars</ion-select-option>
         <ion-select-option value="€">€ Euros</ion-select-option>
-
       </ion-select>
     </ion-item>
 
-       <!-- Picture -->
-       <!-- <ion-item>
-        <ion-label
-          class="label"
-          position="stacked"
-          text-wrap
-        >And finally, upload a profile pic?</ion-label>
-        <ion-input
-          type="file"
-          name="profile"
-          [(ngModel)]="profile"
-          accept="image/png, image/jpeg"
-        >
-        </ion-input>
-      </ion-item> -->
       <div id="btn-wrapper">
         <ion-button
           type="submit"
@@ -85,10 +72,6 @@
         >NEXT</ion-button>
       </div>
   </form>
-
-  <p id="disclaimer">Providing this information is 100% optional, but filling it in will improve
-    your Poo Timer experience. This data will not be shared with any third party.
-  </p>
   
 </ion-content>
 
