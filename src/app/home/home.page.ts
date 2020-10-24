@@ -5,7 +5,6 @@ import { DataServiceService } from '../services/data-service.service';
 import * as moment from 'moment';
 import { ItemStorageService } from '../services/item-storage.service';
 import { UserStorageService } from '../services/user-storage.service';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Environment, EnvironmentStorageService } from '../services/environment-storage.service';
 import { Time } from '@angular/common';
 
@@ -44,30 +43,19 @@ export class HomePage {
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
       private userStorageService: UserStorageService,
-      private splashScreen: SplashScreen,
       private environmentStorageService: EnvironmentStorageService
     ) {}
 
     ionViewWillEnter() {
-      this.getUser();
+      this.getData();
     }
 
-    getUser() {
-      this.userStorageService.getUser().then((user) => {
-        if (user) {
-          this.dataService.user = user;
-          this.environmentStorageService.listEnvironments().then((data) => {
-            data.forEach((environment) => {
-              if (environment.id === this.dataService.user.activeEnvironmentID) {
-                this.environment = environment;
-                this.dataService.environment = environment;
-              }
-            })
-          })
-        } else {
-          this.router.navigate(['/initial-setup'])
-        }
-      })
+    getData() {
+      if (this.dataService.user) {
+        this.environment = this.dataService.environment;
+      } else {
+        this.router.navigate(['/initial-setup'])
+      }
     }
 
     clear() {
