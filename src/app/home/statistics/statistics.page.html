@@ -7,13 +7,13 @@
     <ion-row>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Total Poo Time</p>
+          <p class="stat-header">Total Time</p>
           <h1 class="stat" text-wrap>{{totalTime}}</h1>
         </div>
       </ion-col>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Total Poos</p>
+          <p class="stat-header">Total Times</p>
           <h1 class="stat">{{environment.itemCount}}</h1>
         </div>
       </ion-col>
@@ -28,7 +28,7 @@
       </ion-col>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Poo Streak</p>
+          <p class="stat-header">Day Streak</p>
           <h1 class="stat">{{environment.streak}} {{environment.streak === 1 ? 'day' : 'days'}}</h1>
         </div>
       </ion-col>
@@ -37,13 +37,13 @@
     <ion-row>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Shortest Poo</p>
+          <p class="stat-header">Shortest Time</p>
           <h1 class="stat">{{shortestTimeFormated}}</h1>
         </div>
       </ion-col>
       <ion-col>
         <div class="stat-square">
-          <p class="stat-header">Longest Poo</p>
+          <p class="stat-header">Longest Time</p>
           <h1 class="stat">{{longestTimeFormated}}</h1>
         </div>
       </ion-col>
