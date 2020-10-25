@@ -13,12 +13,16 @@ export class StatisticsPage implements OnInit {
 
   environment: Environment
   totalTime: string;
-  hours = '0 hrs';
-  minutes = '0 mins';
-  seconds = '0 secs';
+  hours: string;
+  minutes: string;
+  seconds: string;
   totalPaid: string;
-  shortestTimeFormated: string;
-  longestTimeFormated: string;
+  shortestHours: string;
+  shortestMinutes: string;
+  shortestSeconds: string;
+  longestHours: string;
+  longestMinutes: string;
+  longestSeconds: string;
 
   constructor(
     private router: Router,
@@ -37,7 +41,7 @@ export class StatisticsPage implements OnInit {
   formatTotalTime() {
     const time = this.environment.totalTime * 1000;
     const digitalTime = new Date(time).toISOString().substr(11, 8);
-    
+
     const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
     const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);
     const seconds = digitalTime[6] === '0' ? digitalTime.substr(7, 1) : digitalTime.substr(6, 2);
@@ -58,21 +62,29 @@ export class StatisticsPage implements OnInit {
   }
 
   formatShortestTime() {
-    const time = this.environment.shortestTime;
-    if (time < 3600) {
-      this.shortestTimeFormated = new Date(time * 1000).toISOString().substr(14, 5);
-    } else {
-      this.shortestTimeFormated = new Date(time * 1000).toISOString().substr(11, 8);
-    }
+    const time = this.environment.shortestTime * 1000;
+    const digitalTime = new Date(time).toISOString().substr(11, 8);
+    
+    const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
+    const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);
+    const seconds = digitalTime[6] === '0' ? digitalTime.substr(7, 1) : digitalTime.substr(6, 2);
+
+    this.shortestHours = hours.length === 1 && hours[0] === '1' ? hours + ' hr' : hours + ' hrs';
+    this.shortestMinutes = minutes.length === 1 && minutes[0] === '1' ? minutes + ' min' : minutes + ' mins';
+    this.shortestSeconds = seconds.length === 1 && seconds[0] === '1' ? seconds + ' sec' : seconds + ' secs';
   }
 
   formatLongestTime() {
-    const time = this.environment.longestTime;
-    if (time < 3600) {
-      this.longestTimeFormated = new Date(time * 1000).toISOString().substr(14, 5);
-    } else {
-      this.longestTimeFormated = new Date(time * 1000).toISOString().substr(11, 8);
-    }
+    const time = this.environment.longestTime * 1000;
+    const digitalTime = new Date(time).toISOString().substr(11, 8);
+    
+    const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
+    const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);
+    const seconds = digitalTime[6] === '0' ? digitalTime.substr(7, 1) : digitalTime.substr(6, 2);
+
+    this.longestHours = hours.length === 1 && hours[0] === '1' ? hours + ' hr' : hours + ' hrs';
+    this.longestMinutes = minutes.length === 1 && minutes[0] === '1' ? minutes + ' min' : minutes + ' mins';
+    this.longestSeconds = seconds.length === 1 && seconds[0] === '1' ? seconds + ' sec' : seconds + ' secs';
   }
 
   goBack(){
