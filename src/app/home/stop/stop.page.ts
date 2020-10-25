@@ -45,7 +45,6 @@ export class StopPage implements OnInit {
     }
 
   ngOnInit() {
-    console.log('raw', this.dataService.stopTimeRaw)
     this.user = this.dataService.user;
     this.environment = this.dataService.environment;
     this.ifFirstTime();
@@ -62,16 +61,13 @@ export class StopPage implements OnInit {
   }
 
   calculateMoney(time, hourlyRate) {
-    console.log('time', time)
     if (time) {
       this.paidRaw = ((hourlyRate / 3600) * time);
-      console.log('paidraw', this.paidRaw)
       if (this.paidRaw < .01) {
         const paid = this.paidRaw.toFixed(3);
         this.formatMoney(paid);
       } else {
         const paid = this.paidRaw.toFixed(2);
-        console.log('paid', paid)
         this.formatMoney(paid);
       }
     }
@@ -85,7 +81,6 @@ export class StopPage implements OnInit {
       this.paid = `${symbol}${paid} ${moneyType}`
     } else {
       this.paid = `${currency}${paid}`
-      console.log('paidcur', this.paid)
     }
   }
 
@@ -160,14 +155,12 @@ export class StopPage implements OnInit {
       isLongest,
       isShortest
     }).then((poo) => {
-      console.log('returnedPoo', poo);
       this.presentToast('Time Saved');
       this.router.navigate(['/home']);
     })
   }
 
   calcTotals(duration) {
-    console.log(typeof(this.environment.totalTime), typeof(duration), typeof(this.environment.totalPaid), typeof(this.paidRaw))
     this.environment.totalTime += duration
     this.environment.itemCount += 1;
     this.environment.totalPaid = this.environment.totalPaid += this.paidRaw;

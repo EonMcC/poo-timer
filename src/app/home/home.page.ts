@@ -87,7 +87,6 @@ export class HomePage {
       this.dataService.startTime = moment.now();
       this.intervalFn = setInterval(() => {
         this.unformatedTime = ((moment.now() - this.dataService.startTime) / 1000).toFixed(0);
-        console.log('unformatedTime', this.unformatedTime)
         if (this.unformatedTime < 3600) {
           this.timerElement.nativeElement.classList.remove('timer-long');
           this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
@@ -99,36 +98,10 @@ export class HomePage {
           this.calculateMoney(this.unformatedTime)
         }
       }, 1000);
-
-      // this.timer = this.numbers.subscribe(t => {
-      //   console.log(t)
-      //   let startTime = 0;
-      //   if (moment.now() - this.timerStartMoment > 1500) {
-      //     console.log('greater')
-      //     startTime = moment.now() - this.timerStartMoment
-      //   }
-      //   this.unformatedTime = t + ( startTime / 1000);
-      //   console.log('unfor', this.unformatedTime)
-
-      //   this.momentEnd = startTime;
-
-      //   if (this.unformatedTime < 3600) {
-      //     this.timerElement.nativeElement.classList.remove('timer-long');
-      //     this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
-      //   } else {
-      //     this.timerElement.nativeElement.classList.add('timer-long');
-      //     this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(11, 8);
-      //   }
-      //   if (this.dataService.environment.hourlyRate) {
-      //     this.calculateMoney(this.unformatedTime)
-      //   }
-      // });
     } else {
-      console.log('Stopping Timer');
       this.timerRunning = false;
-      // this.timer.unsubscribe();
       clearInterval(this.intervalFn);
-      this.dataService.stopTimeRaw = parseInt(this.unformatedTime);
+      this.dataService.stopTimeRaw = parseFloat(this.unformatedTime);
       this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'

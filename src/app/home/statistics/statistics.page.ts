@@ -25,7 +25,6 @@ export class StatisticsPage implements OnInit {
 
   ngOnInit() {
     this.environment = this.dataService.environment
-    console.log('environment', this.environment)
     this.formatTotalTime();
     this.calculateTotalPaid();
     this.formatShortestTime();
@@ -33,11 +32,11 @@ export class StatisticsPage implements OnInit {
   }
 
   formatTotalTime() {
-    const time = this.environment.totalTime;
-    if (time < 3600) {
-      this.totalTime = new Date(time.toString()).toISOString().substr(14, 5);
+    const time = this.environment.totalTime * 1000;
+    if (time < 3600000) {
+      this.totalTime = new Date(time).toISOString().substr(14, 5);
     } else {
-      this.totalTime = new Date(time.toString()).toISOString().substr(11, 8);
+      this.totalTime = new Date(time).toISOString().substr(11, 8);
     }
   }
 
