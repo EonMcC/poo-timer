@@ -128,7 +128,7 @@ export class HomePage {
       this.timerRunning = false;
       // this.timer.unsubscribe();
       clearInterval(this.intervalFn);
-      this.dataService.stopTimeRaw = this.unformatedTime;
+      this.dataService.stopTimeRaw = parseInt(this.unformatedTime);
       this.dataService.stopTime = this.formatedTime;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
