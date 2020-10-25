@@ -46,14 +46,12 @@ export class SettingsPage implements OnInit {
 
   async handleDeleteStatsClick() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Confirm',
-      message: 'This action will delete all stats; are you sure you want to do this? This action cannot be reversed.',
+      message: 'This action will delete all stats. Are you sure you want to do this? This action cannot be reversed.',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'danger',
           handler: (data) => {
             console.log('Cancel');
           }
@@ -88,14 +86,12 @@ export class SettingsPage implements OnInit {
 
   async presentDeleteAlert() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Confirm',
       message: 'Are you sure you want to delete this environment? You will lose all saved data. This action cannot be reversed.',
       buttons: [
         {
           text: 'No',
           role: 'cancel',
-          cssClass: 'secondary',
           handler: (data) => {
             console.log('Cancel');
           }

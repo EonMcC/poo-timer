@@ -53,7 +53,6 @@ export class EnvironmentSelectPage  {
     console.log(event)
     event.stopPropagation();
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Delete',
       message: 'This action will delete the environment and assosiated data. Are you sure you want to do this?  This action cannot be reversed.',
       buttons: [
@@ -65,7 +64,6 @@ export class EnvironmentSelectPage  {
           }
         }, {
           text: 'Delete',
-          cssClass: 'danger',
           handler: () => {
             console.log('Confirm Okay');
             this.deleteEnvironment(environment);

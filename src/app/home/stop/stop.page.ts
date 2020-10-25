@@ -217,20 +217,17 @@ export class StopPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Confirm!',
       message: 'Do you want to discard this time?',
       buttons: [
         {
           text: 'No',
           role: 'cancel',
-          cssClass: 'secondary',
           handler: (data) => {
             console.log('Cancel');
           }
         }, {
           text: 'Yes',
-          cssClass: 'danger',
           handler: () => {
             this.dataService.stopTime = null;
             this.dataService.stopTimeRaw = null;
