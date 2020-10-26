@@ -12,6 +12,7 @@ export class DataServiceService {
   stopTimeRaw: number;
   user: User;
   environment: Environment
+  currentTime: number;
 
   constructor() { }
 

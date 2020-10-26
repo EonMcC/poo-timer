@@ -12,9 +12,10 @@ export class PoobertComponent implements AfterViewInit {
   // user: User;
   pooStreak: number;
 
+  // poobertEmotion = 'dyk-seconds-year';
   poobertEmotion = 'normal';
-  preTimerEmotions = ['waiting', 'tap-start', 'ima-poo']
-  emotions = ['ima-poo']
+  preTimerEmotions = ['waiting', 'tap-start', 'ima-poo', 'dyk-seconds-year', 'relative']
+  emotions = ['ima-poo', 'dyk-seconds-year', 'relative']
   iteration = 0;
 
   constructor(
@@ -24,6 +25,15 @@ export class PoobertComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setInterval(() => {
+      console.log(this.emotions);
+      console.log(this.dataService.currentTime)
+      if (this.dataService.environment && !this.emotions.includes('longest') && this.dataService.environment.longestTime < this.dataService.currentTime) {
+        this.emotions.push('longest')
+      } else if (this.emotions.includes('longest') && this.dataService.currentTime === undefined) {
+        console.log('else if')
+        this.emotions.splice(this.emotions.indexOf('longest'), 1)
+        console.log(this.emotions)
+      }
       if (this.dataService.environment && this.dataService.environment.streak > 0 && !this.emotions.includes('streak')) {
         this.emotions.push('streak')
       };

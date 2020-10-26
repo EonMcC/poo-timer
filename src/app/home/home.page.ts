@@ -87,6 +87,7 @@ export class HomePage {
       this.dataService.startTime = moment.now();
       this.intervalFn = setInterval(() => {
         this.unformatedTime = ((moment.now() - this.dataService.startTime) / 1000).toFixed(0);
+        this.dataService.currentTime = this.unformatedTime;
         if (this.unformatedTime < 3600) {
           this.timerElement.nativeElement.classList.remove('timer-long');
           this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
@@ -100,6 +101,7 @@ export class HomePage {
       }, 1000);
     } else {
       this.timerRunning = false;
+      this.dataService.currentTime = undefined;
       clearInterval(this.intervalFn);
       this.dataService.stopTimeRaw = parseFloat(this.unformatedTime);
       this.dataService.stopTime = this.formatedTime;
