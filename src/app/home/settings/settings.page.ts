@@ -1,10 +1,11 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import { ItemStorageService } from 'src/app/services/item-storage.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-settings',
@@ -18,12 +19,12 @@ export class SettingsPage implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataServiceService,
-    private toastController: ToastController,
     public alertController: AlertController,
     private environmentStorageService: EnvironmentStorageService,
     private userStorageService: UserStorageService,
     private itemStorageService: ItemStorageService,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private toastService: ToastService
   ) { 
 
   }
@@ -37,26 +38,29 @@ export class SettingsPage implements OnInit {
   handleUpdateEnvironment() {
     this.environmentStorageService.updateEnvironment(this.environment).then((data) => {
       try {
-        this.presentToast('Setting Updated');
+        this.toastService.presentToast('Setting Updated');
       } catch (error) {
-        this.presentToast('Update Failed, please try again later');
+        this.toastService.presentToast('Update Failed, please try again later');
       }
     })
   }
 
   async handleDeleteStatsClick() {
     const alert = await this.alertController.create({
-      header: 'Confirm',
+      header: 'Confirm!',
       message: 'This action will delete all stats. Are you sure you want to do this? This action cannot be reversed.',
+      cssClass: "alert-class",
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
+          cssClass: "alert-cancel-button",
           handler: (data) => {
             console.log('Cancel');
           }
         }, {
           text: 'Delete',
+          cssClass: "alert-confirm-button",
           handler: () => {
             console.log('Confirm Okay');
             this.deleteStats();
@@ -76,7 +80,7 @@ export class SettingsPage implements OnInit {
     this.environment.totalPaid = 0;
     this.environmentStorageService.updateEnvironment(this.environment).then((data) => {
       const toastMessage = 'Stats deleted.'
-      this.presentToast(toastMessage)
+      this.toastService.presentToast(toastMessage)
     });
   }
 
@@ -114,28 +118,18 @@ export class SettingsPage implements OnInit {
         this.itemStorageService.deleteEnvironmentItems(this.dataService.user.activeEnvironmentID);
         this.dataService.user.activeEnvironmentID = 1;
         this.userStorageService.updateUser(this.dataService.user);
-        this.presentToast('Environment deleted. Bye Bye');
+        this.toastService.presentToast('Environment deleted. Bye Bye');
         this.environmentStorageService.listEnvironments().then((data) => {
           this.router.navigate(['/environment-select']);
         })
       } catch (error) {
-        this.presentToast('Deletion Failed, please try again later');
+        this.toastService.presentToast('Deletion Failed, please try again later');
       }
     })
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      position: 'middle',
-      duration: 2000
-    });
-    toast.present();
   }
 
   goBack(){
     this.router.navigate(['/home'])
   }
-
 
 }

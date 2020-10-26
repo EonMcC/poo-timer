@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ToastController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserStorageService } from '../services/user-storage.service';
 import * as moment from 'moment';
 import { EnvironmentStorageService } from '../services/environment-storage.service';
 import { DataServiceService } from '../services/data-service.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-initial-setup',
@@ -15,7 +15,7 @@ import { DataServiceService } from '../services/data-service.service';
 export class InitialSetupPage implements OnInit {
 
   constructor(
-    public toastController: ToastController,
+    private toastService: ToastService,
     private router: Router,
     private userStorageService: UserStorageService,
     private environmentStorageService: EnvironmentStorageService,
@@ -53,23 +53,14 @@ export class InitialSetupPage implements OnInit {
           streak: null
         }).then((env) => {
           this.dataService.environment = env[0];
-          this.presentToast('Details saved, you\'re good to go!');
+          this.toastService.presentToast('Details saved, you\'re good to go!');
           this.router.navigate(['/home'])
         })
       })
       form.reset();
     } else {
-      this.presentToast('Please fill in all information');
+      this.toastService.presentToast('Please fill in all information');
     }
-  }
-
-  async presentToast(message) {
-    const toast = await this.toastController.create({
-      message,
-      position: 'top',
-      duration: 2000
-    });
-    toast.present();
   }
 
 }

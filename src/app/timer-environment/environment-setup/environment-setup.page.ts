@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-environment-setup',
@@ -18,7 +18,7 @@ export class EnvironmentSetupPage implements OnInit {
   constructor(
     private environmentStorageService: EnvironmentStorageService,
     private router: Router,
-    public toastController: ToastController
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -61,17 +61,8 @@ export class EnvironmentSetupPage implements OnInit {
       })
       form.reset();
     } else {
-      this.presentToast('Please fill in all information');
+      this.toastService.presentToast('Please fill in all information');
     }
-  }
-
-  async presentToast(message) {
-    const toast = await this.toastController.create({
-      message,
-      position: 'middle',
-      duration: 2000
-    });
-    toast.present();
   }
 
 }

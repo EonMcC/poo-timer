@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController  } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import * as moment from 'moment';
 import { ItemStorageService } from 'src/app/services/item-storage.service';
 import { User, UserStorageService } from 'src/app/services/user-storage.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-stop',
@@ -32,11 +32,10 @@ export class StopPage implements OnInit {
 
   constructor(
       public alertController: AlertController,
-      public toastController: ToastController,
+      private toastService: ToastService,
       private router: Router,
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
-      private userStorageService: UserStorageService,
       private environmentStorageService: EnvironmentStorageService
     ) { }
 
@@ -155,7 +154,7 @@ export class StopPage implements OnInit {
       isLongest,
       isShortest
     }).then((poo) => {
-      this.presentToast('Time Saved');
+      this.toastService.presentToast('Time Saved');
       this.router.navigate(['/home']);
     })
   }
@@ -186,18 +185,15 @@ export class StopPage implements OnInit {
   calcLongestPooTime(duration) {
     if (duration > this.environment.longestTime) {
       this.longestTime = duration;
-      // this.environment.longestTime = duration;
     }
     if (this.environment.shortestTime === 0) {
       this.shortestTime = duration;
-      // this.environment.shortestTime = duration;
     }
   }
 
   calcShortestPooTime(duration) {
     if (duration < this.environment.shortestTime) {
       this.shortestTime = duration;
-      // this.environment.shortestTime = duration;
     }
   }
 
@@ -231,7 +227,7 @@ export class StopPage implements OnInit {
           handler: () => {
             this.dataService.stopTime = null;
             this.dataService.stopTimeRaw = null;
-            this.presentToast('Time Discarded');
+            this.toastService.presentToast('Time Discarded');
             this.router.navigate(['/home']);
           }
         }
@@ -240,14 +236,5 @@ export class StopPage implements OnInit {
 
     await alert.present();
   }
-
-  async presentToast(message) {
-      const toast = await this.toastController.create({
-        message: message,
-        position: 'top',
-        duration: 2000
-      });
-      toast.present();
-    }
 
 }
