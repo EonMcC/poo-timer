@@ -3,6 +3,7 @@ h1{
   color: var(--ion-color-secondary);
   margin: 32px auto 0px auto;
   text-align: center;
+  line-height: 45px;
 }
 
 #sub-heading {
@@ -22,11 +23,11 @@ ion-item {
 .label {
   font-size: 32px;
   color: var(--ion-color-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 #btn-wrapper {
-  margin: 16px auto;
+  margin: 32px auto;
   width: 100%;
   background: var(--ion-color-background);
   z-index:15;

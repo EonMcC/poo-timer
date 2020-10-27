@@ -25,7 +25,7 @@ h2 {
 .stat-square {
   width: 150px;
   height: 150px;
-  background: #6FCF97;
+  background: var(--ion-color-primary-super-tint);
   border-radius: 10px;
   margin: 0 auto;
   display: flex;

@@ -25,14 +25,10 @@ export class PoobertComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setInterval(() => {
-      console.log(this.emotions);
-      console.log(this.dataService.currentTime)
       if (this.dataService.environment && !this.emotions.includes('longest') && this.dataService.environment.longestTime < this.dataService.currentTime) {
         this.emotions.push('longest')
       } else if (this.emotions.includes('longest') && this.dataService.currentTime === undefined) {
-        console.log('else if')
         this.emotions.splice(this.emotions.indexOf('longest'), 1)
-        console.log(this.emotions)
       }
       if (this.dataService.environment && this.dataService.environment.streak > 0 && !this.emotions.includes('streak')) {
         this.emotions.push('streak')
@@ -61,22 +57,6 @@ export class PoobertComponent implements AfterViewInit {
         }
       }
     }, 1000);
-
-  }
-
-  // ngAfterViewInit() {
-    // setTimeout(() => {
-    //   this.user = this.dataService.user;
-    //   console.log(this.user)
-    //   this.setPooStreak()
-    // }, 3000)
-  // }
-
-  setPooStreak() {
-    // if (this.user.pooStreak && this.user.pooStreak > 1) {
-    //   this.pooStreak = this.user.pooStreak;
-    //   this.emotions.push('wow');
-    // }
   }
 
 }

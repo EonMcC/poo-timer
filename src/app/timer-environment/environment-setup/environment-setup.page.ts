@@ -34,7 +34,6 @@ export class EnvironmentSetupPage implements OnInit {
       let hourlyRate: number;
       let currency: string;
       if (form.value.same) {
-        console.log('environment', this.environments[0])
         hourlyRate = this.environments[0].hourlyRate;
         currency = this.environments[0].currency;
       } else {

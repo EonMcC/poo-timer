@@ -30,9 +30,7 @@ export class SettingsPage implements OnInit {
   }
 
   ngOnInit() {
-    
     this.environment = this.dataService.environment
-    console.log('settings init', this.environment)
   }
 
   handleUpdateEnvironment() {

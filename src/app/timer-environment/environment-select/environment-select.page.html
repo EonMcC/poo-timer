@@ -7,9 +7,9 @@
       class="label"
       position="stacked"
       >{{environment.name}} Timer</ion-label>
-      <p *ngIf="environment.hourlyRate">Hourly Rate: {{environment.hourlyRate}}</p>
-      <p *ngIf="environment.currency">Currency: {{environment.currency}}</p>
-      <p *ngIf="environment.firstTimeDate">Timing Since: {{calculateTimingSinceDate(environment.firstTimeDate)}}</p>
+      <p *ngIf="environment.hourlyRate"><span>Hourly Rate:</span> {{environment.hourlyRate}}</p>
+      <p *ngIf="environment.currency"><span>Currency:</span> {{environment.currency}}</p>
+      <p *ngIf="environment.firstTimeDate"><span>Timing Since:</span> {{calculateTimingSinceDate(environment.firstTimeDate)}}</p>
       <ion-icon
         *ngIf="environment.id !== 1"
         class="menu-icon"

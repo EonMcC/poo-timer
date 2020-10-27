@@ -27,10 +27,8 @@ export class EnvironmentSelectPage  {
   }
 
   ionViewWillEnter () {
-    console.log('init')
     this.environmentStorageService.listEnvironments().then((environments) => {
       this.environments = environments;
-      console.log('environments', environments)
     })
     this.user = this.dataService.user;
   }

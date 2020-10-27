@@ -30,7 +30,6 @@ export class DataGuardGuard implements CanActivate {
         const environmentID = user.activeEnvironmentID;
         this.environmentStorageService.getEnvironment(environmentID).then((environment: Environment) => {
           this.dataService.environment = environment;
-          console.log('environment', environment)
         })
         return true;
       }

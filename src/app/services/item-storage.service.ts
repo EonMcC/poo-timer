@@ -22,7 +22,6 @@ export class ItemStorageService {
 
   addItem(item: Item): Promise<any> {
     return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
-      console.log('items', items)
       if (items) {
         items.push(item);
         return this.storage.set(ITEMS_KEY, items);
@@ -74,7 +73,6 @@ export class ItemStorageService {
 
   deleteEnvironmentItems(environmentID: number) {
     this.storage.get(ITEMS_KEY).then((items: Item[]) => {
-      console.log('items', items)
       
       let toKeep: Item[] = [];
 

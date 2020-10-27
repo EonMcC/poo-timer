@@ -26,9 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 ion-content {
-  // --background: var(--ion-color-background);
-  // background: rgb(2,0,36);
-  --background: #df17ad;
+  --background: var(--ion-color-background);
 }
 
 #primary-btn {
