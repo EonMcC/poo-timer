@@ -53,7 +53,7 @@ export class EnvironmentSetupPage implements OnInit {
         totalPaid: 0,
         lastItemID: 0,
         lastTimeDate: null,
-        streak: null
+        streak: 0
       }).then(() => {
         this.router.navigate(['/environment-select'])
         this.formValid = true;

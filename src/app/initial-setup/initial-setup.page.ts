@@ -50,7 +50,7 @@ export class InitialSetupPage implements OnInit {
           totalPaid: 0,
           lastItemID: 0,
           lastTimeDate: null,
-          streak: null
+          streak: 0
         }).then((env) => {
           this.dataService.environment = env[0];
           this.toastService.presentToast('Details saved, you\'re good to go!');
