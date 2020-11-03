@@ -25,10 +25,10 @@ export class ProfilePage implements OnInit {
     ) { }
 
   ngOnInit() {
-      this.user = this.dataService.user;
-      this.environment = this.dataService.environment;
-      this.calculateGrandTotal();
-      this.calculateSignupDate();
+    this.user = this.dataService.user;
+    this.environment = this.dataService.environment;
+    this.calculateGrandTotal();
+    this.calculateSignupDate();
   }
 
   goBack(){

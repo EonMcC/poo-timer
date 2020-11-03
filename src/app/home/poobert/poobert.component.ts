@@ -56,7 +56,7 @@ export class PoobertComponent implements AfterViewInit {
           this.iteration += 1;
         }
       }
-    }, 1000);
+    }, 10000);
   }
 
 }

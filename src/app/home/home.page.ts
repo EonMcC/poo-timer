@@ -53,16 +53,11 @@ export class HomePage {
     getData() {
       if (this.dataService.user) {
         this.environment = this.dataService.environment;
+        console.log('environment in home', this.environment);
       } else {
         this.router.navigate(['/initial-setup'])
       }
     }
-
-    clear() {
-      console.log('clear')
-      this.userStorageService.clearItems()
-    }
-
 
   set data(value: string) {
     this.dataService.stopTime = value;
