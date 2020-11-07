@@ -35,6 +35,17 @@
   font-size: 24px;
 }
 
+.menu-item-bottom-disabled {
+  pointer-events:none;
+  font-size: 24px;
+  --background: var(--ion-color-background);
+  color: #0000003b;
+
+  & ion-icon {
+    fill: #0000003b;
+  }
+}
+
 .top-menu-item {
   margin-bottom: 10px;
 }

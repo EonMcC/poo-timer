@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { DataServiceService } from 'src/app/services/data-service.service';
-import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { Environment } from 'src/app/services/environment-storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,6 +17,7 @@ export class Menu implements OnChanges {
   constructor(
       private menu: MenuController,
       private router: Router,
+      public dataService: DataServiceService
     ) {}
 
   ngOnInit(){
