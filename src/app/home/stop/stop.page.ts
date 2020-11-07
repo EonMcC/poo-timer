@@ -7,6 +7,7 @@ import { ItemStorageService } from 'src/app/services/item-storage.service';
 import { User, UserStorageService } from 'src/app/services/user-storage.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'app-stop',
@@ -36,8 +37,11 @@ export class StopPage implements OnInit {
       private router: Router,
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
-      private environmentStorageService: EnvironmentStorageService
-    ) { }
+      private environmentStorageService: EnvironmentStorageService,
+      private adMobFree: AdMobFree
+    ) {
+      this.showInterstitialAd();
+     }
 
     get data():string {
       return this.dataService.stopTime;
@@ -51,6 +55,20 @@ export class StopPage implements OnInit {
     this.calcShortestPooTime(this.dataService.stopTimeRaw);
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
+  }
+
+  async showInterstitialAd() {
+    try {
+      const interstitialConfig = {
+        id: 'ca-app-pub-5355321711329831/2109754483',
+        autoShow: true
+      }
+      this.adMobFree.interstitial.config(interstitialConfig);
+      const result = await this.adMobFree.interstitial.prepare();
+      console.log('the result', result);
+    } catch (error) {
+      console.error('the error', error)
+    }
   }
 
   ifFirstTime() {

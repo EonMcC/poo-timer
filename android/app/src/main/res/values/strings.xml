@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Poo Timer</string>
     <string name="title_activity_main">Poo Timer</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">io.ionic.pooTimer</string>
+    <string name="custom_url_scheme">io.ionic.pooTimer</string>
+    <string name="ADMOB_APP_ID">ca-app-pub-5355321711329831~7856448335</string>
 </resources>

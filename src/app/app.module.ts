@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { AdMobFree } from '@ionic-native/admob-free/ngx'
+
 @NgModule({
   declarations: [
     AppComponent
@@ -27,6 +29,7 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
+    AdMobFree,
 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
