@@ -28,9 +28,9 @@
 
   <ion-list id="menu-list-bottom" lines="none">
     <ion-item
-      [ngClass]="this.dataService.currentTime === undefined ? 'menu-item menu-item-bottom' : 'menu-item-bottom-disabled'"
+      *ngIf="this.dataService.currentTime === undefined"
+      class="menu-item menu-item-bottom"
       (click)="navigateTo('/environment-select')"
-
     >
       <ion-icon name="swap-horizontal-outline" slot="start" size="large"></ion-icon>
       Environments
