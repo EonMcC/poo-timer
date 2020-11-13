@@ -53,7 +53,9 @@ export class HomePage {
     getData() {
       if (this.dataService.user) {
         this.environment = this.dataService.environment;
-        console.log('environment in home', this.environment);
+        if (this.environment.startTime !== 0) {
+          this.handleTimer();
+        }
       } else {
         this.router.navigate(['/initial-setup'])
       }
@@ -79,10 +81,13 @@ export class HomePage {
   handleTimer(){
     if (this.timerRunning === false) {
       this.timerRunning = true;
-      this.dataService.startTime = moment.now();
+      if (this.environment.startTime === 0) {
+        this.environment.startTime = moment.now();
+        this.environmentStorageService.updateEnvironment(this.environment);
+      }
       this.intervalFn = setInterval(() => {
-        this.unformatedTime = ((moment.now() - this.dataService.startTime) / 1000).toFixed(0);
-        this.dataService.currentTime = this.unformatedTime;
+        this.unformatedTime = ((moment.now() - this.environment.startTime) / 1000).toFixed(0);
+        this.environment.currentTime = this.unformatedTime;
         if (this.unformatedTime < 3600) {
           this.timerElement.nativeElement.classList.remove('timer-long');
           this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
@@ -90,16 +95,18 @@ export class HomePage {
           this.timerElement.nativeElement.classList.add('timer-long');
           this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(11, 8);
         }
-        if (this.dataService.environment.hourlyRate) {
+        if (this.environment.hourlyRate) {
           this.calculateMoney(this.unformatedTime)
         }
       }, 1000);
     } else {
       this.timerRunning = false;
-      this.dataService.currentTime = undefined;
+      this.environment.currentTime = undefined;
       clearInterval(this.intervalFn);
       this.dataService.stopTimeRaw = parseFloat(this.unformatedTime);
       this.dataService.stopTime = this.formatedTime;
+      this.environment.startTime = 0;
+      this.environment.currentTime = 0;
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
       this.setPaid();

@@ -17,6 +17,8 @@ export interface Environment {
   lastItemID: number;
   lastTimeDate: number;
   streak: number;
+  startTime: number;
+  currentTime: number;
 }
 
 const ENV_KEY = "environments"
