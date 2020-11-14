@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { TimeoutError, timer } from 'rxjs';
 import { DataServiceService } from '../services/data-service.service';
 import * as moment from 'moment';
-import { ItemStorageService } from '../services/item-storage.service';
-import { UserStorageService } from '../services/user-storage.service';
 import { Environment, EnvironmentStorageService } from '../services/environment-storage.service';
 
 export interface stopData {
@@ -39,8 +37,6 @@ export class HomePage {
   constructor(
       private router: Router,
       private dataService: DataServiceService,
-      private itemStorageService: ItemStorageService,
-      private userStorageService: UserStorageService,
       private environmentStorageService: EnvironmentStorageService
     ) {}
 
@@ -58,10 +54,6 @@ export class HomePage {
         this.router.navigate(['/initial-setup'])
       }
     }
-
-  set data(value: string) {
-    this.dataService.stopTime = value;
-  }
 
   setPaid() {
     if (this.dataService.environment.currency) {

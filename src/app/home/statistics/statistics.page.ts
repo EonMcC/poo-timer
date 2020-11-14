@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
-import * as moment from 'moment';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 
 @Component({
@@ -27,7 +26,6 @@ export class StatisticsPage implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataServiceService,
-    private environmentStorageService: EnvironmentStorageService
   ) { }
 
   ngOnInit() {
@@ -39,6 +37,7 @@ export class StatisticsPage implements OnInit {
   }
 
   formatTotalTime() {
+    console.log(this.environment)
     const time = this.environment.totalTime * 1000;
     const digitalTime = new Date(time).toISOString().substr(11, 8);
 

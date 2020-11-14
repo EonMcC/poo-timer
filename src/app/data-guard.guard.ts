@@ -24,6 +24,7 @@ export class DataGuardGuard implements CanActivate {
   }
 
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('canLoad()')
     return this.userStorageService.getUser().then((user) => {
       if (user) {
         this.dataService.user = user;

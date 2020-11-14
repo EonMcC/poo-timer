@@ -30,7 +30,7 @@ export class SettingsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.environment = this.dataService.environment
+    this.environment = this.dataService.environment;
   }
 
   handleUpdateEnvironment() {
@@ -77,6 +77,7 @@ export class SettingsPage implements OnInit {
     this.environment.longestTime = 0;
     this.environment.totalPaid = 0;
     this.environmentStorageService.updateEnvironment(this.environment).then((data) => {
+      console.log(data)
       const toastMessage = 'Stats deleted.'
       this.toastService.presentToast(toastMessage)
     });

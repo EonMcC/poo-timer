@@ -32,11 +32,6 @@ xmlns:tools="http://schemas.android.com/tools"
             </intent-filter>
 
         </activity>
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ADMOB_APP_ID"
-            tools:replace="android:value"
-            />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -7,7 +7,6 @@ import { ItemStorageService } from 'src/app/services/item-storage.service';
 import { User, UserStorageService } from 'src/app/services/user-storage.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { AdMobFree } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'app-stop',
@@ -38,7 +37,6 @@ export class StopPage implements OnInit {
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
       private environmentStorageService: EnvironmentStorageService,
-      private adMobFree: AdMobFree
     ) {}
 
     get data():string {
@@ -130,6 +128,7 @@ export class StopPage implements OnInit {
     }
     if (this.shortestTime !== null) {
       this.environment.shortestTime = this.shortestTime;
+      console.log('this.environment.shortestTime', this.environment.shortestTime)
     }
     this.environment.lastTimeDate = today;
     this.environment.lastItemID += 1;
@@ -138,8 +137,6 @@ export class StopPage implements OnInit {
 
     this.environmentStorageService.updateEnvironment(this.environment)
 
-
-    this.calcShortestPooTime(duration);
     this.calcTotalPaid();
     const createdAt = moment.now()
 
@@ -189,12 +186,12 @@ export class StopPage implements OnInit {
     if (duration > this.environment.longestTime) {
       this.longestTime = duration;
     }
-    if (this.environment.shortestTime === 0) {
+  }
+  
+  calcShortestPooTime(duration) {
+    if (this.environment.shortestTime === null) {
       this.shortestTime = duration;
     }
-  }
-
-  calcShortestPooTime(duration) {
     if (duration < this.environment.shortestTime) {
       this.shortestTime = duration;
     }
