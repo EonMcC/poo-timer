@@ -1,11 +1,3 @@
-// #avatar {
-//   width: 164px;
-//   height: 164px;
-//   margin: 24px auto 16px auto;
-//   border-radius: 50%;
-//   background: url(../../../assets/images/profile-avatar.png);
-// }
-
 h1 {
   margin: 40px auto 40px auto;
   text-align: center;
@@ -19,6 +11,10 @@ p {
 
   & span {
     color: var(--ion-color-dark);
+  }
+
+  & .normal-span {
+    color: inherit;
   }
 }
 

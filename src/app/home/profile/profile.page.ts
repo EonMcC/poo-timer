@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { DataServiceService } from 'src/app/services/data-service.service';
-import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
-import { User, UserStorageService } from 'src/app/services/user-storage.service';
+import { Environment } from 'src/app/services/environment-storage.service';
+import { User } from 'src/app/services/user-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +19,6 @@ export class ProfilePage implements OnInit {
 
   constructor(
       private router: Router,
-      private userStorageService: UserStorageService,
-      private environmentStorageService: EnvironmentStorageService,
       private dataService: DataServiceService
     ) { }
 
@@ -39,7 +37,6 @@ export class ProfilePage implements OnInit {
     if(this.environment.firstTimeDate !== null) {
       this.firstTimeDate = moment(this.environment.firstTimeDate).format('MMM \'YY');
     }
-    console.log(this.firstTimeDate)
   }
 
   calculateGrandTotal() {
