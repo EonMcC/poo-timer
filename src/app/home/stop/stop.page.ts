@@ -47,8 +47,8 @@ export class StopPage implements OnInit {
     this.user = this.dataService.user;
     this.environment = this.dataService.environment;
     this.ifFirstTime();
-    this.calcLongestPooTime(this.dataService.stopTimeRaw);
-    this.calcShortestPooTime(this.dataService.stopTimeRaw);
+    this.calcLongestTime(this.dataService.stopTimeRaw);
+    this.calcShortestTime(this.dataService.stopTimeRaw);
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
   }
@@ -153,7 +153,7 @@ export class StopPage implements OnInit {
       worth: this.paidRaw,
       isLongest,
       isShortest
-    }).then((poo) => {
+    }).then(() => {
       this.toastService.presentToast('Time Saved');
       this.router.navigate(['/home']);
     })
@@ -182,13 +182,13 @@ export class StopPage implements OnInit {
     }
   }
 
-  calcLongestPooTime(duration) {
+  calcLongestTime(duration) {
     if (duration > this.environment.longestTime) {
       this.longestTime = duration;
     }
   }
   
-  calcShortestPooTime(duration) {
+  calcShortestTime(duration) {
     if (this.environment.shortestTime === null) {
       this.shortestTime = duration;
     }
