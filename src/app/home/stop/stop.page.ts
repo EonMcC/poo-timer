@@ -39,9 +39,7 @@ export class StopPage implements OnInit {
       private itemStorageService: ItemStorageService,
       private environmentStorageService: EnvironmentStorageService,
       private adMobFree: AdMobFree
-    ) {
-      this.showInterstitialAd();
-     }
+    ) {}
 
     get data():string {
       return this.dataService.stopTime;
@@ -55,20 +53,6 @@ export class StopPage implements OnInit {
     this.calcShortestPooTime(this.dataService.stopTimeRaw);
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
-  }
-
-  async showInterstitialAd() {
-    try {
-      const interstitialConfig = {
-        id: 'ca-app-pub-5355321711329831/2109754483',
-        autoShow: true
-      }
-      this.adMobFree.interstitial.config(interstitialConfig);
-      const result = await this.adMobFree.interstitial.prepare();
-      console.log('the result', result);
-    } catch (error) {
-      console.error('the error', error)
-    }
   }
 
   ifFirstTime() {
@@ -149,6 +133,7 @@ export class StopPage implements OnInit {
     }
     this.environment.lastTimeDate = today;
     this.environment.lastItemID += 1;
+    this.environment.startTime = 0;
 
 
     this.environmentStorageService.updateEnvironment(this.environment)

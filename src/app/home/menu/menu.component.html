@@ -26,9 +26,9 @@
 
   <p id="watermark">Have<br> you <span>Poo Timed</span> it yet?</p>
 
-  <ion-list id="menu-list-bottom" lines="none">
+  <ion-list id="menu-list-bottom" lines="none" *ngIf="this.environment">
     <ion-item
-      *ngIf="this.dataService.currentTime === undefined"
+      *ngIf="this.environment.startTime === 0"
       class="menu-item menu-item-bottom"
       (click)="navigateTo('/environment-select')"
     >

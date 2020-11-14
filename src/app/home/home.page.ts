@@ -6,8 +6,6 @@ import * as moment from 'moment';
 import { ItemStorageService } from '../services/item-storage.service';
 import { UserStorageService } from '../services/user-storage.service';
 import { Environment, EnvironmentStorageService } from '../services/environment-storage.service';
-import { Time } from '@angular/common';
-
 
 export interface stopData {
   stopTime: string;
@@ -54,7 +52,7 @@ export class HomePage {
       if (this.dataService.user) {
         this.environment = this.dataService.environment;
         if (this.environment.startTime !== 0) {
-          this.handleTimer();
+          this.continueTimer();
         }
       } else {
         this.router.navigate(['/initial-setup'])
@@ -76,6 +74,28 @@ export class HomePage {
     setTimeout(() => {
       this.menuClick = false;
     }, 500)
+  }
+
+  continueTimer() {
+    this.timerRunning = true;
+    if (this.environment.startTime === 0) {
+      this.environment.startTime = moment.now();
+      this.environmentStorageService.updateEnvironment(this.environment);
+    }
+    this.intervalFn = setInterval(() => {
+      this.unformatedTime = ((moment.now() - this.environment.startTime) / 1000).toFixed(0);
+      this.environment.currentTime = this.unformatedTime;
+      if (this.unformatedTime < 3600) {
+        this.timerElement.nativeElement.classList.remove('timer-long');
+        this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(14, 5);
+      } else {
+        this.timerElement.nativeElement.classList.add('timer-long');
+        this.formatedTime = new Date(this.unformatedTime * 1000).toISOString().substr(11, 8);
+      }
+      if (this.environment.hourlyRate) {
+        this.calculateMoney(this.unformatedTime)
+      }
+    }, 1000);
   }
 
   handleTimer(){
@@ -101,10 +121,9 @@ export class HomePage {
       }, 1000);
     } else {
       this.timerRunning = false;
-      this.environment.currentTime = undefined;
-      clearInterval(this.intervalFn);
       this.dataService.stopTimeRaw = parseFloat(this.unformatedTime);
       this.dataService.stopTime = this.formatedTime;
+      clearInterval(this.intervalFn);
       this.environment.startTime = 0;
       this.environment.currentTime = 0;
       this.router.navigate(['/home/stop'])
