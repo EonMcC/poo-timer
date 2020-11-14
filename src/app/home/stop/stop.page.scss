@@ -7,8 +7,11 @@ p {
   & span {
     color: var(--ion-color-dark);
   }
-}
 
+  & .normal-span {
+    color: inherit;
+  }
+}
 
 #para-one {
   margin: 40px 24px 32px 24px;

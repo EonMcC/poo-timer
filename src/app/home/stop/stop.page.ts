@@ -128,7 +128,6 @@ export class StopPage implements OnInit {
     }
     if (this.shortestTime !== null) {
       this.environment.shortestTime = this.shortestTime;
-      console.log('this.environment.shortestTime', this.environment.shortestTime)
     }
     this.environment.lastTimeDate = today;
     this.environment.lastItemID += 1;

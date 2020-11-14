@@ -7,9 +7,9 @@
       <span>{{minutes}} minute </span>
     </span>
     <span>{{seconds}} second</span> 
-    poo,
+    <span class="normal-span"> {{environment.name.toLowerCase()}}</span>,
   </p>
-  <p id="para-two">meaning you were paid <span>{{paid}}</span> to poo</p>
+  <p id="para-two">meaning you were paid <span>{{paid}}</span> to <span class="normal-span"> {{environment.name.toLowerCase()}}</span></p>
   <p *ngIf="!longestTime" id="para-three">Way to go!</p>
   <p *ngIf="longestTime" id="para-three">That was your longest time!</p>
 
