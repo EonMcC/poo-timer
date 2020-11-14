@@ -35,25 +35,29 @@ export class HomePage {
   intervalFn: NodeJS.Timer;
 
   constructor(
-      private router: Router,
-      private dataService: DataServiceService,
-      private environmentStorageService: EnvironmentStorageService
-    ) {}
+    private router: Router,
+    private dataService: DataServiceService,
+    private environmentStorageService: EnvironmentStorageService
+  ) {}
 
-    ionViewWillEnter() {
-      this.getData();
-    }
+  ionViewWillEnter() {
+    this.getData();
+  }
 
-    getData() {
-      if (this.dataService.user) {
-        this.environment = this.dataService.environment;
-        if (this.environment.startTime !== 0) {
-          this.continueTimer();
-        }
-      } else {
-        this.router.navigate(['/initial-setup'])
+  ionViewWillLeave() {
+    clearInterval(this.intervalFn);
+  }
+
+  getData() {
+    if (this.dataService.user) {
+      this.environment = this.dataService.environment;
+      if (this.environment.startTime !== 0) {
+        this.continueTimer();
       }
+    } else {
+      this.router.navigate(['/initial-setup'])
     }
+  }
 
   setPaid() {
     if (this.dataService.environment.currency) {
