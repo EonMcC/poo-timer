@@ -135,6 +135,7 @@ export class StopPage implements OnInit {
 
 
     this.environmentStorageService.updateEnvironment(this.environment)
+    this.dataService.environment = this.environment;
 
     this.calcTotalPaid();
     const createdAt = moment.now()
