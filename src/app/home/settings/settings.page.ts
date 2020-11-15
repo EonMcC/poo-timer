@@ -73,7 +73,7 @@ export class SettingsPage implements OnInit {
     this.environment.totalTime = 0;
     this.environment.itemCount = 0;
     this.environment.streak = 0;
-    this.environment.shortestTime = null;
+    this.environment.shortestTime = 0;
     this.environment.longestTime = 0;
     this.environment.totalPaid = 0;
     this.environmentStorageService.updateEnvironment(this.environment).then((data) => {

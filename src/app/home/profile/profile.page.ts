@@ -56,7 +56,7 @@ export class ProfilePage implements OnInit {
 
   formatMoney(paid) {
     const currency = this.environment.currency;
-    if (currency === '£ Pieces of Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
+    if (currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);
       this.grandTotal = `${symbol}${paid} ${moneyType}`

@@ -26,7 +26,7 @@ export class StopPage implements OnInit {
   paid: string;
   paidRaw: number;
   longestTime = null;
-  shortestTime = null;
+  shortestTime = 0;
   firstTime = false;
 
 
@@ -74,7 +74,7 @@ export class StopPage implements OnInit {
 
   formatMoney(paid) {
     const currency = this.environment.currency;
-    if (currency === '£ Pieces of Unicorn Dust' || currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
+    if (currency === '$ Pieces of Eight' || currency === '£ Old Money Pounds') {
       const symbol = currency.slice(0,1);
       const moneyType = currency.slice(2);
       this.paid = `${symbol}${paid} ${moneyType}`
@@ -126,7 +126,7 @@ export class StopPage implements OnInit {
     if (this.longestTime !== null) {
       this.environment.longestTime = this.longestTime;
     }
-    if (this.shortestTime !== null) {
+    if (this.shortestTime !== 0) {
       this.environment.shortestTime = this.shortestTime;
     }
     this.environment.lastTimeDate = today;
@@ -189,10 +189,7 @@ export class StopPage implements OnInit {
   }
   
   calcShortestTime(duration) {
-    if (this.environment.shortestTime === null) {
-      this.shortestTime = duration;
-    }
-    if (duration < this.environment.shortestTime) {
+    if (duration < this.environment.shortestTime || this.environment.shortestTime === 0) {
       this.shortestTime = duration;
     }
   }
