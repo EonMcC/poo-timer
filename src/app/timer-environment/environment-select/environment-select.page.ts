@@ -43,13 +43,11 @@ export class EnvironmentSelectPage  {
       this.user.activeEnvironmentID = environment.id;
       this.userStorageService.updateUser(this.user);
       this.dataService.environment = environment;
-      console.log('environment in select', environment)
       this.router.navigate(['/home']);
     })
   }
 
   async handleTrashClick(event, environment) {
-    console.log(event)
     event.stopPropagation();
     const alert = await this.alertController.create({
       header: 'Delete!',

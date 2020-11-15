@@ -37,7 +37,6 @@ export class StatisticsPage implements OnInit {
   }
 
   formatTotalTime() {
-    console.log(this.environment)
     const time = this.environment.totalTime * 1000;
     const digitalTime = new Date(time).toISOString().substr(11, 8);
 

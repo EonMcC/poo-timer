@@ -23,7 +23,6 @@ export class InitialSetupPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('initial-setup page')
     if (this.dataService.environment) {
       this.router.navigate(['/home']);
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { DataServiceService } from '../../services/data-service.service';
 
@@ -9,10 +9,8 @@ import { DataServiceService } from '../../services/data-service.service';
 })
 export class PoobertComponent implements AfterViewInit {
 
-  // user: User;
   pooStreak: number;
 
-  // poobertEmotion = 'dyk-seconds-year';
   poobertEmotion = 'normal';
   preTimerEmotions = ['waiting', 'tap-start', 'ima-poo', 'dyk-seconds-year', 'relative']
   emotions = ['ima-poo', 'dyk-seconds-year', 'relative']
@@ -25,11 +23,11 @@ export class PoobertComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setInterval(() => {
-      if (this.dataService.environment && !this.emotions.includes('longest') && this.dataService.environment.longestTime < this.dataService.currentTime) {
-        this.emotions.push('longest')
-      } else if (this.emotions.includes('longest') && this.dataService.currentTime === undefined) {
-        this.emotions.splice(this.emotions.indexOf('longest'), 1)
-      }
+      // if (this.dataService.environment && !this.emotions.includes('longest') && this.dataService.environment.longestTime < this.dataService.environment.currentTime) {
+      //   this.emotions.push('longest')
+      // } else if (this.emotions.includes('longest') && this.dataService.environment.currentTime === undefined) {
+      //   this.emotions.splice(this.emotions.indexOf('longest'), 1)
+      // }
       if (this.dataService.environment && this.dataService.environment.streak > 0 && !this.emotions.includes('streak')) {
         this.emotions.push('streak')
       };
@@ -37,7 +35,7 @@ export class PoobertComponent implements AfterViewInit {
         this.emotions.push('boss');
         this.preTimerEmotions.push('boss');
       }
-      if (this.dataService.startTime !== undefined) {
+      if (this.dataService.environment.startTime !== 0) {
         if (this.iteration % 2 !== 0) {
           const index = Math.floor(Math.random() * this.emotions.length);
           this.poobertEmotion = this.emotions[index];
@@ -56,7 +54,7 @@ export class PoobertComponent implements AfterViewInit {
           this.iteration += 1;
         }
       }
-    }, 10000);
+    }, 1000);
   }
 
 }
