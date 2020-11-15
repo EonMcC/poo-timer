@@ -14,6 +14,8 @@ import { ToastService } from '../services/toast.service';
 })
 export class InitialSetupPage implements OnInit {
 
+  spinner = false;
+
   constructor(
     private toastService: ToastService,
     private router: Router,
@@ -29,6 +31,7 @@ export class InitialSetupPage implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.spinner = true;
     if (form.valid) {
       const userName = form.value.name || 'User';
       const signupDate = moment.now();
@@ -56,11 +59,13 @@ export class InitialSetupPage implements OnInit {
         }).then((env) => {
           this.dataService.environment = env[0];
           this.toastService.presentToast('Details saved, you\'re good to go!');
+          this.spinner = false;
           this.router.navigate(['/home'])
         })
       })
       form.reset();
     } else {
+      this.spinner = false;
       this.toastService.presentToast('Please fill in all information');
     }
   }

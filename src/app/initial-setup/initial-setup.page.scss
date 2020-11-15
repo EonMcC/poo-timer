@@ -40,3 +40,7 @@ ion-item {
   bottom: 32px;
   z-index: 100;
 }
+
+ion-spinner {
+  --color: var(--ion-color-secondary);
+}

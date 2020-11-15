@@ -14,6 +14,7 @@ export class EnvironmentSetupPage implements OnInit {
   environments: Array<Environment>
   formValid = false;
   same = true;
+  spinner = false;
 
   constructor(
     private environmentStorageService: EnvironmentStorageService,
@@ -28,6 +29,7 @@ export class EnvironmentSetupPage implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.spinner = true;
     if (form.valid) {
       const id = this.environments.length + 1;
       const name = form.value.name;
@@ -57,11 +59,13 @@ export class EnvironmentSetupPage implements OnInit {
         startTime: 0,
         currentTime: 0
       }).then(() => {
+        this.spinner = false;
         this.router.navigate(['/environment-select'])
         this.formValid = true;
       })
       form.reset();
     } else {
+      this.spinner = false;
       this.toastService.presentToast('Please fill in all information');
     }
   }
