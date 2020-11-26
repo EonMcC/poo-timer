@@ -1,0 +1,27 @@
+h1{
+  font-size: 48px;
+  color: var(--ion-color-secondary);
+  margin: 32px auto 0px auto;
+  text-align: center;
+  line-height: 45px;
+}
+
+#sub-heading {
+  font-size: 18px;
+  color: var(--ion-color-dark);
+  margin: 0px auto 16px auto;
+  text-align: center;
+}
+
+#btn-wrapper {
+  margin-bottom: 16px;
+  width: 100%;
+  background: var(--ion-color-background);
+}
+
+#secondary-btn {
+  display: block;
+  width: 90vw;
+  margin: 0 auto;
+  bottom: 32px;
+}

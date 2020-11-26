@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'statistics',
     loadChildren: () => import('./statistics/statistics.module').then( m => m.StatisticsPageModule)
+  },
+  {
+    path: 'time-list',
+    loadChildren: () => import('./time-list/time-list.module').then( m => m.TimeListPageModule)
   }
 ];
 
