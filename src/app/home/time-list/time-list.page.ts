@@ -98,6 +98,7 @@ export class TimeListPage implements OnInit {
   async presentNewTimeEntryAlert(item) {
     const alert = await this.alertController.create({
       header: 'Enter New Time in Minutes',
+      cssClass: "alert-class",
       inputs: [
         {
           name: 'time',
@@ -134,6 +135,7 @@ export class TimeListPage implements OnInit {
   async addNewTimeAlert() {
     const alert = await this.alertController.create({
       header: 'Add a Time',
+      cssClass: "alert-class",
       inputs: [
         {
           name: 'time',
