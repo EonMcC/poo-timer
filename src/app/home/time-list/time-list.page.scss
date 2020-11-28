@@ -13,6 +13,36 @@ h1{
   text-align: center;
 }
 
+#menu-list {
+  background: var(--ion-color-background);
+  width: 100%;
+}
+
+:host ::ng-deep #menu-list > ion-item > ion-icon {
+  padding-top: 18px;
+}
+
+.date-label {
+  font-size: 40px;
+  color: var(--ion-color-dark);
+  padding-bottom: 24px;
+  padding-top: 4px;
+}
+
+.menu-item {
+  --background: var(--ion-color-background);
+  font-size: 24px;
+  color: var(--ion-color-secondary);
+  // border: none;
+  margin-bottom: 24px;
+}
+
+.small-duration {
+  display: block;
+  clear: left;
+  font-size: 24px;
+}
+
 #btn-wrapper {
   margin-bottom: 16px;
   width: 100%;
