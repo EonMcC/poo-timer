@@ -11,7 +11,13 @@
         <p class="date-label">{{time.createdAt | date: 'EE dd MMM '}}</p>
       </ion-label>
       {{time.formattedDuration}}
-      <ion-icon class="menu-icon" name="create" slot="end" size="large"></ion-icon>
+      <ion-icon
+        class="menu-icon"
+        name="create"
+        slot="end"
+        size="large"
+        (click)="handleEditTimeClick(time)"
+      ></ion-icon>
       <ion-icon
         class="menu-icon"
         name="trash"

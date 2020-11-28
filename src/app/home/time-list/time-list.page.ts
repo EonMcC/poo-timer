@@ -85,6 +85,48 @@ export class TimeListPage implements OnInit {
     })
   }
 
+  handleEditTimeClick(item) {
+    const newItem = this.presentNewTimeEntryAlert(item).then((newItem) => {
+     
+    })
+  }
+
+  async presentNewTimeEntryAlert(item) {
+    const alert = await this.alertController.create({
+      header: 'Enter New Time in Minutes',
+      inputs: [
+        {
+          name: 'time',
+          type: 'number',
+          placeholder: 'Enter Minutes'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: "alert-cancel-button",
+          handler: (data) => {
+            console.log('Cancel');
+          }
+        }, {
+          text: 'Update',
+          cssClass: "alert-confirm-button",
+          handler: (alertData) => {
+            item.duration = parseFloat(alertData.time) * 60;
+            this.itemStorageService.updateItem(item).then((items) => {
+              let times = items.filter((item) => {
+                return item.environmentID === this.dataService.environment.id;
+              })
+              this.formatTimes(times);
+            })
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   goBack(){
     this.router.navigate(['/home'])
   }

@@ -9,6 +9,7 @@ export interface Item {
   worth: number;
   isLongest: boolean;
   isShortest: boolean;
+  formattedDuration?: string;
 }
 
 const ITEMS_KEY = 'items'
@@ -37,7 +38,7 @@ export class ItemStorageService {
 
   updateItem(item: Item) {
     return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
-     if (!items || HTMLIonItemSlidingElement.length === 0) {
+     if (!items) {
        return null;
      }
 
