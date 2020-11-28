@@ -51,6 +51,7 @@ export class StopPage implements OnInit {
     this.calcShortestTime(this.dataService.stopTimeRaw);
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
+    console.log('stoptimeraw', this.dataService.stopTimeRaw);
   }
 
   ifFirstTime() {

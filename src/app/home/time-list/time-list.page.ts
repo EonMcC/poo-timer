@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DataServiceService } from 'src/app/services/data-service.service';
+import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-time-list',
@@ -17,11 +19,13 @@ export class TimeListPage implements OnInit {
     private router: Router,
     public itemStorageService: ItemStorageService,
     private dataService: DataServiceService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private environmentStorageService: EnvironmentStorageService,
+
   ) { }
 
   ngOnInit() {
-    this.getTimes()
+    this.getTimes();
   }
 
   getTimes(){
@@ -119,6 +123,55 @@ export class TimeListPage implements OnInit {
                 return item.environmentID === this.dataService.environment.id;
               })
               this.formatTimes(times);
+            })
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async addNewTimeAlert() {
+    const alert = await this.alertController.create({
+      header: 'Add a Time',
+      inputs: [
+        {
+          name: 'time',
+          type: 'number',
+          placeholder: 'Enter Minutes'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: "alert-cancel-button",
+          handler: (data) => {
+            console.log('Cancel');
+          }
+        }, {
+          text: 'Add',
+          cssClass: "alert-confirm-button",
+          handler: (alertData) => {
+            const duration = parseFloat(alertData.time) * 60;
+            this.dataService.environment.lastTimeDate = moment.now();
+            this.dataService.environment.lastItemID += 1;
+            const environmentID = this.dataService.environment.id;
+            const createdAt = moment.now()
+            const paidRaw = (this.dataService.environment.hourlyRate / 3600) * duration;
+            const newItem = {
+              id: this.dataService.environment.lastItemID,
+              environmentID,
+              duration,
+              createdAt,
+              worth: paidRaw
+            }
+            this.itemStorageService.addItem(newItem).then((items) => {
+              let times = items.filter((item) => {
+                return item.environmentID === this.dataService.environment.id;
+              })
+              this.formatTimes(times);
+              this.environmentStorageService.updateEnvironment(this.dataService.environment)
             })
           }
         }
