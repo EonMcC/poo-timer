@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
 
@@ -16,6 +17,7 @@ export class TimeListPage implements OnInit {
     private router: Router,
     public itemStorageService: ItemStorageService,
     private dataService: DataServiceService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,6 @@ export class TimeListPage implements OnInit {
 
   getTimes(){
     this.itemStorageService.getItems().then((items) => {
-      console.log(items)
       let times = items.filter((item) => {
         return item.environmentID === this.dataService.environment.id;
       })
@@ -33,6 +34,7 @@ export class TimeListPage implements OnInit {
   }
 
   formatTimes(times) {
+    times.sort((a, b) => b.id - a.id);
     const formattedTimes = []
     times.forEach((time) => {
       const minutes = (time.duration / 60);
@@ -46,6 +48,41 @@ export class TimeListPage implements OnInit {
       }
     })
     this.times = formattedTimes;
+  }
+
+  async handleDeleteClick(item) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'This action will delete this time. Are you sure you want to do this? This action cannot be reversed.',
+      cssClass: "alert-class",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: "alert-cancel-button",
+          handler: (data) => {
+            console.log('Cancel');
+          }
+        }, {
+          text: 'Delete',
+          cssClass: "alert-confirm-button",
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteTime(item);
+          }
+        }
+      ]
+    })
+    alert.present();
+  }
+
+  deleteTime(item) {
+    this.itemStorageService.deleteItem(item.id).then((items) => {
+      let times = items.filter((item) => {
+        return item.environmentID === this.dataService.environment.id;
+      })
+      this.formatTimes(times);
+    })
   }
 
   goBack(){

@@ -54,7 +54,7 @@ export class ItemStorageService {
     })
   }
 
-  deleteItem(id: number): Promise<Item> {
+  deleteItem(id: number): Promise<Item[]> {
     return this.storage.get(ITEMS_KEY).then((items: Item[]) => {
       if (!items || items.length === 0) {
         return null;
