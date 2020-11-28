@@ -44,10 +44,8 @@ export class TimeListPage implements OnInit {
         const formattedDuration = minutes.toFixed(0) + ' mins ' + seconds.toFixed(0) + ' secs'
         formattedTimes.push({...time, formattedDuration})
       }
-      console.log('time', time)
     })
     this.times = formattedTimes;
-    console.log(this.times)
   }
 
   goBack(){
