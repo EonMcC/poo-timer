@@ -42,11 +42,16 @@ export class StatisticsPage {
 
   getTimes(){
     this.itemStorageService.getItems().then((items) => {
+      this.totalTimeMs = 0;
       this.times = items.filter((item) => {
         return item.environmentID === this.dataService.environment.id;
       })
       if (this.times.length > 0) {
-        this.times.forEach((item) => this.totalTimeMs += item.duration * 1000);
+        this.times.forEach((item) => {
+          console.log(item.duration)
+          this.totalTimeMs += item.duration * 1000
+          console.log(this.totalTimeMs)
+        });
         this.formatTotalTime();
         this.calculateTotalPaid();
         this.formatShortestTime();
