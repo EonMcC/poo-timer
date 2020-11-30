@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-statistics',
@@ -25,6 +26,7 @@ export class StatisticsPage {
   longestHours: string;
   longestMinutes: string;
   longestSeconds: string;
+  streak: number;
 
   constructor(
     private router: Router,
@@ -48,6 +50,7 @@ export class StatisticsPage {
       this.calculateTotalPaid();
       this.formatShortestTime();
       this.formatLongestTime();
+      this.calcStreak();
     })
   }
 
@@ -97,6 +100,31 @@ export class StatisticsPage {
     this.longestHours = hours.length === 1 && hours[0] === '1' ? hours + ' hr' : hours + ' hrs';
     this.longestMinutes = minutes.length === 1 && minutes[0] === '1' ? minutes + ' min' : minutes + ' mins';
     this.longestSeconds = seconds.length === 1 && seconds[0] === '1' ? seconds + ' sec' : seconds + ' secs';
+  }
+
+  calcStreak() {
+    const times = this.times.reverse();
+
+    const dates = [];
+    times.forEach((item) => {
+      dates.push(moment(item.createdAt).startOf('day'))
+    })
+
+    let streak = 0;
+    if (moment().isSame(dates[0], 'day')) {
+      streak = 1;
+      let curDate = moment(new Date()).startOf('day');
+      dates.forEach((date) => {
+        const diffTime = curDate.diff(date, 'days');
+        if (diffTime === 1) {
+          streak += 1;
+          curDate = date;
+        } else {
+          streak = streak;
+        }
+      })
+    }
+    this.streak = streak;
   }
 
   goBack(){
