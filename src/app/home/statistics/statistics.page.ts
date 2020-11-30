@@ -4,6 +4,7 @@ import { DataServiceService } from '../../services/data-service.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
 import * as moment from 'moment';
+import { time } from 'console';
 
 @Component({
   selector: 'app-statistics',
@@ -44,13 +45,14 @@ export class StatisticsPage {
       this.times = items.filter((item) => {
         return item.environmentID === this.dataService.environment.id;
       })
-      console.log('times', this.times)
-      this.times.forEach((item) => this.totalTimeMs += item.duration * 1000);
-      this.formatTotalTime();
-      this.calculateTotalPaid();
-      this.formatShortestTime();
-      this.formatLongestTime();
-      this.calcStreak();
+      if (this.times.length > 0) {
+        this.times.forEach((item) => this.totalTimeMs += item.duration * 1000);
+        this.formatTotalTime();
+        this.calculateTotalPaid();
+        this.formatShortestTime();
+        this.formatLongestTime();
+        this.calcStreak();
+      }
     })
   }
 

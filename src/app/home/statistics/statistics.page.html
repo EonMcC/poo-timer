@@ -3,7 +3,7 @@
   <h1>Statistics</h1>
   <h2>Check those times!</h2>
 
-  <ion-grid>
+  <ion-grid *ngIf="times.length > 0; else noStatsTpl">
     <ion-row>
       <ion-col>
         <div class="stat-square" *ngIf="hours">
@@ -55,6 +55,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ng-template #noStatsTpl>
+    <p id='no-times'>No times saved yet</p>
+  </ng-template>
 
 </ion-content>
 
