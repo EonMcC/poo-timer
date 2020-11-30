@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.page.html',
   styleUrls: ['./statistics.page.scss'],
 })
-export class StatisticsPage implements OnInit {
+export class StatisticsPage {
 
+  times: Array<Item> = [];
+  totalTimeMs = 0;
   environment: Environment
   totalTime: string;
   hours: string;
@@ -26,19 +29,32 @@ export class StatisticsPage implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataServiceService,
+    private itemStorageService: ItemStorageService
   ) { }
 
-  ngOnInit() {
-    this.environment = this.dataService.environment
-    this.formatTotalTime();
-    this.calculateTotalPaid();
-    this.formatShortestTime();
-    this.formatLongestTime();
+  ionViewWillEnter() {
+    this.environment = this.dataService.environment;
+    this.getTimes();
+  }
+
+  getTimes(){
+    this.itemStorageService.getItems().then((items) => {
+      this.times = items.filter((item) => {
+        return item.environmentID === this.dataService.environment.id;
+      })
+      console.log('times', this.times)
+      this.times.forEach((item) => this.totalTimeMs += item.duration * 1000);
+      this.formatTotalTime();
+      this.calculateTotalPaid();
+      this.formatShortestTime();
+      this.formatLongestTime();
+    })
   }
 
   formatTotalTime() {
-    const time = this.environment.totalTime * 1000;
-    const digitalTime = new Date(time).toISOString().substr(11, 8);
+    console.log(this.totalTimeMs)
+    const digitalTime = new Date(this.totalTimeMs).toISOString().substr(11, 8);
+    console.log('digitalTime', digitalTime)
 
     const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
     const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);
@@ -47,21 +63,18 @@ export class StatisticsPage implements OnInit {
     this.hours = hours.length === 1 && hours[0] === '1' ? hours + ' hr' : hours + ' hrs';
     this.minutes = minutes.length === 1 && minutes[0] === '1' ? minutes + ' min' : minutes + ' mins';
     this.seconds = seconds.length === 1 && seconds[0] === '1' ? seconds + ' sec' : seconds + ' secs';
+    console.log(this.hours, this.minutes, this.seconds)
   }
 
   calculateTotalPaid() {
     const symbol = this.environment.currency.slice(0,1);
-    if (this.environment.totalPaid) {
-      const total = this.environment.totalPaid.toFixed(2);
-      this.totalPaid = symbol + total;
-    } else {
-      this.totalPaid = symbol + 0;
-    }
+    const totalPaid = (this.totalTimeMs / (1000 * 60 * 60)) * this.environment.hourlyRate;
+    this.totalPaid = symbol + totalPaid.toFixed(2);
   }
 
   formatShortestTime() {
-    const time = this.environment.shortestTime * 1000;
-    const digitalTime = new Date(time).toISOString().substr(11, 8);
+    const rawTime = this.times.reduce((min, item) => item.duration < min ? item.duration : min, this.times[0].duration)
+    const digitalTime = new Date(rawTime * 1000).toISOString().substr(11, 8);
     
     const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
     const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);
@@ -73,8 +86,9 @@ export class StatisticsPage implements OnInit {
   }
 
   formatLongestTime() {
-    const time = this.environment.longestTime * 1000;
-    const digitalTime = new Date(time).toISOString().substr(11, 8);
+    const rawTime = this.times.reduce((min, item) => item.duration > min ? item.duration : min, this.times[0].duration)
+
+    const digitalTime = new Date(rawTime * 1000).toISOString().substr(11, 8);
     
     const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
     const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);

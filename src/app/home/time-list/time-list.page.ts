@@ -13,7 +13,7 @@ import * as moment from 'moment';
 })
 export class TimeListPage implements OnInit {
 
-  times = [];
+  times: Array<Item> = [];
 
   constructor(
     private router: Router,

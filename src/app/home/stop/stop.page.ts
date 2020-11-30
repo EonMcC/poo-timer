@@ -47,8 +47,6 @@ export class StopPage implements OnInit {
     this.user = this.dataService.user;
     this.environment = this.dataService.environment;
     this.ifFirstTime();
-    this.calcLongestTime(this.dataService.stopTimeRaw);
-    this.calcShortestTime(this.dataService.stopTimeRaw);
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
     console.log('stoptimeraw', this.dataService.stopTimeRaw);
@@ -143,17 +141,12 @@ export class StopPage implements OnInit {
 
     const environmentID = this.user.activeEnvironmentID;
 
-    const isLongest = this.longestTime ? true : false;
-    const isShortest = this.shortestTime ? true : false;
-
     this.itemStorageService.addItem({
       id: this.environment.lastItemID,
       environmentID,
       duration,
       createdAt,
-      worth: this.paidRaw,
-      isLongest,
-      isShortest
+      worth: this.paidRaw
     }).then(() => {
       this.toastService.presentToast('Time Saved');
       this.router.navigate(['/home']);
@@ -180,18 +173,6 @@ export class StopPage implements OnInit {
       }
     } else {
       this.environment.streak = 1;
-    }
-  }
-
-  calcLongestTime(duration) {
-    if (duration > this.environment.longestTime) {
-      this.longestTime = duration;
-    }
-  }
-  
-  calcShortestTime(duration) {
-    if (duration < this.environment.shortestTime || this.environment.shortestTime === 0) {
-      this.shortestTime = duration;
     }
   }
 

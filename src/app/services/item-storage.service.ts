@@ -7,8 +7,6 @@ export interface Item {
   createdAt: number;
   duration: number;
   worth?: number;
-  isLongest?: boolean;
-  isShortest?: boolean;
   formattedDuration?: string;
 }
 
