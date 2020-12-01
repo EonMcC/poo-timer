@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
 import { DataServiceService } from '../../services/data-service.service';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
   templateUrl: './poobert.component.html',
   styleUrls: ['./poobert.component.scss'],
 })
-export class PoobertComponent implements AfterViewInit {
+export class PoobertComponent implements AfterViewInit, OnInit {
 
   pooStreak: number;
 
@@ -20,6 +20,7 @@ export class PoobertComponent implements AfterViewInit {
   totalTimeMs: number;
   items: Array<Item>
   streak: number;
+  longestTime: number;
 
   constructor(
     private dataService: DataServiceService,
@@ -27,17 +28,19 @@ export class PoobertComponent implements AfterViewInit {
     private itemStorageService: ItemStorageService
   ) { }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.getTimes()
   }
 
   ngAfterViewInit() {
     setInterval(() => {
-      // if (this.dataService.environment && !this.emotions.includes('longest') && this.dataService.environment.longestTime < this.dataService.environment.currentTime) {
-      //   this.emotions.push('longest')
-      // } else if (this.emotions.includes('longest') && this.dataService.environment.currentTime === undefined) {
-      //   this.emotions.splice(this.emotions.indexOf('longest'), 1)
-      // }
+      console.log(this.emotions)
+      if (this.dataService.environment && !this.emotions.includes('longest') && this.longestTime < this.dataService.environment.currentTime) {
+        console.log('here')
+        this.emotions.push('longest')
+      } else if (this.emotions.includes('longest') && this.dataService.environment.currentTime === 0) {
+        this.emotions.splice(this.emotions.indexOf('longest'), 1)
+      }
       if (this.dataService.environment && this.streak > 1 && !this.emotions.includes('streak')) {
         this.emotions.push('streak')
       };
@@ -64,10 +67,11 @@ export class PoobertComponent implements AfterViewInit {
           this.iteration += 1;
         }
       }
-    }, 10000);
+    }, 750);
   }
 
   getTimes(){
+    console.log('gettimes')
     this.itemStorageService.getItems().then((items) => {
       this.totalTimeMs = 0;
       this.items = items.filter((item) => {
@@ -79,6 +83,7 @@ export class PoobertComponent implements AfterViewInit {
           this.totalTimeMs += item.duration * 1000
         });
         this.calcStreak();
+        this.getLongestTime();
       }
     })
   }
@@ -104,6 +109,11 @@ export class PoobertComponent implements AfterViewInit {
       })
     }
     this.streak = streak;
+  }
+
+  getLongestTime() {
+    console.log('items', this.items)
+    this.longestTime = this.items.reduce((min, item) => item.duration > min ? item.duration : min, this.items[0].duration)
   }
 
 }
