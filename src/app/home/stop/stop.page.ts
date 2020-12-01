@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import * as moment from 'moment';
-import { ItemStorageService } from 'src/app/services/item-storage.service';
-import { User, UserStorageService } from 'src/app/services/user-storage.service';
-import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
+import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
+import { User } from 'src/app/services/user-storage.service';
+import { Environment } from 'src/app/services/environment-storage.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -25,9 +25,8 @@ export class StopPage implements OnInit {
   showMinutes: boolean;
   paid: string;
   paidRaw: number;
-  longestTime = null;
-  shortestTime = 0;
-  firstTime = false;
+  isLongest: boolean;
+  items: Array<Item>
 
 
   constructor(
@@ -36,7 +35,6 @@ export class StopPage implements OnInit {
       private router: Router,
       private dataService: DataServiceService,
       private itemStorageService: ItemStorageService,
-      private environmentStorageService: EnvironmentStorageService,
     ) {}
 
     get data():string {
@@ -46,15 +44,20 @@ export class StopPage implements OnInit {
   ngOnInit() {
     this.user = this.dataService.user;
     this.environment = this.dataService.environment;
-    this.ifFirstTime();
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
-    this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
-    console.log('stoptimeraw', this.dataService.stopTimeRaw);
+    this.itemStorageService.getItems().then((items) => {
+      this.items = items.filter((item) => {
+        return item.environmentID === this.dataService.environment.id;
+      })
+      this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
+      this.isLongestTime();
+    })
   }
 
-  ifFirstTime() {
-    if(!this.environment.firstTimeDate) {
-      this.firstTime = true;
+  isLongestTime() {
+    if (this.items.length > 0) {
+      const curLongestTime = this.items.reduce((min, item) => item.duration > min ? item.duration : min, this.items[0].duration)
+      this.isLongest = curLongestTime < this.dataService.stopTimeRaw ? true : false;
     }
   }
 
@@ -116,33 +119,12 @@ export class StopPage implements OnInit {
   acceptTime() {
     const today = moment.now();
     const duration = this.dataService.stopTimeRaw;
-    this.calcTotals(duration);
-    this.calcStreak(today);
 
-    if (this.firstTime) {
-      this.environment.firstTimeDate = today;
-    }
-    if (this.longestTime !== null) {
-      this.environment.longestTime = this.longestTime;
-    }
-    if (this.shortestTime !== 0) {
-      this.environment.shortestTime = this.shortestTime;
-    }
-    this.environment.lastTimeDate = today;
-    this.environment.lastItemID += 1;
-    this.environment.startTime = 0;
-
-
-    this.environmentStorageService.updateEnvironment(this.environment)
-    this.dataService.environment = this.environment;
-
-    this.calcTotalPaid();
     const createdAt = moment.now()
-
     const environmentID = this.user.activeEnvironmentID;
 
     this.itemStorageService.addItem({
-      id: this.environment.lastItemID,
+      id: this.items.length > 0 ? this.items[0].id + 1 : 1,
       environmentID,
       duration,
       createdAt,
@@ -151,38 +133,6 @@ export class StopPage implements OnInit {
       this.toastService.presentToast('Time Saved');
       this.router.navigate(['/home']);
     })
-  }
-
-  calcTotals(duration) {
-    this.environment.totalTime += duration
-    this.environment.itemCount += 1;
-    this.environment.totalPaid = this.environment.totalPaid += this.paidRaw;
-  }
-
-  calcStreak(date) {
-    if (this.environment.lastTimeDate !== null) {
-      const lastTimeDate = moment(this.environment.lastTimeDate).startOf('day');
-      const today = moment(date).startOf('day');
-      const diffTime = today.diff(lastTimeDate, 'days');
-      if (diffTime > 0 && diffTime < 2) {
-        this.environment.streak += 1;
-      } else if (diffTime === 0) {
-        this.environment.streak = this.environment.streak;
-      }  else {
-        this.environment.streak = 1;
-      }
-    } else {
-      this.environment.streak = 1;
-    }
-  }
-
-  calcTotalPaid() {
-    if (this.environment.hourlyRate) {
-      const time = this.environment.totalTime;
-      this.environment.totalPaid = (this.environment.hourlyRate / 3600) * time;
-    } else {
-      this.environment.totalPaid = 0;
-    }
   }
 
   discardTime(){

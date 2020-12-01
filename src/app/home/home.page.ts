@@ -122,6 +122,10 @@ export class HomePage {
       clearInterval(this.intervalFn);
       this.environment.startTime = 0;
       this.environment.currentTime = 0;
+      if (!this.environment.firstTimeDate) {
+        this.environment.firstTimeDate = moment.now()
+      }
+      this.environmentStorageService.updateEnvironment(this.environment);
       this.router.navigate(['/home/stop'])
       this.formatedTime = '00:00'
       this.setPaid();

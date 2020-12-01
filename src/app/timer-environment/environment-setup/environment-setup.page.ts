@@ -48,14 +48,6 @@ export class EnvironmentSetupPage implements OnInit {
         firstTimeDate: null,
         hourlyRate,
         currency,
-        longestTime: 0,
-        shortestTime: 0,
-        totalTime: 0,
-        itemCount: 0,
-        totalPaid: 0,
-        lastItemID: 0,
-        lastTimeDate: null,
-        streak: 0,
         startTime: 0,
         currentTime: 0
       }).then(() => {

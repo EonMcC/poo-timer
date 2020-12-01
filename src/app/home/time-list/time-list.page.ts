@@ -156,13 +156,11 @@ export class TimeListPage implements OnInit {
           cssClass: "alert-confirm-button",
           handler: (alertData) => {
             const duration = parseFloat(alertData.time) * 60;
-            this.dataService.environment.lastTimeDate = moment.now();
-            this.dataService.environment.lastItemID += 1;
             const environmentID = this.dataService.environment.id;
             const createdAt = moment.now()
             const paidRaw = (this.dataService.environment.hourlyRate / 3600) * duration;
             const newItem = {
-              id: this.dataService.environment.lastItemID,
+              id: this.times.length > 0 ? this.times[0].id + 1 : 1,
               environmentID,
               duration,
               createdAt,

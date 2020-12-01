@@ -1,5 +1,4 @@
 <ion-content>
-  <p id="para-three" *ngIf="firstTime">First Time!</p>
   <p id="para-one">
     That was a 
     <span *ngIf="showHours">{{hours}} hour and </span>
@@ -10,8 +9,8 @@
     <span class="normal-span"> {{environment.name.toLowerCase()}}</span>,
   </p>
   <p id="para-two">meaning you were paid <span>{{paid}}</span> to <span class="normal-span"> {{environment.name.toLowerCase()}}</span></p>
-  <p *ngIf="!longestTime" id="para-three">Way to go!</p>
-  <p *ngIf="longestTime" id="para-three">That was your longest time!</p>
+  <p *ngIf="!isLongest" id="para-three">Way to go!</p>
+  <p *ngIf="isLongest" id="para-three">That was your longest time!</p>
 
 </ion-content>
 

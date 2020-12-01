@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { env } from 'process';
-import { environment } from 'src/environments/environment';
 
 export interface Environment {
   id: number;
@@ -9,14 +7,6 @@ export interface Environment {
   firstTimeDate: number;
   hourlyRate: number;
   currency: string;
-  longestTime: number;
-  shortestTime: number;
-  totalTime: number;
-  itemCount: number;
-  totalPaid: number;
-  lastItemID: number;
-  lastTimeDate: number;
-  streak: number;
   startTime: number;
   currentTime: number;
 }

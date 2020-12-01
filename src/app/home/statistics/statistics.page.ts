@@ -4,7 +4,6 @@ import { DataServiceService } from '../../services/data-service.service';
 import { Environment, EnvironmentStorageService } from 'src/app/services/environment-storage.service';
 import { Item, ItemStorageService } from 'src/app/services/item-storage.service';
 import * as moment from 'moment';
-import { time } from 'console';
 
 @Component({
   selector: 'app-statistics',
@@ -46,11 +45,10 @@ export class StatisticsPage {
       this.times = items.filter((item) => {
         return item.environmentID === this.dataService.environment.id;
       })
+      this.times.reverse();
       if (this.times.length > 0) {
         this.times.forEach((item) => {
-          console.log(item.duration)
           this.totalTimeMs += item.duration * 1000
-          console.log(this.totalTimeMs)
         });
         this.formatTotalTime();
         this.calculateTotalPaid();
@@ -62,9 +60,7 @@ export class StatisticsPage {
   }
 
   formatTotalTime() {
-    console.log(this.totalTimeMs)
     const digitalTime = new Date(this.totalTimeMs).toISOString().substr(11, 8);
-    console.log('digitalTime', digitalTime)
 
     const hours = digitalTime[0] === '0' ? digitalTime.substr(1, 1) : digitalTime.substr(0, 2);
     const minutes = digitalTime[3] === '0' ? digitalTime.substr(4, 1) : digitalTime.substr(3, 2);
@@ -73,7 +69,6 @@ export class StatisticsPage {
     this.hours = hours.length === 1 && hours[0] === '1' ? hours + ' hr' : hours + ' hrs';
     this.minutes = minutes.length === 1 && minutes[0] === '1' ? minutes + ' min' : minutes + ' mins';
     this.seconds = seconds.length === 1 && seconds[0] === '1' ? seconds + ' sec' : seconds + ' secs';
-    console.log(this.hours, this.minutes, this.seconds)
   }
 
   calculateTotalPaid() {
@@ -110,10 +105,8 @@ export class StatisticsPage {
   }
 
   calcStreak() {
-    const times = this.times.reverse();
-
     const dates = [];
-    times.forEach((item) => {
+    this.times.forEach((item) => {
       dates.push(moment(item.createdAt).startOf('day'))
     })
 

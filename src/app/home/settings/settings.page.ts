@@ -43,43 +43,30 @@ export class SettingsPage implements OnInit {
     })
   }
 
-  async handleDeleteStatsClick() {
+  async presentDeleteTimesAlert() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'This action will delete all stats. Are you sure you want to do this? This action cannot be reversed.',
+      header: 'Confirm',
       cssClass: "alert-class",
+      message: 'Are you sure you want to delete all times for this environment? This action cannot be reversed.',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           cssClass: "alert-cancel-button",
           handler: (data) => {
             console.log('Cancel');
           }
         }, {
-          text: 'Delete',
+          text: 'Yes',
           cssClass: "alert-confirm-button",
           handler: () => {
-            console.log('Confirm Okay');
-            this.deleteStats();
+            this.itemStorageService.deleteEnvironmentItems(this.environment.id)
+            this.toastService.presentToast('Times deleted.')
           }
         }
       ]
     })
     alert.present();
-  }
-
-  deleteStats() {
-    this.environment.totalTime = 0;
-    this.environment.itemCount = 0;
-    this.environment.streak = 0;
-    this.environment.shortestTime = 0;
-    this.environment.longestTime = 0;
-    this.environment.totalPaid = 0;
-    this.environmentStorageService.updateEnvironment(this.environment).then((data) => {
-      const toastMessage = 'Stats deleted.'
-      this.toastService.presentToast(toastMessage)
-    });
   }
 
   handleDeleteClick() {
@@ -89,16 +76,19 @@ export class SettingsPage implements OnInit {
   async presentDeleteAlert() {
     const alert = await this.alertController.create({
       header: 'Confirm',
+      cssClass: "alert-class",
       message: 'Are you sure you want to delete this environment? You will lose all saved data. This action cannot be reversed.',
       buttons: [
         {
           text: 'No',
           role: 'cancel',
+          cssClass: "alert-cancel-button",
           handler: (data) => {
             console.log('Cancel');
           }
         }, {
           text: 'Yes',
+          cssClass: "alert-confirm-button",
           handler: () => {
             console.log('Confirm Okay');
             this.deleteEnvironment();

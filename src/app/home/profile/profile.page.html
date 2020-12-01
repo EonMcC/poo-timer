@@ -10,7 +10,7 @@
     <span>
       {{environment.currency.slice(0,1) + environment.hourlyRate}}</span>, {{user.userName}} has been paid a grand total of 
     <span>
-      {{grandTotal}}
+      {{totalPaid}}
     </span> to {{environment.name}} <span class="normal-span" *ngIf="environment.id === 1">at work.</span>
   </p>
   <p *ngIf="user && !firstTimeDate">What are you waiting for? Start {{environment.name}} Timing today!</p>
