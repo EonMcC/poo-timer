@@ -38,10 +38,8 @@ export class EnvironmentSelectPage  {
   }
 
   selectEnvironment(environment) {
-    this.userStorageService.getUser().then((user) => {
-      this.user = user;
-      this.user.activeEnvironmentID = environment.id;
-      this.userStorageService.updateUser(this.user);
+    this.user.activeEnvironmentID = environment.id
+    this.userStorageService.updateUser(this.user).then((user) => {
       this.dataService.environment = environment;
       this.router.navigate(['/home']);
     })

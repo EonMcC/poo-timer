@@ -129,7 +129,7 @@ export class StopPage implements OnInit {
       duration,
       createdAt,
       worth: this.paidRaw
-    }).then(() => {
+    }).then((item) => {
       this.toastService.presentToast('Time Saved');
       this.router.navigate(['/home']);
     })
