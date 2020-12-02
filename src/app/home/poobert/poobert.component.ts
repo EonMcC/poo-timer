@@ -14,13 +14,14 @@ export class PoobertComponent implements AfterViewInit, OnInit {
   pooStreak: number;
 
   poobertEmotion = 'normal';
-  preTimerEmotions = ['waiting', 'tap-start', 'ima-poo', 'dyk-seconds-year', 'relative']
-  emotions = ['ima-poo', 'dyk-seconds-year', 'relative']
+  preTimerEmotions = ['waiting', 'tap-start', 'ima-poo', 'dyk-seconds-year', 'relative', 'washHands']
+  emotions = ['ima-poo', 'dyk-seconds-year', 'relative', 'washHands']
   iteration = 0;
   totalTimeMs: number;
   items: Array<Item>
   streak: number;
   longestTime: number;
+  intervalFn: NodeJS.Timer;
 
   constructor(
     private dataService: DataServiceService,
@@ -33,10 +34,8 @@ export class PoobertComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    setInterval(() => {
-      console.log(this.emotions)
+    this.intervalFn = setInterval(() => {
       if (this.dataService.environment && !this.emotions.includes('longest') && this.longestTime < this.dataService.environment.currentTime) {
-        console.log('here')
         this.emotions.push('longest')
       } else if (this.emotions.includes('longest') && this.dataService.environment.currentTime === 0) {
         this.emotions.splice(this.emotions.indexOf('longest'), 1)
@@ -48,10 +47,21 @@ export class PoobertComponent implements AfterViewInit, OnInit {
         this.emotions.push('boss');
         this.preTimerEmotions.push('boss');
       }
+      if (this.dataService.environment && this.dataService.environment.name === 'Poo' && !this.emotions.includes('ownTime')) {
+        this.emotions.push('ownTime');
+        this.preTimerEmotions.push('ownTime');
+      }
+      if (this.dataService.environment && this.dataService.environment.name === 'Poo' && !this.emotions.includes('pool')) {
+        this.emotions.push('pool');
+      }
+      if (this.dataService.environment && this.dataService.environment.name === 'Poo' && !this.emotions.includes('water')) {
+        this.emotions.push('water');
+      }
       if (this.dataService.environment.startTime !== 0) {
         if (this.iteration % 2 !== 0) {
           const index = Math.floor(Math.random() * this.emotions.length);
           this.poobertEmotion = this.emotions[index];
+          console.log(this.poobertEmotion)
           this.iteration += 1
         } else {
           this.poobertEmotion = 'normal';
