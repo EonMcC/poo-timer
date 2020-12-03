@@ -14,8 +14,8 @@ export class PoobertComponent implements AfterViewInit, OnInit {
   pooStreak: number;
 
   poobertEmotion = 'normal';
-  preTimerEmotions = ['waiting', 'tap-start', 'ima-poo', 'dyk-seconds-year', 'relative', 'washHands']
-  emotions = ['ima-poo', 'dyk-seconds-year', 'relative', 'washHands']
+  preTimerEmotions = ['waiting', 'tap-start', 'ima-poo', 'dyk-seconds-year', 'relative', 'wash-hands', 'jeepers']
+  emotions = ['ima-poo', 'dyk-seconds-year', 'relative', 'wash-hands', 'swish', 'jeepers']
   iteration = 0;
   totalTimeMs: number;
   items: Array<Item>
@@ -47,9 +47,9 @@ export class PoobertComponent implements AfterViewInit, OnInit {
         this.emotions.push('boss');
         this.preTimerEmotions.push('boss');
       }
-      if (this.dataService.environment && this.dataService.environment.name === 'Poo' && !this.emotions.includes('ownTime')) {
-        this.emotions.push('ownTime');
-        this.preTimerEmotions.push('ownTime');
+      if (this.dataService.environment && this.dataService.environment.name === 'Poo' && !this.emotions.includes('own-time')) {
+        this.emotions.push('own-time');
+        this.preTimerEmotions.push('own-time');
       }
       if (this.dataService.environment && this.dataService.environment.name === 'Poo' && !this.emotions.includes('pool')) {
         this.emotions.push('pool');
@@ -77,7 +77,7 @@ export class PoobertComponent implements AfterViewInit, OnInit {
           this.iteration += 1;
         }
       }
-    }, 750);
+    }, 550);
   }
 
   getTimes(){
