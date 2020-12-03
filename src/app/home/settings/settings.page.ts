@@ -90,7 +90,7 @@ export class SettingsPage implements OnInit {
           text: 'Yes',
           cssClass: "alert-confirm-button",
           handler: () => {
-            console.log('Confirm Okay');
+            this.itemStorageService.deleteEnvironmentItems(this.environment.id)
             this.deleteEnvironment();
           }
         }

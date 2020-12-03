@@ -5,6 +5,7 @@ import { Environment, EnvironmentStorageService } from 'src/app/services/environ
 import * as moment from 'moment';
 import { User, UserStorageService } from 'src/app/services/user-storage.service';
 import { AlertController } from '@ionic/angular';
+import { ItemStorageService } from 'src/app/services/item-storage.service';
 
 @Component({
   selector: 'app-environment-select',
@@ -22,6 +23,7 @@ export class EnvironmentSelectPage  {
     private userStorageService: UserStorageService,
     private router: Router,
     public alertController: AlertController,
+    private itemStorageService: ItemStorageService
   ) { 
 
   }
@@ -49,7 +51,7 @@ export class EnvironmentSelectPage  {
     event.stopPropagation();
     const alert = await this.alertController.create({
       header: 'Delete!',
-      message: 'This action will delete the environment and assosiated data. Are you sure you want to do this?  This action cannot be reversed.',
+      message: 'This action will delete the environment and assosiated data. Are you sure you want to do this? This action cannot be reversed.',
       cssClass: "alert-class",
       buttons: [
         {
@@ -63,7 +65,8 @@ export class EnvironmentSelectPage  {
           text: 'Delete',
           cssClass: "alert-confirm-button",
           handler: () => {
-            console.log('Confirm Okay');
+            console.log('envrionmentid', environment.id);
+            this.itemStorageService.deleteEnvironmentItems(environment.id)
             this.deleteEnvironment(environment);
           }
         }

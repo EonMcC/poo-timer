@@ -25,13 +25,14 @@ export class EnvironmentSetupPage implements OnInit {
   ngOnInit() {
     this.environmentStorageService.listEnvironments().then((environments) => {
       this.environments = environments;
+      this.environments.sort((a, b) => a.id - b.id);
     })
   }
 
   onSubmit(form: NgForm) {
     this.spinner = true;
     if (form.valid) {
-      const id = this.environments.length + 1;
+      const id = this.environments.slice(-1)[0].id + 1;
       const name = form.value.name;
       let hourlyRate: number;
       let currency: string;
