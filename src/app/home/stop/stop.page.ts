@@ -49,6 +49,7 @@ export class StopPage implements OnInit {
       this.items = items.filter((item) => {
         return item.environmentID === this.dataService.environment.id;
       })
+      this.items.reverse();
       this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
       this.isLongestTime();
     })
