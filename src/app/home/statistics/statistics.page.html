@@ -1,64 +1,66 @@
 <ion-content>
-  <div id="bar-chart-cont"><ion-icon id="chart" name="bar-chart"></ion-icon></div>
-  <h1>Statistics</h1>
-  <h2>Check those times!</h2>
-
-  <ion-grid *ngIf="times.length > 0; else noStatsTpl">
-    <ion-row>
-      <ion-col>
-        <div class="stat-square" *ngIf="hours">
-          <p class="stat-header">Total Time</p>
-          <h1 class="stat" *ngIf="hours[0] !== '0'">{{hours}}<br>{{minutes}}<br>{{seconds}}</h1>
-          <h1 class="stat" *ngIf="hours[0] === '0' && minutes[0] !== '0'">{{minutes}}<br>{{seconds}}</h1>
-          <h1 class="stat" *ngIf="hours[0] === '0' && minutes[0] === '0' && seconds !== '0'">{{seconds}}</h1>
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="stat-square">
-          <p class="stat-header">Total Times</p>
-          <h1 class="stat">{{times.length}}</h1>
-        </div>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <div class="stat-square">
-          <p class="stat-header">Total Paid</p>
-          <h1 class="stat">{{totalPaid}}</h1>
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="stat-square" *ngIf="environment">
-          <p class="stat-header">Day Streak</p>
-          <h1 class="stat">{{streak}} {{streak === 1 ? 'day' : 'days'}}</h1>
-        </div>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <div class="stat-square" *ngIf="shortestHours">
-          <p class="stat-header">Shortest Time</p>
-          <h1 class="stat" *ngIf="shortestHours[0] !== '0'">{{shortestHours}}<br>{{shortestMinutes}}<br>{{shortestSeconds}}</h1>
-          <h1 class="stat" *ngIf="shortestHours[0] === '0' && shortestMinutes[0] !== '0'">{{shortestMinutes}}<br>{{shortestSeconds}}</h1>
-          <h1 class="stat" *ngIf="shortestHours[0] === '0' && shortestMinutes[0] === '0' && shortestSeconds !== '0'">{{shortestSeconds}}</h1>
-        </div>
-      </ion-col>
-      <ion-col>
-        <div class="stat-square" *ngIf="longestHours">
-          <p class="stat-header">Longest Time</p>
-          <h1 class="stat" *ngIf="longestHours[0] !== '0'">{{longestHours}}<br>{{longestMinutes}}<br>{{longestSeconds}}</h1>
-          <h1 class="stat" *ngIf="longestHours[0] === '0' && longestMinutes[0] !== '0'">{{longestMinutes}}<br>{{longestSeconds}}</h1>
-          <h1 class="stat" *ngIf="longestHours[0] === '0' && longestMinutes[0] === '0' && longestSeconds !== '0'">{{longestSeconds}}</h1>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ng-template #noStatsTpl>
-    <p id='no-times'>No times saved yet</p>
-  </ng-template>
+  <div id="statistics-page-content">
+    <div id="bar-chart-cont"><ion-icon id="chart" name="bar-chart"></ion-icon></div>
+    <h1>Statistics</h1>
+    <h2>Check those times!</h2>
+  
+    <ion-grid *ngIf="times.length > 0; else noStatsTpl">
+      <ion-row>
+        <ion-col>
+          <div class="stat-square" *ngIf="hours">
+            <p class="stat-header">Total Time</p>
+            <h1 class="stat" *ngIf="hours[0] !== '0'">{{hours}}<br>{{minutes}}<br>{{seconds}}</h1>
+            <h1 class="stat" *ngIf="hours[0] === '0' && minutes[0] !== '0'">{{minutes}}<br>{{seconds}}</h1>
+            <h1 class="stat" *ngIf="hours[0] === '0' && minutes[0] === '0' && seconds !== '0'">{{seconds}}</h1>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="stat-square">
+            <p class="stat-header">Total Times</p>
+            <h1 class="stat">{{times.length}}</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <div class="stat-square">
+            <p class="stat-header">Total Paid</p>
+            <h1 class="stat">{{totalPaid}}</h1>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="stat-square" *ngIf="environment">
+            <p class="stat-header">Day Streak</p>
+            <h1 class="stat">{{streak}} {{streak === 1 ? 'day' : 'days'}}</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row>
+        <ion-col>
+          <div class="stat-square" *ngIf="shortestHours">
+            <p class="stat-header">Shortest Time</p>
+            <h1 class="stat" *ngIf="shortestHours[0] !== '0'">{{shortestHours}}<br>{{shortestMinutes}}<br>{{shortestSeconds}}</h1>
+            <h1 class="stat" *ngIf="shortestHours[0] === '0' && shortestMinutes[0] !== '0'">{{shortestMinutes}}<br>{{shortestSeconds}}</h1>
+            <h1 class="stat" *ngIf="shortestHours[0] === '0' && shortestMinutes[0] === '0' && shortestSeconds !== '0'">{{shortestSeconds}}</h1>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="stat-square" *ngIf="longestHours">
+            <p class="stat-header">Longest Time</p>
+            <h1 class="stat" *ngIf="longestHours[0] !== '0'">{{longestHours}}<br>{{longestMinutes}}<br>{{longestSeconds}}</h1>
+            <h1 class="stat" *ngIf="longestHours[0] === '0' && longestMinutes[0] !== '0'">{{longestMinutes}}<br>{{longestSeconds}}</h1>
+            <h1 class="stat" *ngIf="longestHours[0] === '0' && longestMinutes[0] === '0' && longestSeconds !== '0'">{{longestSeconds}}</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ng-template #noStatsTpl>
+      <p id='no-times'>No times saved yet</p>
+    </ng-template>
+  </div>
 
 </ion-content>
 

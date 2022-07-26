@@ -7,6 +7,11 @@ app-poobert {
   z-index: 9;
 }
 
+.home-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 #title {
   color: var(--ion-color-secondary);
   font-size: 68px;
@@ -19,7 +24,6 @@ app-poobert {
 }
 
 #number-wrapper {
-  width: 95vw;
   color: var(--ion-color-secondary);
   margin:148px auto 0px auto;
   display: grid;
@@ -56,13 +60,14 @@ app-poobert {
 
 #btn-wrapper {
   width: 100vw;
+  max-width: 600px;
+  margin: 0 auto 16px auto;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 16px;
   background: var(--ion-color-background);
 
-  & ion-button {
+  ion-button {
     max-width: 45vw;
   }
 }

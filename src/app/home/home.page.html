@@ -2,20 +2,24 @@
 
   <app-poobert></app-poobert>
 
-  <h1 id="title" *ngIf="environment">{{environment.name}} Timer</h1>
-
-  <div id="number-wrapper">
-    <div id="inside-number-wrapper">
-      <p #timer class="timer">{{formatedTime}}</p>
-      <p id="money-counter">{{paid}}</p>
+  <div class="home-content">
+    <h1 id="title" *ngIf="environment">{{environment.name}} Timer</h1>
+  
+    <div id="number-wrapper">
+      <div id="inside-number-wrapper">
+        <p #timer class="timer">{{formatedTime}}</p>
+        <p id="money-counter">{{paid}}</p>
+      </div>
     </div>
+
   </div>
 
 </ion-content>
-  <div id="btn-wrapper">
-    <ion-button color="secondary" id="secondary-btn" (click)="openMenu()">MENU</ion-button>
-    <ion-button *ngIf="!timerRunning" color="primary" id="primary-btn" (click)="handleTimer()">START</ion-button>
-    <ion-button *ngIf="timerRunning" color="danger" id="danger-btn" (click)="handleTimer()">STOP</ion-button>
-  </div>
+
+<div id="btn-wrapper">
+  <ion-button color="secondary" id="secondary-btn" (click)="openMenu()">MENU</ion-button>
+  <ion-button *ngIf="!timerRunning" color="primary" id="primary-btn" (click)="handleTimer()">START</ion-button>
+  <ion-button *ngIf="timerRunning" color="danger" id="danger-btn" (click)="handleTimer()">STOP</ion-button>
+</div>
 
 <app-menu [menuClick]="menuClick" [environment]="environment"></app-menu>

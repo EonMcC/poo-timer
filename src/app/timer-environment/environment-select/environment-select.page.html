@@ -1,24 +1,26 @@
 <ion-content>
-  <h1>Select Environment</h1>
-  <p id="change">Change the timer</p>
-
-    <ion-item *ngFor="let environment of environments" (click)="selectEnvironment(environment)">
-      <ion-label
-      class="label"
-      position="stacked"
-      >{{environment.name}} Timer</ion-label>
-      <p *ngIf="environment.hourlyRate"><span>Hourly Rate:</span> {{environment.hourlyRate}}</p>
-      <p *ngIf="environment.currency"><span>Currency:</span> {{environment.currency}}</p>
-      <p *ngIf="environment.firstTimeDate"><span>Timing Since:</span> {{calculateTimingSinceDate(environment.firstTimeDate)}}</p>
-      <ion-icon
-        *ngIf="environment.id !== 1"
-        class="menu-icon"
-        name="trash-outline"
-        slot="end"
-        size="large"
-        (click)="handleTrashClick($event, environment)"
-      ></ion-icon>
-    </ion-item>
+  <div id="select-environment-page-content">
+    <h1>Select Environment</h1>
+    <p id="change">Change the timer</p>
+  
+      <ion-item *ngFor="let environment of environments" (click)="selectEnvironment(environment)">
+        <ion-label
+        class="label"
+        position="stacked"
+        >{{environment.name}} Timer</ion-label>
+        <p *ngIf="environment.hourlyRate"><span>Hourly Rate:</span> {{environment.hourlyRate}}</p>
+        <p *ngIf="environment.currency"><span>Currency:</span> {{environment.currency}}</p>
+        <p *ngIf="environment.firstTimeDate"><span>Timing Since:</span> {{calculateTimingSinceDate(environment.firstTimeDate)}}</p>
+        <ion-icon
+          *ngIf="environment.id !== 1"
+          class="menu-icon"
+          name="trash-outline"
+          slot="end"
+          size="large"
+          (click)="handleTrashClick($event, environment)"
+        ></ion-icon>
+      </ion-item>
+  </div>
     
 </ion-content>
 

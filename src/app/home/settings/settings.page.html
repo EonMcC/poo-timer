@@ -1,61 +1,64 @@
 <ion-content>
-  <div id="cog-cont"><ion-icon id="cog" name="cog"></ion-icon></div>
-  <h1>Settings</h1>
-  <h2>Change the things</h2>
 
-  <ion-list id="menu-list" lines="none">
-
-    <ion-item class="menu-item">
-      <ion-label
-        class="label"
-        position="stacked"
-      >Currency</ion-label>
-      <ion-select
-        type="search"
-        name="currency"
-        [(ngModel)]="environment.currency"
-        value="string"
-        interface="popover"
-        (ionChange)="handleUpdateEnvironment()"
-      >
-        <ion-select-option value="€">€ Euros</ion-select-option>
-        <ion-select-option value="£">£ Pounds</ion-select-option>
-        <ion-select-option value="$">$ Dollars</ion-select-option>
-        <ion-select-option value="$ Pieces of Eight">$ Pieces of Eight</ion-select-option>
-        <ion-select-option value="£ Old Money Pounds">£ Old Money</ion-select-option>
-
-      </ion-select>
-    </ion-item>
-
-    <ion-item class="menu-item">
-      <ion-label
-        class="label"
-        position="stacked"
-      >Hourly Rate</ion-label>
-      <ion-input
-        type="number"
-        name="wage"
-        [(ngModel)]="environment.hourlyRate"
-        value="string"
-        inputmode="decimal"
-        enterkeyhit="done"
-        (ionBlur)="handleUpdateEnvironment()"
-      >
-      </ion-input>
-    </ion-item>
-
-    <ion-item class="menu-item" (click)="presentDeleteTimesAlert()">
-      Delete All Times
-      <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
-    </ion-item>
-    
-    <ion-item *ngIf="environment.id !== 1" class="menu-item" (click)="handleDeleteClick()">
-      Delete Environment
-      <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
-    </ion-item>
-
-
-  </ion-list>
+  <div id="settings-page-content">
+    <div id="cog-cont"><ion-icon id="cog" name="cog"></ion-icon></div>
+    <h1>Settings</h1>
+    <h2>Change the things</h2>
+  
+    <ion-list id="menu-list" lines="none">
+  
+      <ion-item class="menu-item">
+        <ion-label
+          class="label"
+          position="stacked"
+        >Currency</ion-label>
+        <ion-select
+          type="search"
+          name="currency"
+          [(ngModel)]="environment.currency"
+          value="string"
+          interface="popover"
+          (ionChange)="handleUpdateEnvironment()"
+        >
+          <ion-select-option value="€">€ Euros</ion-select-option>
+          <ion-select-option value="£">£ Pounds</ion-select-option>
+          <ion-select-option value="$">$ Dollars</ion-select-option>
+          <ion-select-option value="$ Pieces of Eight">$ Pieces of Eight</ion-select-option>
+          <ion-select-option value="£ Old Money Pounds">£ Old Money</ion-select-option>
+  
+        </ion-select>
+      </ion-item>
+  
+      <ion-item class="menu-item">
+        <ion-label
+          class="label"
+          position="stacked"
+        >Hourly Rate</ion-label>
+        <ion-input
+          type="number"
+          name="wage"
+          [(ngModel)]="environment.hourlyRate"
+          value="string"
+          inputmode="decimal"
+          enterkeyhit="done"
+          (ionBlur)="handleUpdateEnvironment()"
+        >
+        </ion-input>
+      </ion-item>
+  
+      <ion-item class="menu-item" (click)="presentDeleteTimesAlert()">
+        Delete All Times
+        <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
+      </ion-item>
+      
+      <ion-item *ngIf="environment.id !== 1" class="menu-item" (click)="handleDeleteClick()">
+        Delete Environment
+        <ion-icon class="menu-icon" name="trash-outline" slot="end" size="large"></ion-icon>
+      </ion-item>
+  
+  
+    </ion-list>
+  </div>
 </ion-content>
 
 <div id="btn-wrapper">

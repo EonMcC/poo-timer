@@ -1,32 +1,34 @@
 <ion-content>
-  <h1>Times</h1>
-  <p id="sub-heading">Add, edit or delete</p>
-
-  <ion-list id="menu-list">
-    <ion-item class="menu-item" *ngFor="let time of times">
-      <ion-label
-        class="label"
-        position="stacked"
-      >
-        <p class="date-label">{{time.createdAt | date: 'EE dd MMM '}}</p>
-      </ion-label>
-      {{time.formattedDuration}}
-      <ion-icon
-        class="menu-icon"
-        name="create"
-        slot="end"
-        size="large"
-        (click)="handleEditTimeClick(time)"
-      ></ion-icon>
-      <ion-icon
-        class="menu-icon"
-        name="trash"
-        slot="end"
-        size="large"
-        (click)="handleDeleteClick(time)"
-      ></ion-icon>
-    </ion-item>
-  </ion-list>
+  <div id="time-list-page-content">
+    <h1>Times</h1>
+    <p id="sub-heading">Add, edit or delete</p>
+  
+    <ion-list id="menu-list">
+      <ion-item class="menu-item" *ngFor="let time of times">
+        <ion-label
+          class="label"
+          position="stacked"
+        >
+          <p class="date-label">{{time.createdAt | date: 'EE dd MMM '}}</p>
+        </ion-label>
+        {{time.formattedDuration}}
+        <ion-icon
+          class="menu-icon"
+          name="create"
+          slot="end"
+          size="large"
+          (click)="handleEditTimeClick(time)"
+        ></ion-icon>
+        <ion-icon
+          class="menu-icon"
+          name="trash"
+          slot="end"
+          size="large"
+          (click)="handleDeleteClick(time)"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
 
 </ion-content>
 

@@ -1,3 +1,9 @@
+#profile-page-content {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 h1 {
   margin: 40px auto 40px auto;
   text-align: center;
@@ -19,14 +25,15 @@ p {
 }
 
 #btn-wrapper {
-  margin-bottom: 16px;
+  max-width: 600px;
+  margin: 0 auto 16px auto;
   width: 100%;
   background: var(--ion-color-background);
 }
 
 #secondary-btn {
   display: block;
-  width: 90vw !important;
+  max-width: 95vw;
   margin: 0 auto;
   bottom: 32px;
 }

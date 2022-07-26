@@ -1,78 +1,83 @@
 <ion-content>
-  <ion-spinner *ngIf="spinner"></ion-spinner>
-    <h1>Initial Setup</h1>
-    <p id="sub-heading">First things first</p>
-
-    <form #initialSetupForm="ngForm" (ngSubmit)="onSubmit(initialSetupForm)">
-      <!-- name -->
-      <ion-item>
-        <ion-label
-          class="label" 
-          position="stacked"
-          text-wrap
-        >What would you like us to call you?</ion-label>
-        <ion-input
-          type="text"
-          placeholder="Enter your name/alias"
-          name="name"
-          [(ngModel)]="name"
-          value="string"
-          required
-        >
-        </ion-input>
-      </ion-item>
-
-      <!-- Hourly Rate -->
-      <ion-item>
-        <ion-label
-          class="label"
-          position="stacked"
-          text-wrap
-        >And how much do you get paid hourly?</ion-label>
-        <ion-input
-          type="number"
-          placeholder="Enter hourly wage"
-          name="wage"
-          [(ngModel)]="wage"
-          value="string"
-          required
-        >
-        </ion-input>
-      </ion-item>
-
-      <!-- currency -->
-      <ion-item>
-        <ion-label
-          class="label"
-          position="stacked"
-          text-wrap
-        >And what currency is that in?</ion-label>
-        <ion-select
-          type="search"
-          placeholder="Choose currency"
-          name="currency"
-          [(ngModel)]="currency"
-          value="string"
-          interface="popover"
-          required
-        >
-          <ion-select-option value="€">€ Euros</ion-select-option>
-          <ion-select-option value="£">£ Pounds</ion-select-option>
-          <ion-select-option value="$">$ Dollars</ion-select-option>
-          <ion-select-option value="$ Pieces of Eight">Pieces of Eight</ion-select-option>
-          <ion-select-option value="£ Old Money Pounds">Old Money</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-        <div id="btn-wrapper">
-          <ion-button
-            type="submit"
-            color="primary"
-            id="primary-btn"
-          >NEXT</ion-button>
-        </div>
-    </form>
-</ion-content>
+  <div id="initial-setup-page-content">
+    <ion-spinner *ngIf="spinner"></ion-spinner>
+      <h1>Initial Setup</h1>
+      <p id="sub-heading">First things first</p>
+  
+      <form #initialSetupForm="ngForm">
+        <!-- name -->
+        <ion-item>
+          <ion-label
+            class="label" 
+            position="stacked"
+            text-wrap
+          >What would you like us to call you?</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Enter your name/alias"
+            name="name"
+            [(ngModel)]="name"
+            value="string"
+            required
+          >
+          </ion-input>
+        </ion-item>
+  
+        <!-- Hourly Rate -->
+        <ion-item>
+          <ion-label
+            class="label"
+            position="stacked"
+            text-wrap
+          >And how much do you get paid hourly?</ion-label>
+          <ion-input
+            type="number"
+            placeholder="Enter hourly wage"
+            name="wage"
+            [(ngModel)]="wage"
+            value="string"
+            required
+          >
+          </ion-input>
+        </ion-item>
+  
+        <!-- currency -->
+        <ion-item>
+          <ion-label
+            class="label"
+            position="stacked"
+            text-wrap
+          >And what currency is that in?</ion-label>
+          <ion-select
+            type="search"
+            placeholder="Choose currency"
+            name="currency"
+            [(ngModel)]="currency"
+            value="string"
+            interface="popover"
+            required
+          >
+            <ion-select-option value="€">€ Euros</ion-select-option>
+            <ion-select-option value="£">£ Pounds</ion-select-option>
+            <ion-select-option value="$">$ Dollars</ion-select-option>
+            <ion-select-option value="$ Pieces of Eight">Pieces of Eight</ion-select-option>
+            <ion-select-option value="£ Old Money Pounds">Old Money</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+      </form>
+    </div>
+  </ion-content>
+  
+  <form #initialSetupForm="ngForm" (ngSubmit)="onSubmit(initialSetupForm)">
+    <div id="btn-wrapper">
+      <ion-button
+        type="submit"
+        color="primary"
+        id="primary-btn"
+      >NEXT</ion-button>
+    </div>
+  </form>
 
 
 

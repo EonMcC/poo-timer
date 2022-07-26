@@ -1,20 +1,23 @@
 <ion-content>
 
-  <div id="avatar"></div>
-  <h1 *ngIf="user">{{user.userName}}</h1>
+  <div id="profile-page-content">
+    <div id="avatar"></div>
+    <h1 *ngIf="user">{{user.userName}}</h1>
+  
+    <p *ngIf="user && firstTimeDate">{{user.userName}} has been {{environment.name}} Timing since <span>{{firstTimeDate}}</span>.</p>
+    <p
+      *ngIf="user && environment.hourlyRate">
+      Currently rocking an hourly rate of 
+      <span>
+        {{environment.currency.slice(0,1) + environment.hourlyRate}}</span>, {{user.userName}} has been paid a grand total of 
+      <span>
+        {{totalPaid}}
+      </span> to {{environment.name}} <span class="normal-span" *ngIf="environment.id === 1">at work.</span>
+    </p>
+    <p *ngIf="user && !firstTimeDate">What are you waiting for? Start {{environment.name}} Timing today!</p>
+    <p *ngIf="user && firstTimeDate">That's some great work {{user.userName}}, we salute you</p>
+  </div>
 
-  <p *ngIf="user && firstTimeDate">{{user.userName}} has been {{environment.name}} Timing since <span>{{firstTimeDate}}</span>.</p>
-  <p
-    *ngIf="user && environment.hourlyRate">
-    Currently rocking an hourly rate of 
-    <span>
-      {{environment.currency.slice(0,1) + environment.hourlyRate}}</span>, {{user.userName}} has been paid a grand total of 
-    <span>
-      {{totalPaid}}
-    </span> to {{environment.name}} <span class="normal-span" *ngIf="environment.id === 1">at work.</span>
-  </p>
-  <p *ngIf="user && !firstTimeDate">What are you waiting for? Start {{environment.name}} Timing today!</p>
-  <p *ngIf="user && firstTimeDate">That's some great work {{user.userName}}, we salute you</p>
 
 </ion-content>
 
