@@ -30,10 +30,12 @@ export class TimeListPage implements OnInit {
 
   getTimes(){
     this.itemStorageService.getItems().then((items) => {
-      let times = items.filter((item) => {
-        return item.environmentID === this.dataService.environment.id;
-      })
-      this.formatTimes(times);
+      if (items && items.length > 0) {
+        let times = items.filter((item) => {
+          return item.environmentID === this.dataService.environment.id;
+        })
+        this.formatTimes(times);
+      }
     })
   }
 

@@ -42,19 +42,21 @@ export class StatisticsPage {
   getTimes(){
     this.itemStorageService.getItems().then((items) => {
       this.totalTimeMs = 0;
-      this.times = items.filter((item) => {
-        return item.environmentID === this.dataService.environment.id;
-      })
-      this.times.reverse();
-      if (this.times.length > 0) {
-        this.times.forEach((item) => {
-          this.totalTimeMs += item.duration * 1000
-        });
-        this.formatTotalTime();
-        this.calculateTotalPaid();
-        this.formatShortestTime();
-        this.formatLongestTime();
-        this.calcStreak();
+      if (items && items.length > 0) {
+        this.times = items.filter((item) => {
+          return item.environmentID === this.dataService.environment.id;
+        })
+        this.times.reverse();
+        if (this.times.length > 0) {
+          this.times.forEach((item) => {
+            this.totalTimeMs += item.duration * 1000
+          });
+          this.formatTotalTime();
+          this.calculateTotalPaid();
+          this.formatShortestTime();
+          this.formatLongestTime();
+          this.calcStreak();
+        }
       }
     })
   }
