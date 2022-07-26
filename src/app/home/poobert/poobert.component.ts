@@ -76,7 +76,7 @@ export class PoobertComponent implements AfterViewInit, OnInit {
           this.iteration += 1;
         }
       }
-    }, 10000);
+    }, 3000);
   }
 
   getTimes(){
