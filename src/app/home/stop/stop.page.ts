@@ -46,12 +46,14 @@ export class StopPage implements OnInit {
     this.environment = this.dataService.environment;
     this.dataService.stopTime.length > 5 ? this.breakDownTimeInclHours(this.dataService.stopTime) : this.breakDownTime(this.dataService.stopTime);
     this.itemStorageService.getItems().then((items) => {
-      this.items = items.filter((item) => {
-        return item.environmentID === this.dataService.environment.id;
-      })
-      this.items.reverse();
+      if (items && items.length > 0) {
+        this.items = items.filter((item) => {
+          return item.environmentID === this.dataService.environment.id;
+        })
+        this.items.reverse();
+        this.isLongestTime();
+      }
       this.calculateMoney(this.dataService.stopTimeRaw, this.environment.hourlyRate);
-      this.isLongestTime();
     })
   }
 
@@ -125,7 +127,7 @@ export class StopPage implements OnInit {
     const environmentID = this.user.activeEnvironmentID;
 
     this.itemStorageService.addItem({
-      id: this.items.length > 0 ? this.items[0].id + 1 : 1,
+      id: this.items?.length > 0 ? this.items[0].id + 1 : 1,
       environmentID,
       duration,
       createdAt,
