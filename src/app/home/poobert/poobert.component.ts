@@ -24,7 +24,7 @@ export class PoobertComponent implements AfterViewInit, OnInit {
   intervalFn: NodeJS.Timer;
 
   constructor(
-    private dataService: DataServiceService,
+    public dataService: DataServiceService,
     public environmentStorageService: EnvironmentStorageService,
     private itemStorageService: ItemStorageService
   ) { }
@@ -61,7 +61,6 @@ export class PoobertComponent implements AfterViewInit, OnInit {
         if (this.iteration % 2 !== 0) {
           const index = Math.floor(Math.random() * this.emotions.length);
           this.poobertEmotion = this.emotions[index];
-          console.log(this.poobertEmotion)
           this.iteration += 1
         } else {
           this.poobertEmotion = 'normal';
@@ -81,19 +80,20 @@ export class PoobertComponent implements AfterViewInit, OnInit {
   }
 
   getTimes(){
-    console.log('gettimes')
     this.itemStorageService.getItems().then((items) => {
-      this.totalTimeMs = 0;
-      this.items = items.filter((item) => {
-        return item.environmentID === this.dataService.environment.id;
-      })
-      this.items.reverse();
-      if (this.items.length > 0) {
-        this.items.forEach((item) => {
-          this.totalTimeMs += item.duration * 1000
-        });
-        this.calcStreak();
-        this.getLongestTime();
+      if (items && items.length > 0) {
+        this.totalTimeMs = 0;
+        this.items = items.filter((item) => {
+          return item.environmentID === this.dataService.environment.id;
+        })
+        this.items.reverse();
+        if (this.items.length > 0) {
+          this.items.forEach((item) => {
+            this.totalTimeMs += item.duration * 1000
+          });
+          this.calcStreak();
+          this.getLongestTime();
+        }
       }
     })
   }
@@ -122,7 +122,6 @@ export class PoobertComponent implements AfterViewInit, OnInit {
   }
 
   getLongestTime() {
-    console.log('items', this.items)
     this.longestTime = this.items.reduce((min, item) => item.duration > min ? item.duration : min, this.items[0].duration)
   }
 
