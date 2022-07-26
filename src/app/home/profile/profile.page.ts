@@ -36,14 +36,16 @@ export class ProfilePage implements OnInit {
   getTimes(){
     this.itemStorageService.getItems().then((items) => {
       this.totalTimeMs = 0;
-      this.items = items.filter((item) => {
-        return item.environmentID === this.dataService.environment.id;
-      })
-      if (this.items.length > 0) {
-        this.items.forEach((item) => {
-          this.totalTimeMs += item.duration * 1000
-        });
-        this.calculateTotalPaid();
+      if (items && items.length > 0) {
+        this.items = items.filter((item) => {
+          return item.environmentID === this.dataService.environment.id;
+        })
+        if (this.items.length > 0) {
+          this.items.forEach((item) => {
+            this.totalTimeMs += item.duration * 1000
+          });
+          this.calculateTotalPaid();
+        }
       }
     })
   }
