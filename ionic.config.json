@@ -1,7 +1,4 @@
 {
   "name": "pooTimer",
-  "integrations": {
-    "capacitor": {}
-  },
   "type": "angular"
 }
