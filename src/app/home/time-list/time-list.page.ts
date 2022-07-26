@@ -47,7 +47,7 @@ export class TimeListPage implements OnInit {
         const formattedDuration = seconds.toFixed(0) + ' secs'
         formattedTimes.push({...time, formattedDuration})
       } else {
-        const formattedDuration = minutes.toFixed(0) + ' mins ' + seconds.toFixed(0) + ' secs'
+        const formattedDuration = Math.floor(minutes).toFixed(0) + ' mins ' + seconds.toFixed(0) + ' secs'
         formattedTimes.push({...time, formattedDuration})
       }
     })
@@ -71,7 +71,6 @@ export class TimeListPage implements OnInit {
           text: 'Delete',
           cssClass: "alert-confirm-button",
           handler: () => {
-            console.log('Confirm Okay');
             this.deleteTime(item);
           }
         }

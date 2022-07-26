@@ -65,7 +65,6 @@ export class EnvironmentSelectPage  {
           text: 'Delete',
           cssClass: "alert-confirm-button",
           handler: () => {
-            console.log('envrionmentid', environment.id);
             this.itemStorageService.deleteEnvironmentItems(environment.id)
             this.deleteEnvironment(environment);
           }
