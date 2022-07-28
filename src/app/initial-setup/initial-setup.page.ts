@@ -26,7 +26,7 @@ export class InitialSetupPage implements OnInit {
 
   ngOnInit() {
     if (this.dataService.environment) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
     }
   }
 
@@ -52,7 +52,7 @@ export class InitialSetupPage implements OnInit {
           this.dataService.environment = env[0];
           this.toastService.presentToast('Details saved, you\'re good to go!');
           this.spinner = false;
-          this.router.navigate(['/home'])
+          this.router.navigate([''])
         })
       })
       form.reset();

@@ -182,6 +182,6 @@ export class TimeListPage implements OnInit {
   }
 
   goBack(){
-    this.router.navigate(['/home'])
+    this.router.navigate([''])
   }
 }

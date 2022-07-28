@@ -16,7 +16,7 @@
             type="text"
             placeholder="Run, Sleep etc."
             name="name"
-            [(ngModel)]="name"
+            [(ngModel)]="environmentSetupForm.value.name"
             value="string"
             required
           >
@@ -56,7 +56,7 @@
                 type="text"
                 placeholder="Enter hourly rate"
                 name="hourlyRate"
-                [(ngModel)]="hourlyRate"
+                [(ngModel)]="environmentSetupForm.value.hourlyRate"
                 value="number"
                 [required]="!same"
               >
@@ -74,7 +74,7 @@
             type="search"
             placeholder="Choose currency"
             name="currency"
-            [(ngModel)]="currency"
+            [(ngModel)]="environmentSetupForm.value.currency"
             value="string"
             interface="popover"
             [required]="!same"

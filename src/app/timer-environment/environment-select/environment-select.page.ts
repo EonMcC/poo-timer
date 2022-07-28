@@ -43,7 +43,7 @@ export class EnvironmentSelectPage  {
     this.user.activeEnvironmentID = environment.id
     this.userStorageService.updateUser(this.user).then((user) => {
       this.dataService.environment = environment;
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
     })
   }
 

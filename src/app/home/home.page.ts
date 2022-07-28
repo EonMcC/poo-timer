@@ -126,7 +126,7 @@ export class HomePage {
         this.environment.firstTimeDate = moment.now()
       }
       this.environmentStorageService.updateEnvironment(this.environment);
-      this.router.navigate(['/home/stop'])
+      this.router.navigate(['/stop'])
       this.formatedTime = '00:00'
       this.setPaid();
     }

@@ -16,7 +16,7 @@
             type="text"
             placeholder="Enter your name/alias"
             name="name"
-            [(ngModel)]="name"
+            [(ngModel)]="initialSetupForm.value.name"
             value="string"
             required
           >
@@ -34,7 +34,7 @@
             type="number"
             placeholder="Enter hourly wage"
             name="wage"
-            [(ngModel)]="wage"
+            [(ngModel)]="initialSetupForm.value.wage"
             value="string"
             required
           >
@@ -52,7 +52,7 @@
             type="search"
             placeholder="Choose currency"
             name="currency"
-            [(ngModel)]="currency"
+            [(ngModel)]="initialSetupForm.value.currency"
             value="string"
             interface="popover"
             required
