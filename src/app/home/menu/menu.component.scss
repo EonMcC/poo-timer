@@ -29,6 +29,11 @@
   font-size: 32px;
   color: var(--ion-color-dark);
   border: none;
+
+  ion-icon {
+    color: var(--ion-color-dark);
+    opacity: 0.54;
+  }
 }
 
 .menu-item-bottom {
